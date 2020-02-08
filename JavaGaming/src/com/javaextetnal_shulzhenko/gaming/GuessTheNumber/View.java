@@ -1,18 +1,12 @@
 package com.javaextetnal_shulzhenko.gaming.GuessTheNumber;
 
+/**
+ * View class of the game
+ */
 public class View {
 
-	public void printNumbersRange(int[] range, int leftBorder, int rightBorder) {
-		System.out.print("[");
-		for(int i = leftBorder; i <= rightBorder; i++) {
-			System.out.print(range[i]);
-			if(i== rightBorder) {
-				System.out.print("]");
-			}else {
-				System.out.print(", ");
-			}
-		}
-		System.out.println("\n");
+	public void printNumbersRange(int leftBorder, int rightBorder) {
+		System.out.println("The secret number is between [" + leftBorder + " and " + rightBorder + "]");
 	}
 	
 	public void printCongrats(int secretNumber) {
@@ -21,18 +15,17 @@ public class View {
 
 	public void printQuit() {
 		System.out.println("Quit the game");
-		
 	}
 
 	public void printHint(int leftFieldBorder, int rightFieldBorder) {
-		System.out.println("Type number from " + leftFieldBorder + " to " + 
-							rightFieldBorder + " for guess or 'quit' for ending the game.");
+		System.out.println("Enter the number from *** " + leftFieldBorder + " to " +
+							rightFieldBorder + " *** for guess or *** quit *** for ending the game.");
 	}
 	
 	public void printGreeting() {
 		System.out.println("Welcome to the 'GuessTheNumber' game\n"
-		         + "Start the game -- type 'play'\n"
-		         + "Quit the game -- type 'quit'\n");
+		         + "Start the game enter *** play ***\n"
+		         + "Quit the game enter *** quit ***\n");
 	}
 
 	public void printAttempts(int attempts) {
@@ -40,8 +33,8 @@ public class View {
 	}
 
 	public void printFirstPointer() {
-		System.out.println("Enter the number from 0 to 99 to guess the secret number"
-				             + " or type 'quit' for ending the game.");
+		System.out.println("Enter the number from *** 0 to 99 *** to guess the secret number"
+				             + " or enter *** quit *** for ending the game.");
 	}
 
 	public void printLosing(int secretNumber) {

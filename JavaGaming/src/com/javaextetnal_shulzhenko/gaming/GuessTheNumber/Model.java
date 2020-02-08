@@ -2,59 +2,45 @@ package com.javaextetnal_shulzhenko.gaming.GuessTheNumber;
 
 import java.util.Random;
 
+/**
+ * Model class of the game
+ */
 public class Model {
 	
 	private int secretNumber;
-	private int[] numbersField;
-	private int rightFieldBorder;
-	private int leftFieldBorder;
+	private int rightBorder;
+	private int leftBorder;
 	private int attempts;
 	
 	public Model() {
 		Random random = new Random();
 		secretNumber = random.nextInt(100);
-		numbersField = new int[100];
-		rightFieldBorder = 99;
-		leftFieldBorder = 0;
+		rightBorder = 99;
+		leftBorder = 0;
 		attempts = 6;
-		for(int i = 0; i< numbersField.length; i++) {
-			numbersField[i] = i;
-		}
 	}
 	
 	public int getSecretNumber() {
 		return secretNumber;
 	}
 
-	public int[] getNumberField() {
-		return numbersField;
+	public int getRightBorder() {
+		return rightBorder;
 	}
 
-
-	public int getRightFieldBorder() {
-		return rightFieldBorder;
+	public void setRightBorder(int rightBorder) {
+		this.rightBorder = rightBorder;
 	}
 
-
-	public void setRightFieldBorder(int rightFieldBorder) {
-		this.rightFieldBorder = rightFieldBorder;
+	public int getLeftBorder() {
+		return leftBorder;
 	}
 
-
-	public int getLeftFieldBorder() {
-		return leftFieldBorder;
+	public void setLeftBorder(int leftBorder) {
+		this.leftBorder = leftBorder;
 	}
 
+	public int getAttempts() { return attempts; }
 
-	public void setLeftFieldBorder(int leftFieldBorder) {
-		this.leftFieldBorder = leftFieldBorder;
-	}
-
-	public int getAttempts() {
-		return attempts;
-	}
-
-	public void setAttempts(int attempts) {
-		this.attempts = attempts;
-	}
+	public void decrementAttemps(){ attempts--; }
 }

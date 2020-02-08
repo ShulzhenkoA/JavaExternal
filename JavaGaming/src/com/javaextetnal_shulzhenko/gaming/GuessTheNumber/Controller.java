@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Controller class of the game
+ */
 public class Controller {
 
 	private Model model;
@@ -14,122 +17,133 @@ public class Controller {
 		view = new View();
 	}
 
+	/**
+	 * Launch the game
+	 */
 	public void launchGame() {
 		displayInfo("greeting");
-		String command = null;
+		String enteredData = null;
 		do {
-			command = readFromConsole();
-		}while(!(command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("play")));
-		
-		if(command.equalsIgnoreCase("play")) {
-			displayInfo("firstPointer");
-			play();
-		}else {
-			displayInfo("quit");
-		}
+			enteredData = readInputData();
+		}while(enteredData.equalsIgnoreCase("quit") ? false :
+				enteredData.equalsIgnoreCase("play") ? play() : true);
+		displayInfo("quit");
 	}
-	
-	private void play() {
-		String command=null;
+
+	/**
+	 * Begin playing process of the game
+	 *
+	 * @return false when for ending the game
+	 */
+	private boolean play() {
+
+		displayInfo("firstPointer");
+
+		String enteredData = null;
 		do {
 			if(model.getAttempts() == 0) {
 				displayInfo("lost");
 				break;
 			}
-			String typedData = readFromConsole();
-			command = typedData;
-			if(typedData != null && typedData.length() <= 2 && checkingForAppropriateNum(typedData)) {
-				command = processTypedNumber(typedData);
-				displayInfo(command);
-			}else{
-				model.setAttempts(model.getAttempts() - 1);
-				displayInfo(command);
+			enteredData = readInputData();
+
+			if(!enteredData.equalsIgnoreCase("quit")) {
+				enteredData = processTypedNumber(determineEnteredNumber(enteredData));
+				displayInfo(enteredData);
 			}
-		}while(!(command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("won")));
+		}while(enteredData.equalsIgnoreCase("quit") ? false :
+			   enteredData.equalsIgnoreCase("won") ? false : true);
+		return false;
 	}
 
-	private String readFromConsole() {
-		String command = null;
+	/**
+	 * Read input data from the user
+	 *
+	 * @return the string type of the entered data
+	 */
+	private String readInputData() {
+		String data = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
-			command = br.readLine();
+			data = br.readLine();
 		}catch(IOException exc) {
 			exc.printStackTrace();
 		}
-		return command;
+		return data;
 	}
 
-	private String processTypedNumber(String typedData) {
-		
-		int typedNumber = Integer.parseInt(typedData);
-		int left = model.getLeftFieldBorder();
-		int right = model.getRightFieldBorder();
+	/**
+	 * Process the main logic of the game
+	 *
+	 * @param number integer variant of entered data
+	 * @return the command to be display
+	 */
+	private String processTypedNumber(int number) {
+
 		int secretNumber = model.getSecretNumber();
-			
-		if(typedNumber == secretNumber) {
+
+		if(number == secretNumber) {
 			return "won";
-		}else if(typedNumber >= left && typedNumber <= right) {
-			if(typedNumber > (right - left)/2) {
-				if(typedNumber < secretNumber) {
-					model.setLeftFieldBorder(typedNumber);
-				}else {
-					model.setRightFieldBorder(typedNumber);
-				}
-			}else if(typedNumber < (right - left)/2){
-				if(typedNumber > secretNumber) {
-					model.setRightFieldBorder(typedNumber);
-				}else {
-					model.setLeftFieldBorder(typedNumber);
-				}
-			}else{
-				if (typedNumber < secretNumber){
-					model.setLeftFieldBorder(typedNumber);
-				}else{
-					model.setRightFieldBorder(typedNumber);
-				}
-			}
-			model.setAttempts(model.getAttempts() - 1);
+		}else if(number > secretNumber && number <= model.getRightBorder()) {
+			model.setRightBorder(number);
+			model.decrementAttemps();
 			return "forth";
+		}else if(number < secretNumber && number >= model.getLeftBorder()){
+			model.setLeftBorder(number);
+			model.decrementAttemps();
+			return "forth";
+		}else{
+			model.decrementAttemps();
+			return "again";
 		}
-		model.setAttempts(model.getAttempts() - 1);
-		return "again";
 	}
 
-	private void displayInfo(String typedData) {
-		switch(typedData) {
-		case "forth":
-			view.printNumbersRange(model.getNumberField(), model.getLeftFieldBorder(), model.getRightFieldBorder());
-			view.printAttempts(model.getAttempts());
-			break;
-		case "won":
-			view.printCongrats(model.getSecretNumber());
-			break;
-		case "quit":
-			view.printQuit();
-			break;
-		case "greeting":
-			view.printGreeting();
-			break;
-		case "firstPointer":
-			view.printFirstPointer();
-			view.printAttempts(model.getAttempts());
-			break;
-		case "lost":
-			view.printLosing(model.getSecretNumber());
-			break;
-		default :
-			view.printHint(model.getLeftFieldBorder(), model.getRightFieldBorder());
-			view.printAttempts(model.getAttempts());
+	/**
+	 *Determine int value of entered data
+	 *
+	 * @param data input data
+	 * @return an integer value of entered data or -1 in case of {@link NumberFormatException}
+	 */
+	private int determineEnteredNumber(String data) {
+		int num;
+		try{
+			num = Integer.parseInt(data);
+			return num;
+		}catch (NumberFormatException exc){
+			return -1;
 		}
 	}
-	
-	private boolean checkingForAppropriateNum(String command) {
-		int[] numbers = model.getNumberField();
-		for(int i = 0; i < numbers.length; i++) {
-			if(command.equals(String.valueOf(numbers[i]))) {
-				return true;
-			}
+
+	/**
+	 * Display game info throw view object.
+	 *
+	 * @param command indicates type of information to be display
+	 */
+	private void displayInfo(String command) {
+		switch(command) {
+			case "forth":
+				view.printNumbersRange(model.getLeftBorder(), model.getRightBorder());
+				view.printAttempts(model.getAttempts());
+				break;
+			case "won":
+				view.printCongrats(model.getSecretNumber());
+				break;
+			case "quit":
+				view.printQuit();
+				break;
+			case "greeting":
+				view.printGreeting();
+				break;
+			case "firstPointer":
+				view.printFirstPointer();
+				view.printAttempts(model.getAttempts());
+				break;
+			case "lost":
+				view.printLosing(model.getSecretNumber());
+				break;
+			case "again":
+				view.printHint(model.getLeftBorder(), model.getRightBorder());
+				view.printAttempts(model.getAttempts());
 		}
-		return false;
 	}
 }
