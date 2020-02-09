@@ -83,17 +83,20 @@ public class Controller {
 		int secretNumber = model.getSecretNumber();
 
 		if(number == secretNumber) {
+			model.addPreviousNumbers(number);
 			return "won";
 		}else if(number > secretNumber && number <= model.getRightBorder()) {
 			model.setRightBorder(number);
-			model.decrementAttemps();
+			model.decrementAttempts();
+			model.addPreviousNumbers(number);
 			return "forth";
 		}else if(number < secretNumber && number >= model.getLeftBorder()){
 			model.setLeftBorder(number);
-			model.decrementAttemps();
+			model.decrementAttempts();
+			model.addPreviousNumbers(number);
 			return "forth";
 		}else{
-			model.decrementAttemps();
+			model.decrementAttempts();
 			return "again";
 		}
 	}
@@ -123,10 +126,12 @@ public class Controller {
 		switch(command) {
 			case "forth":
 				view.printNumbersRange(model.getLeftBorder(), model.getRightBorder());
+				view.printPreviousNumbers(model.getPreviousNumbers());
 				view.printAttempts(model.getAttempts());
 				break;
 			case "won":
 				view.printCongrats(model.getSecretNumber());
+				view.printPreviousNumbers(model.getPreviousNumbers());
 				break;
 			case "quit":
 				view.printQuit();

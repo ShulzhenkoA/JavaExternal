@@ -1,5 +1,7 @@
 package com.javaextetnal_shulzhenko.gaming.GuessTheNumber;
 
+import java.util.List;
+
 /**
  * View class of the game
  */
@@ -40,5 +42,9 @@ public class View {
 	public void printLosing(int secretNumber) {
 		System.out.println("You had lost!!! A-ia-iaaaaa :-( !!! The secret number was "+ secretNumber+".");
 		
+	}
+
+	public void printPreviousNumbers(List<Integer> previousNumbers) {
+		System.out.println("Selected numbers " + previousNumbers);
 	}
 }
