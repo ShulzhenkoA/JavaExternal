@@ -35,7 +35,7 @@ public class View {
 	}
 
 	public void printFirstPointer() {
-		System.out.println("Enter the number from *** 0 to 99 *** to guess the secret number"
+		System.out.println("Enter the number from *** 0 to 100 *** to guess the secret number"
 				             + " or enter *** quit *** for ending the game.");
 	}
 
