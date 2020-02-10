@@ -29,8 +29,8 @@ public class DroidsWar {
 
         //Create two Battle Droid[BD01] with single weapon "BlasterRifleE5" and 20 points of defence.
         //Print info to console.
-        DroidBD01 firsBattleDroidV01 = new DroidBD01(blE5[0]);
-        ConsoleView.printDroidInfo(firsBattleDroidV01);
+        DroidBD01 firstBattleDroidV01 = new DroidBD01(blE5[0]);
+        ConsoleView.printDroidInfo(firstBattleDroidV01);
         DroidBD01 secondBattleDroidV01 = new DroidBD01(blE5[1]);
         ConsoleView.printDroidInfo(secondBattleDroidV01);
 
@@ -55,37 +55,37 @@ public class DroidsWar {
 
         System.out.println(
                 "//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//\n"+
-                "//Modeling battle among two same droids Battle Droid[BD01](firsBattleDroidV01 and secondBattleDroidV01)//\n" +
-                "//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//\n");
+                "//Modeling battle among two same droids Battle Droid[BD01](firstBattleDroidV01 and secondBattleDroidV01)//\n" +
+                "//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//\n");
 
 
-        //Modeling battle among two same droids (firsBattleDroidV01 and secondBattleDroidV01)
+        //Modeling battle among two same droids (firstBattleDroidV01 and secondBattleDroidV01)
         //The result of the battle is unknown because the strength of both droids is equal.
         //Print the result of the battle to console.
-        //Repair(if not alive - set to alive and add 50hp) firsBattleDroidV01 with Repair Droid[R1] for the next fight.
-        //Reload firsBattleDroidV01 weapon for the next fight.
+        //Repair(if not alive - set to alive and add 50hp) firstBattleDroidV01 with Repair Droid[R1] for the next fight.
+        //Reload firstBattleDroidV01 weapon for the next fight.
 
-        BattleField.fightToTheEnd(firsBattleDroidV01, secondBattleDroidV01);
+        BattleField.fightToTheEnd(firstBattleDroidV01, secondBattleDroidV01);
 
-        repairDroid.repair(firsBattleDroidV01);
-        repairDroid.repair(firsBattleDroidV01);
+        repairDroid.repair(firstBattleDroidV01);
+        repairDroid.repair(firstBattleDroidV01);
 
         blE5[0].reloadAmmunition();
 
         System.out.println(
-                "//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//\n"+
-                "//Modeling battle among Battle Droid[BD01] and Battle Droid[BD02] (firsBattleDroidV01 and battleDroidV02)//\n" +
-                "//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//\n");
+                "//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//\n"+
+                "//Modeling battle among Battle Droid[BD01] and Battle Droid[BD02] (firstBattleDroidV01 and battleDroidV02)//\n" +
+                "//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//\n");
 
-        //Modeling battle among Battle Droid[BD01] and Battle Droid[BD02] (firsBattleDroidV01 and battleDroidV02)
+        //Modeling battle among Battle Droid[BD01] and Battle Droid[BD02] (firstBattleDroidV01 and battleDroidV02)
         //Battle Droid[BD02] has two weapons and it must win.
         //Print the result of the battle to console
         //Repair them for the next fight
         //Reload their weapon for the next fight.
 
-        BattleField.fightToTheEnd(firsBattleDroidV01,battleDroidV02);
-        repairDroid.repair(firsBattleDroidV01);
-        repairDroid.repair(firsBattleDroidV01);
+        BattleField.fightToTheEnd(firstBattleDroidV01,battleDroidV02);
+        repairDroid.repair(firstBattleDroidV01);
+        repairDroid.repair(firstBattleDroidV01);
 
         repairDroid.repair(battleDroidV02);
         repairDroid.repair(battleDroidV02);
@@ -101,18 +101,18 @@ public class DroidsWar {
         System.out.println(
                 "//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//\n"+
                 "/Modeling fights among Battle Droid[BD01], Battle Droid[BD02] against the strongest droid Droid Destroyer[DD01]//\n" +
-                "//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//\n");
+                "//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//\n");
 
         // Modeling battle among Battle Droid[BD01], Battle Droid[BD02] against the strongest droid Droid Destroyer[DD01]
         //Print info about all droid before fight
         //Droid Destroyer[DD01] must win.
         //Print the result of the battle to console
 
-        ConsoleView.printDroidInfo(firsBattleDroidV01);
+        ConsoleView.printDroidInfo(firstBattleDroidV01);
         ConsoleView.printDroidInfo(battleDroidV02);
         ConsoleView.printDroidInfo(destroyer);
 
-        BattleField.fightToTheEnd(destroyer, firsBattleDroidV01);
+        BattleField.fightToTheEnd(destroyer, firstBattleDroidV01);
         BattleField.fightToTheEnd(destroyer, battleDroidV02);
 
     }

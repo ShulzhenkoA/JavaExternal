@@ -4,14 +4,21 @@ public class Droid {
 
     private int health;
     private int MAX_HEALTH = 100;
-    private final String NAME = "Basic Droid";
-    private final String MODEL = "[D01]";
+    private int defense;
+    private String name = "Basic Droid";
+    private String model = "[D01]";
     private boolean alive;
 
     public Droid() {
         health = 100;
         alive = true;
+    }
 
+    protected Droid(int defense, String name, String model) {
+        this();
+        this.defense = defense;
+        this.name = name;
+        this.model = model;
     }
 
     public int getHealth() {
@@ -35,14 +42,14 @@ public class Droid {
         }
     }
 
-    public int getDefence(){ return -1;}
+    public int getDefence(){ return defense;}
 
-    public String getNAME() {
-        return NAME;
+    public String getName() {
+        return name;
     }
 
-    public String getMODEL() {
-        return MODEL;
+    public String getModel() {
+        return model;
     }
 
     public boolean isAlive() {
@@ -55,8 +62,9 @@ public class Droid {
 
     @Override
     public String toString() {
-        return "Name  - " + NAME +
-                "\nModel - "+ MODEL +
-                "\n{health=" + health + '}';
+        return "Name  - " + name +
+                "\nModel - "+ model +
+                "\n{health = " + health + '}'+
+                "\n{defence -- " + getDefence() +" }";
     }
 }

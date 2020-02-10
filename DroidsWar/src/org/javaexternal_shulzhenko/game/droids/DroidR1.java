@@ -2,10 +2,15 @@ package org.javaexternal_shulzhenko.game.droids;
 
 public class DroidR1 extends Droid implements RepairDroid {
 
-    private final String NAME = "Repair Droid";
-    private final String MODEL = "[R1]";
-
     private final int REPAIR_UNIT = 50;
+
+    public DroidR1() {
+        this(0, "Repair Droid", "R1");
+    }
+
+    protected DroidR1(int defense, String name, String model) {
+        super(defense, name, model);
+    }
 
     @Override
     public void repair(Droid droid) {
@@ -20,24 +25,13 @@ public class DroidR1 extends Droid implements RepairDroid {
     }
 
     @Override
-    public String getNAME() {
-        return NAME;
-    }
-
-    @Override
-    public String getMODEL() {
-        return MODEL;
-    }
-
     public int getREPAIR_UNIT() {
         return REPAIR_UNIT;
     }
 
     @Override
     public String toString() {
-        return "Name  - " + NAME +
-                "\nModel - "+ MODEL +
-                "\n{health = " + getHealth() + '}' +
+        return super.toString() +
                 "\n{REPAIR_UNIT = " + REPAIR_UNIT + '}';
     }
 }

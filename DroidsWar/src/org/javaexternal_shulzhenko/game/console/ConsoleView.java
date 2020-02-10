@@ -12,17 +12,17 @@ public class ConsoleView {
         if(firstDroid.isAlive()) {
             firstDroidInfo = firstDroid.toString();
         }else{
-            firstDroidInfo = firstDroid.getNAME()+firstDroid.getMODEL() + " was defeated";
+            firstDroidInfo = firstDroid.getName()+firstDroid.getModel() + " was defeated";
         }
 
         if(secondDroid.isAlive()){
             secondDroidInfo = secondDroid.toString();
         }else{
-            secondDroidInfo = secondDroid.getNAME()+secondDroid.getMODEL() + " was defeated.";
+            secondDroidInfo = secondDroid.getName()+secondDroid.getModel() + " was defeated.";
         }
 
-        String betweenInfo = "= between " + firstDroid.getNAME() + firstDroid.getMODEL() +
-                " and " + secondDroid.getNAME() + secondDroid.getMODEL();
+        String betweenInfo = "= between " + firstDroid.getName() + firstDroid.getModel() +
+                " and " + secondDroid.getName() + secondDroid.getModel();
 
         String equalSignsLine = "";
 

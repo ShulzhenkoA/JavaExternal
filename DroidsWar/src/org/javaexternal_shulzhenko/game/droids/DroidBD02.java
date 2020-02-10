@@ -5,14 +5,14 @@ import org.javaexternal_shulzhenko.game.weapons.*;
 public class DroidBD02 extends DroidBD01 {
 
     private Blaster leftHandWeapon;
-    private final String MODEL = "[BD02]";
 
-    public DroidBD02() {
-        super();
-    }
 
     public DroidBD02(Blaster weapon1, Blaster weapon2) {
-        super(weapon1);
+        this(weapon1, weapon2, 20, "Battle Droid", "[BD02]");
+    }
+
+    protected DroidBD02(Blaster weapon1, Blaster weapon2, int defence, String name, String model) {
+        super(weapon1, defence, name, model);
         leftHandWeapon = weapon2;
     }
 
@@ -30,17 +30,8 @@ public class DroidBD02 extends DroidBD01 {
     }
 
     @Override
-    public String getMODEL() {
-        return MODEL;
-    }
-
-    @Override
     public String toString() {
-        return "Name - " + getNAME() +
-                "\nModel - "+ MODEL +
-                "\n{health -- " + getHealth() +"}" +
-                "\n{weapon \n\t-- right hand -- "  +
-                getRightHandWeapon() + "\n\t-- left hand -- " + leftHandWeapon +"}" +
-                "\n{defence -- " + getDefence() +" }";
+        return super.toString() +
+                 "\n\t-- left hand -- " + leftHandWeapon;
     }
 }

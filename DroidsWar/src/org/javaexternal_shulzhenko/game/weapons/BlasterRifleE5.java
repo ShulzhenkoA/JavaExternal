@@ -4,10 +4,16 @@ public class BlasterRifleE5 implements Blaster {
 
     private int damage;
     private int ammunition;
+    private int ammunitionCapacity;
 
     public BlasterRifleE5() {
-        damage = 10;
-        ammunition = 50;
+        this(10, 50);
+    }
+
+    protected BlasterRifleE5(int damage, int ammunition) {
+        this.damage = damage;
+        this.ammunition = ammunition;
+        ammunitionCapacity = ammunition;
     }
 
     @Override
@@ -21,13 +27,19 @@ public class BlasterRifleE5 implements Blaster {
     }
 
     @Override
-    public void reloadAmmunition() {
-        ammunition = 100;
+    public int getAmmunitionCapacity() {
+        return ammunitionCapacity;
     }
 
     @Override
+    public void reloadAmmunition() {
+        ammunition = ammunitionCapacity;
+    }
+
+
+    @Override
     public String toString() {
-        return "BlasterRifleE5 (" +
+        return getClass().getSimpleName() + " (" +
                 "damage=" + damage +
                 ", ammunition=" + ammunition +
                 ')';
