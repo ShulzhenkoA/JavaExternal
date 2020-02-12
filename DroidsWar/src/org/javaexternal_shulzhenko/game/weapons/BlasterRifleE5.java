@@ -1,6 +1,6 @@
 package org.javaexternal_shulzhenko.game.weapons;
 
-public class BlasterRifleE5 implements Blaster {
+public class BlasterRifleE5 implements Weapon {
 
     private int damage;
     private int ammunition;

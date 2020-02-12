@@ -1,6 +1,6 @@
 package org.javaexternal_shulzhenko.game.weapons;
 
-public interface Blaster {
+public interface Weapon {
     int shoot();
     void reloadAmmunition();
     int getAmmunitionCapacity();

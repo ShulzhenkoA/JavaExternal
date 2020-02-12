@@ -1,29 +1,31 @@
 package org.javaexternal_shulzhenko.game.droids;
 
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.BattleAbility;
 import org.javaexternal_shulzhenko.game.weapons.*;
 
-public class DroidBD01 extends Droid implements BattleDroid{
+public class DroidBD01 extends Droid implements BattleAbility {
 
-    private Blaster rightHandWeapon;
 
-    public DroidBD01(Blaster weapon) {
+    private Weapon rightHandWeapon;
+
+    public DroidBD01(Weapon weapon) {
         this(weapon, 20, "Battle Droid", "[BD01]");
     }
 
-    protected DroidBD01(Blaster weapon, int defence, String name, String model) {
+    protected DroidBD01(Weapon weapon, int defence, String name, String model) {
         super(defence, name, model);
         rightHandWeapon = weapon;
     }
 
-    public int attack(){
+    public int attackEnemy(){
        return rightHandWeapon.shoot();
     }
 
-    public Blaster getRightHandWeapon() {
+    public Weapon getRightHandWeapon() {
         return rightHandWeapon;
     }
 
-    public void setRightHandWeapon(Blaster rightHandWeapon) {
+    public void setRightHandWeapon(Weapon rightHandWeapon) {
         this.rightHandWeapon = rightHandWeapon;
     }
 
