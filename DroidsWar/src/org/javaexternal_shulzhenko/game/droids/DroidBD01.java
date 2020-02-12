@@ -1,16 +1,16 @@
 package org.javaexternal_shulzhenko.game.droids;
 
-import org.javaexternal_shulzhenko.game.droids.abilities.attack.RightHandBattleProperties;
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.RightHandBattleAbilities;
 import org.javaexternal_shulzhenko.game.droids.abilities.defence.SteelBattleDroidBody;
 import org.javaexternal_shulzhenko.game.weapons.Weapon;
 
 public class DroidBD01 extends Droid{
 
 
-    private RightHandBattleProperties rightHandBattleProperties;
+    private RightHandBattleAbilities rightHandBattleProperties;
 
 
-    public DroidBD01(RightHandBattleProperties rightHandBattleProperties, SteelBattleDroidBody protectiveBody) {
+    public DroidBD01(RightHandBattleAbilities rightHandBattleProperties, SteelBattleDroidBody protectiveBody) {
         this("Battle Droid", "[BD01]", 100, protectiveBody);
         this.rightHandBattleProperties = rightHandBattleProperties;
 

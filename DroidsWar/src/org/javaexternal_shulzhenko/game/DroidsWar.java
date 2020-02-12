@@ -10,6 +10,7 @@ import org.javaexternal_shulzhenko.game.droids.abilities.attack.TwoHandBattlePro
 import org.javaexternal_shulzhenko.game.droids.abilities.defence.BasicDroidBody;
 import org.javaexternal_shulzhenko.game.droids.abilities.defence.SteelBattleDroidBody;
 import org.javaexternal_shulzhenko.game.droids.abilities.defence.TitaniumDestroyerDroidBody;
+import org.javaexternal_shulzhenko.game.factories.DroidFactory;
 import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE10;
 import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE5;
 
@@ -18,41 +19,36 @@ import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE5;
 public class DroidsWar {
     public static void main(String[] args){
 
-        //Create Basic Droid[D01] with no weapons (can do damage by hands) and no defense.
+        //Create DroidFactory
+        DroidFactory factory = new DroidFactory();
+
+
+        //Create Basic Droid[D01] with no weapons (can do damage by hands), 100hp and low defense.
         // Print its info to console.
-        Droid basicDroid = new Droid(new BasicDroidBody());
+        Droid basicDroid = factory.getBasicDroidD01();
         ConsoleView.printDroidInfo(basicDroid);
 
-        //Create two Battle Droid[BD01] with single weapon "BlasterRifleE5" and 20 points of defence.
+
+        //Create two Battle Droid[BD01] with single weapon "BlasterRifleE5", 100hp and middle defence.
         //Print info to console.
-        DroidBD01 firstBattleDroidV01 = new DroidBD01(new RightHandBattleProperties(), new SteelBattleDroidBody());
-        firstBattleDroidV01.setWeaponInRightHand(new BlasterRifleE5());
+        DroidBD01 firstBattleDroidV01 = factory.getBattleDroidBD01();
         ConsoleView.printDroidInfo(firstBattleDroidV01);
-
-        DroidDD01 dd = new DroidDD01(new TwoHandBattleProperties(), new TitaniumDestroyerDroidBody());
-        dd.setWeaponInTheRightHand(new BlasterRifleE10());
-        dd.setWeaponInTheLeftHand(new BlasterRifleE10());
-        ConsoleView.printDroidInfo(dd);
-
-        BattleField.fightToTheEnd(firstBattleDroidV01, dd);
-
-
-        /*ConsoleView.printDroidInfo(firstBattleDroidV01);
-        DroidBD01 secondBattleDroidV01 = new DroidBD01(blE5[1]);
+        DroidBD01 secondBattleDroidV01 = factory.getBattleDroidBD01();
         ConsoleView.printDroidInfo(secondBattleDroidV01);
 
-        //Create Battle Droid[BD02] with two weapons "BlasterRifleE5" and 20 points of defence.
+
+        //Create Battle Droid[BD02] with two weapons "BlasterRifleE5", 100hp and middle defence.
         //Print its info to console.
-        DroidBD02 battleDroidV02= new DroidBD02(blE5[2],blE5[3]);
+        DroidBD02 battleDroidV02= factory.getBattleDroidBD02();
         ConsoleView.printDroidInfo(battleDroidV02);
 
-        //Create Droid Destroyer[DD] with two weapons "BlasterRifleE10" and 20 points of defence.
+        //Create Droid Destroyer[DD] with two weapons "BlasterRifleE10", 135hp and high defence.
         //Print its info to console
-        DroidDD01 destroyer = new DroidDD01(blE10_1, blE10_2);
+        DroidDD01 destroyer = factory.getDroidDestroyerDD01();
         ConsoleView.printDroidInfo(destroyer);
 
-        //Create Repair Droid[01]. Print its info to console
-        DroidR1 repairDroid = new DroidR1();
+        //Create Repair Droid[01] with 50 repair units, 100hp and low defence. Print its info to console
+        DroidR1 repairDroid = factory.getRepairDroidR1();
         ConsoleView.printDroidInfo(repairDroid);
 
 
@@ -77,7 +73,7 @@ public class DroidsWar {
         repairDroid.doRepair(firstBattleDroidV01);
         repairDroid.doRepair(firstBattleDroidV01);
 
-        blE5[0].reloadAmmunition();
+        firstBattleDroidV01.reloadWeapon();
 
         System.out.println(
                 "//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//\n"+
@@ -88,7 +84,6 @@ public class DroidsWar {
         //Battle Droid[BD02] has two weapons and it must win.
         //Print the result of the battle to console
         //Repair them for the next fight
-        //Reload their weapon for the next fight.
 
         BattleField.fightToTheEnd(firstBattleDroidV01,battleDroidV02);
         repairDroid.doRepair(firstBattleDroidV01);
@@ -96,10 +91,7 @@ public class DroidsWar {
 
         repairDroid.doRepair(battleDroidV02);
         repairDroid.doRepair(battleDroidV02);
-
-        blE5[0].reloadAmmunition();
-        blE5[2].reloadAmmunition();
-        blE5[3].reloadAmmunition();
+        
 
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
@@ -121,6 +113,5 @@ public class DroidsWar {
 
         BattleField.fightToTheEnd(destroyer, firstBattleDroidV01);
         BattleField.fightToTheEnd(destroyer, battleDroidV02);
-        */
     }
 }

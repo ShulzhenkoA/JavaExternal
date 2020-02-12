@@ -1,15 +1,15 @@
 package org.javaexternal_shulzhenko.game.droids;
 
-import org.javaexternal_shulzhenko.game.droids.abilities.attack.TwoHandBattleProperties;
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.TwoHandsBattleAbilities;
 import org.javaexternal_shulzhenko.game.droids.abilities.defence.TitaniumDestroyerDroidBody;
 import org.javaexternal_shulzhenko.game.weapons.Weapon;
 
 
 public class DroidDD01 extends Droid{
 
-    TwoHandBattleProperties twoHandBattleProperties;
+    TwoHandsBattleAbilities twoHandBattleProperties;
 
-    public DroidDD01(TwoHandBattleProperties twoHandBattleProperties, TitaniumDestroyerDroidBody protectiveBody) {
+    public DroidDD01(TwoHandsBattleAbilities twoHandBattleProperties, TitaniumDestroyerDroidBody protectiveBody) {
         this("Droid Destroyer", "[DD01]",135, protectiveBody);
         this.twoHandBattleProperties = twoHandBattleProperties;
     }
@@ -23,11 +23,11 @@ public class DroidDD01 extends Droid{
         return twoHandBattleProperties.attackWithTwoHandsWeapons();
     }
 
-    public void setWeaponInTheRightHand(Weapon weapon){
+    public void setWeaponInRightHand(Weapon weapon){
         twoHandBattleProperties.setRightHandWeapon(weapon);
     }
 
-    public void setWeaponInTheLeftHand(Weapon weapon){
+    public void setWeaponInLeftHand(Weapon weapon){
         twoHandBattleProperties.setLeftHandWeapon(weapon);
     }
 
