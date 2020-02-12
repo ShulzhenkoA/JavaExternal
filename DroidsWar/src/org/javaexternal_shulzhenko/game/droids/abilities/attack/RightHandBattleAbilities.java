@@ -8,7 +8,4 @@ public interface RightHandBattleAbilities extends BattleAbility {
     Weapon getRightHandWeapon();
     void setRightHandWeapon(Weapon weapon);
     void reloadRightHandWeapon();
-    default int attackWithRightHand(){
-        return 1;
-    }
 }

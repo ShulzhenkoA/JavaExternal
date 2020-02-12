@@ -1,27 +1,53 @@
 package org.javaexternal_shulzhenko.game.droids;
 
 import org.javaexternal_shulzhenko.game.droids.abilities.attack.BattleAbility;
+import org.javaexternal_shulzhenko.game.droids.abilities.defence.BasicDroidBody;
 import org.javaexternal_shulzhenko.game.droids.abilities.defence.ProtectiveBody;
 
 public class Droid implements BattleAbility {
 
-    private String name = "Basic Droid";
-    private String model = "[D01]";
-    private int maxHealth = 100;
-    private int health = maxHealth;
+    private String name;
+    private String model;
+    private int maxHealth;
+    private int health;
     private boolean alive;
     ProtectiveBody protectiveBody;
 
     public Droid(ProtectiveBody protectiveBody) {
-        alive = true;
+        this();
         this.protectiveBody = protectiveBody;
+    }
+
+    protected Droid(){
+        name = "Basic Droid";
+        model = "[D01]";
+        maxHealth = 100;
+        health = maxHealth;
+        alive = true;
+        protectiveBody = new BasicDroidBody();
     }
 
     protected Droid(String name, String model, int maxHealth, ProtectiveBody protectiveBody) {
         this(protectiveBody);
         this.maxHealth = maxHealth;
+        health = maxHealth;
         this.name = name;
         this.model = model;
+    }
+
+    public int attack(){
+       return attackWithHands();
+    }
+
+    public void receiveDamage(int damage){
+        health -= damage;
+        if(health <=0){
+            alive = false;
+        }
+    }
+
+    public int performDefence(){
+        return protectiveBody.defendFromAttack();
     }
 
     public int getHealth() {
@@ -34,13 +60,6 @@ public class Droid implements BattleAbility {
 
     public int getMaxHealth() {
         return maxHealth;
-    }
-
-    public void receiveDamage(int damage){
-        health -= damage;
-        if(health <=0){
-            alive = false;
-        }
     }
 
     public String getName() {
@@ -63,6 +82,7 @@ public class Droid implements BattleAbility {
     public String toString() {
         return "Name  - " + name +
                 "\nModel - "+ model +
-                "\n{health = " + health + '}';
+                "\n{health = " + health + '}' +
+                "\n{defence = " + protectiveBody.toString() + '}';
     }
 }

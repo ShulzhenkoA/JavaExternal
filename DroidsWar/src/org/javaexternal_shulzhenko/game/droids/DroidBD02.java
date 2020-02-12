@@ -1,28 +1,39 @@
 package org.javaexternal_shulzhenko.game.droids;
 
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.TwoHandBattleProperties;
+import org.javaexternal_shulzhenko.game.droids.abilities.defence.SteelBattleDroidBody;
 import org.javaexternal_shulzhenko.game.weapons.*;
 
 public class DroidBD02 extends DroidBD01 {
 
-    public DroidBD02(Weapon weapon1, Weapon weapon2) {
-        this(weapon1, weapon2, "Battle Droid", "[BD02]");
+    TwoHandBattleProperties twoHandBattleProperties;
+
+    public DroidBD02(TwoHandBattleProperties twoHandBattleProperties, SteelBattleDroidBody protectiveBody) {
+        this("Battle Droid", "[BD02]", 100, protectiveBody);
+        this.twoHandBattleProperties = twoHandBattleProperties;
     }
 
-    protected DroidBD02(Weapon weapon1, Weapon weapon2, String name, String model) {
-        super(name, model, );
-        leftHandWeapon = weapon2;
+    protected DroidBD02(String name, String model, int maxHealth, SteelBattleDroidBody protectiveBody) {
+        super(name, model,maxHealth, protectiveBody);
     }
 
     @Override
-    public int attackEnemy() {
-        return super.attackEnemy() + leftHandWeapon.shoot();
+    public int attack() {
+        return twoHandBattleProperties.attackWithTwoHandsWeapons();
     }
 
+    public void setWeaponInLeftHand(Weapon weapon){
+        twoHandBattleProperties.setLeftHandWeapon(weapon);
+    }
 
+    public void reloadWeapons() {
+        twoHandBattleProperties.reloadRightHandWeapon();
+        twoHandBattleProperties.reloadLeftHandWeapon();
+    }
 
     @Override
     public String toString() {
         return super.toString() +
-                 "\n\t-- left hand -- " + leftHandWeapon;
+                 "\n\t-- left hand -- " + twoHandBattleProperties.getLeftHandWeapon().toString();
     }
 }

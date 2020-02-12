@@ -9,7 +9,4 @@ public interface TwoHandsBattleAbilities extends RightHandBattleAbilities {
     Weapon getLeftHandWeapon();
     void setLeftHandWeapon(Weapon weapon);
     void reloadLeftHandWeapon();
-    default int attackWithLeftHand(){
-        return 1;
-    }
 }

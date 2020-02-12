@@ -27,11 +27,6 @@ public class BlasterRifleE5 implements Weapon {
     }
 
     @Override
-    public int getAmmunitionCapacity() {
-        return ammunitionCapacity;
-    }
-
-    @Override
     public void reloadAmmunition() {
         ammunition = ammunitionCapacity;
     }

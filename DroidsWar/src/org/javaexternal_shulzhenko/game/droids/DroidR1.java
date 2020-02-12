@@ -1,18 +1,19 @@
 package org.javaexternal_shulzhenko.game.droids;
 
+import org.javaexternal_shulzhenko.game.droids.abilities.defence.ProtectiveBody;
 import org.javaexternal_shulzhenko.game.droids.abilities.repearing.RepairAbility;
 
 public class DroidR1 extends Droid{
 
     RepairAbility repairAbility;
 
-    public DroidR1(RepairAbility repairAbility) {
-        this(100,"Repair Droid", "R1");
+    public DroidR1(RepairAbility repairAbility, ProtectiveBody protectiveBody) {
+        this("Repair Droid", "R1", 100, protectiveBody);
         this.repairAbility = repairAbility;
     }
 
-    protected DroidR1(int maxHealth ,String name, String model) {
-        super(name, model, );
+    protected DroidR1(String name, String model, int maxHealth, ProtectiveBody protectiveBody) {
+        super(name, model, maxHealth, protectiveBody);
     }
 
     public void doRepair(Droid droid){

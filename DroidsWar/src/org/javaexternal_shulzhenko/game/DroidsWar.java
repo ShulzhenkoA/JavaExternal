@@ -2,10 +2,14 @@ package org.javaexternal_shulzhenko.game;
 
 
 import org.javaexternal_shulzhenko.game.battle.BattleField;
+
 import org.javaexternal_shulzhenko.game.console.ConsoleView;
 import org.javaexternal_shulzhenko.game.droids.*;
 import org.javaexternal_shulzhenko.game.droids.abilities.attack.RightHandBattleProperties;
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.TwoHandBattleProperties;
+import org.javaexternal_shulzhenko.game.droids.abilities.defence.BasicDroidBody;
 import org.javaexternal_shulzhenko.game.droids.abilities.defence.SteelBattleDroidBody;
+import org.javaexternal_shulzhenko.game.droids.abilities.defence.TitaniumDestroyerDroidBody;
 import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE10;
 import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE5;
 
@@ -14,26 +18,26 @@ import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE5;
 public class DroidsWar {
     public static void main(String[] args){
 
-        // Creating 10 blasters "BlasterRifleE5" for droids
-        BlasterRifleE5[] blE5 = new BlasterRifleE5[10];
-        for(int i = 0; i< blE5.length; i++){
-            blE5[i] = new BlasterRifleE5();
-        }
-
-        // Creating 2 blasters "BlasterRifleE10" for Droid Destroyer
-        BlasterRifleE10 blE10_1= new BlasterRifleE10();
-        BlasterRifleE10 blE10_2 = new BlasterRifleE10();
-
         //Create Basic Droid[D01] with no weapons (can do damage by hands) and no defense.
         // Print its info to console.
-        Droid basicDroid = new Droid();
+        Droid basicDroid = new Droid(new BasicDroidBody());
         ConsoleView.printDroidInfo(basicDroid);
 
         //Create two Battle Droid[BD01] with single weapon "BlasterRifleE5" and 20 points of defence.
         //Print info to console.
         DroidBD01 firstBattleDroidV01 = new DroidBD01(new RightHandBattleProperties(), new SteelBattleDroidBody());
-        firstBattleDroidV01.
+        firstBattleDroidV01.setWeaponInRightHand(new BlasterRifleE5());
         ConsoleView.printDroidInfo(firstBattleDroidV01);
+
+        DroidDD01 dd = new DroidDD01(new TwoHandBattleProperties(), new TitaniumDestroyerDroidBody());
+        dd.setWeaponInTheRightHand(new BlasterRifleE10());
+        dd.setWeaponInTheLeftHand(new BlasterRifleE10());
+        ConsoleView.printDroidInfo(dd);
+
+        BattleField.fightToTheEnd(firstBattleDroidV01, dd);
+
+
+        /*ConsoleView.printDroidInfo(firstBattleDroidV01);
         DroidBD01 secondBattleDroidV01 = new DroidBD01(blE5[1]);
         ConsoleView.printDroidInfo(secondBattleDroidV01);
 
@@ -117,6 +121,6 @@ public class DroidsWar {
 
         BattleField.fightToTheEnd(destroyer, firstBattleDroidV01);
         BattleField.fightToTheEnd(destroyer, battleDroidV02);
-
+        */
     }
 }

@@ -24,8 +24,8 @@ public class BattleField {
     }
 
     private static void fight(Droid firstDroid, Droid secondDroid){
-        int damageFirstDroid = firstDroid.attack() - generateDefence(secondDroid);
-        int damageSecondDroid = secondDroid.attack() - generateDefence(firstDroid);
+        int damageFirstDroid = firstDroid.attack() - secondDroid.performDefence();
+        int damageSecondDroid = secondDroid.attack() - firstDroid.performDefence();
 
 
         if(damageFirstDroid<0){ damageFirstDroid = 0; }
@@ -33,17 +33,6 @@ public class BattleField {
 
         firstDroid.receiveDamage(damageSecondDroid);
         secondDroid.receiveDamage(damageFirstDroid);
-    }
-
-    private static int generateDefence(Droid droid){
-
-        int def = droid.getDefence();
-        Random random = new Random();
-        if(def > random.nextInt(99)){
-            return def;
-        }else{
-            return 0;
-        }
     }
 }
 
