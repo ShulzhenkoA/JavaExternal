@@ -6,12 +6,12 @@ public class DroidDD01 extends DroidBD02 {
 
 
     public DroidDD01(Weapon weapon1, Weapon weapon2) {
-        this(weapon1, weapon2, 35, "Droid Destroyer", "[DD01]");
+        this(weapon1, weapon2, "Droid Destroyer", "[DD01]");
 
     }
 
-    protected DroidDD01(Weapon weapon1, Weapon weapon2, int defence, String name, String model) {
-        super(weapon1, weapon2, defence, name, model);
+    protected DroidDD01(Weapon weapon1, Weapon weapon2, String name, String model) {
+        super(weapon1, weapon2, name, model);
     }
 
 }

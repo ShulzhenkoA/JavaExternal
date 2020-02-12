@@ -2,7 +2,7 @@ package org.javaexternal_shulzhenko.game.droids.abilities.defence;
 
 import java.util.Random;
 
-public class SteelDroidBody implements ProtectiveBody {
+public class SteelBattleDroidBody implements ProtectiveBody {
 
     private final int RESISTANCE = 30;
     private final int RESISTANCE_CHANCE = 40;
@@ -15,5 +15,10 @@ public class SteelDroidBody implements ProtectiveBody {
         }else{
             return 0;
         }
+    }
+
+    @Override
+    public String getProtectionInfo() {
+        return RESISTANCE + "/" + RESISTANCE_CHANCE;
     }
 }

@@ -4,6 +4,8 @@ package org.javaexternal_shulzhenko.game;
 import org.javaexternal_shulzhenko.game.battle.BattleField;
 import org.javaexternal_shulzhenko.game.console.ConsoleView;
 import org.javaexternal_shulzhenko.game.droids.*;
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.RightHandBattleProperties;
+import org.javaexternal_shulzhenko.game.droids.abilities.defence.SteelBattleDroidBody;
 import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE10;
 import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE5;
 
@@ -29,7 +31,8 @@ public class DroidsWar {
 
         //Create two Battle Droid[BD01] with single weapon "BlasterRifleE5" and 20 points of defence.
         //Print info to console.
-        DroidBD01 firstBattleDroidV01 = new DroidBD01(blE5[0]);
+        DroidBD01 firstBattleDroidV01 = new DroidBD01(new RightHandBattleProperties(), new SteelBattleDroidBody());
+        firstBattleDroidV01.
         ConsoleView.printDroidInfo(firstBattleDroidV01);
         DroidBD01 secondBattleDroidV01 = new DroidBD01(blE5[1]);
         ConsoleView.printDroidInfo(secondBattleDroidV01);
@@ -67,8 +70,8 @@ public class DroidsWar {
 
         BattleField.fightToTheEnd(firstBattleDroidV01, secondBattleDroidV01);
 
-        repairDroid.repair(firstBattleDroidV01);
-        repairDroid.repair(firstBattleDroidV01);
+        repairDroid.doRepair(firstBattleDroidV01);
+        repairDroid.doRepair(firstBattleDroidV01);
 
         blE5[0].reloadAmmunition();
 
@@ -84,11 +87,11 @@ public class DroidsWar {
         //Reload their weapon for the next fight.
 
         BattleField.fightToTheEnd(firstBattleDroidV01,battleDroidV02);
-        repairDroid.repair(firstBattleDroidV01);
-        repairDroid.repair(firstBattleDroidV01);
+        repairDroid.doRepair(firstBattleDroidV01);
+        repairDroid.doRepair(firstBattleDroidV01);
 
-        repairDroid.repair(battleDroidV02);
-        repairDroid.repair(battleDroidV02);
+        repairDroid.doRepair(battleDroidV02);
+        repairDroid.doRepair(battleDroidV02);
 
         blE5[0].reloadAmmunition();
         blE5[2].reloadAmmunition();

@@ -13,11 +13,11 @@ public class SmallRepairing implements RepairAbility {
         if(!droid.isAlive()){
             droid.setAlive(true);
             droid.setHealth(REPAIR_UNIT);
-        }else if(droid.getHealth() < droid.getMAX_HEALTH()){
+        }else if(droid.getHealth() < droid.getMaxHealth()){
             droid.setHealth(droid.getHealth()+REPAIR_UNIT);
 
-            if(droid.getHealth() > droid.getMAX_HEALTH()){
-                droid.setHealth(droid.getMAX_HEALTH());
+            if(droid.getHealth() > droid.getMaxHealth()){
+                droid.setHealth(droid.getMaxHealth());
             }
         }
     }

@@ -1,22 +1,25 @@
 package org.javaexternal_shulzhenko.game.droids;
 
-public class Droid {
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.BattleAbility;
+import org.javaexternal_shulzhenko.game.droids.abilities.defence.ProtectiveBody;
 
-    private int health;
-    private int MAX_HEALTH = 100;
-    private int defense;
+public class Droid implements BattleAbility {
+
     private String name = "Basic Droid";
     private String model = "[D01]";
+    private int maxHealth = 100;
+    private int health = maxHealth;
     private boolean alive;
+    ProtectiveBody protectiveBody;
 
-    public Droid() {
-        health = 100;
+    public Droid(ProtectiveBody protectiveBody) {
         alive = true;
+        this.protectiveBody = protectiveBody;
     }
 
-    protected Droid(int defense, String name, String model) {
-        this();
-        this.defense = defense;
+    protected Droid(String name, String model, int maxHealth, ProtectiveBody protectiveBody) {
+        this(protectiveBody);
+        this.maxHealth = maxHealth;
         this.name = name;
         this.model = model;
     }
@@ -29,11 +32,9 @@ public class Droid {
         this.health = health;
     }
 
-    public int getMAX_HEALTH() {
-        return MAX_HEALTH;
+    public int getMaxHealth() {
+        return maxHealth;
     }
-
-    public int attack(){ return 2;}
 
     public void receiveDamage(int damage){
         health -= damage;
@@ -41,8 +42,6 @@ public class Droid {
             alive = false;
         }
     }
-
-    public int getDefence(){ return defense;}
 
     public String getName() {
         return name;
@@ -64,7 +63,6 @@ public class Droid {
     public String toString() {
         return "Name  - " + name +
                 "\nModel - "+ model +
-                "\n{health = " + health + '}'+
-                "\n{defence -- " + getDefence() +" }";
+                "\n{health = " + health + '}';
     }
 }

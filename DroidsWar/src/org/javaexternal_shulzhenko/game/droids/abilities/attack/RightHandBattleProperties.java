@@ -4,7 +4,7 @@ import org.javaexternal_shulzhenko.game.weapons.Weapon;
 
 public class RightHandBattleProperties implements RightHandBattleAbilities {
 
-    private Weapon rightHandWeapon;
+    protected Weapon rightHandWeapon;
 
 
     @Override

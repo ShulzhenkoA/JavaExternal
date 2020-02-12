@@ -8,7 +8,7 @@ public class TwoHandBattleProperties extends RightHandBattleProperties implement
 
     @Override
     public int attackWithTwoHandsWeapons() {
-        return leftHandWeapon.shoot();
+        return leftHandWeapon.shoot() + rightHandWeapon.shoot();
     }
 
     @Override
