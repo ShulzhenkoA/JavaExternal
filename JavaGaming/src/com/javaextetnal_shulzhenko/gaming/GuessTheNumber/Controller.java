@@ -82,13 +82,13 @@ public class Controller {
 	private void displayInfo(String command) {
 		switch(command) {
 			case "forth":
-				view.printNumbersRange(model.getLeftBorder(), model.getRightBorder());
-				view.printPreviousNumbers(model.getPreviousNumbers());
-				view.printAttempts(model.getAttempts());
+				view.printNumbersRange(model);
+				view.printPreviousNumbers(model);
+				view.printAttempts(model);
 				break;
 			case "won":
-				view.printCongrats(model.getSecretNumber());
-				view.printPreviousNumbers(model.getPreviousNumbers());
+				view.printCongrats(model);
+				view.printPreviousNumbers(model);
 				break;
 			case "quit":
 				view.printQuit();
@@ -98,20 +98,20 @@ public class Controller {
 				break;
 			case "firstPointer":
 				view.printFirstPointer();
-				view.printAttempts(model.getAttempts());
+				view.printAttempts(model);
 				break;
 			case "lost":
-				view.printLosing(model.getSecretNumber());
+				view.printLosing(model);
 				break;
 			case "again":
-				view.printHint(model.getLeftBorder(), model.getRightBorder());
-				view.printPreviousNumbers(model.getPreviousNumbers());
-				view.printAttempts(model.getAttempts());
+				view.printHint(model);
+				view.printPreviousNumbers(model);
+				view.printAttempts(model);
 				break;
             default:
-                view.printHint(model.getLeftBorder(), model.getRightBorder());
-                view.printAttempts(model.getAttempts());
-                view.printPreviousNumbers(model.getPreviousNumbers());
+                view.printHint(model);
+                view.printAttempts(model);
+                view.printPreviousNumbers(model);
 		}
 	}
 }

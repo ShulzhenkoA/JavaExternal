@@ -1,7 +1,5 @@
 package com.javaextetnal_shulzhenko.gaming.GuessTheNumber;
 
-import java.util.List;
-
 /**
  * View class of the GuessTheNumber game
  *
@@ -10,44 +8,71 @@ import java.util.List;
  */
 public class View {
 
-	public void printNumbersRange(int leftBorder, int rightBorder) {
-		System.out.println("The secret number is between [" + leftBorder + " and " + rightBorder + "]");
-	}
-	
-	public void printCongrats(int secretNumber) {
-		System.out.println("Congrats!!! The secret number is " + secretNumber + ". You won!!!");
+	void printGreeting() {
+		printToConsole(MessagesForPrinting.GREETING.getMassageSnippet());
 	}
 
-	public void printQuit() {
-		System.out.println("Quit the game");
+	void printFirstPointer() {
+		printToConsole(MessagesForPrinting.FIRST_POINTER.getMassageSnippet());
 	}
 
-	public void printHint(int leftFieldBorder, int rightFieldBorder) {
-		System.out.println("Enter the number from *** " + leftFieldBorder + " to " +
-							rightFieldBorder + " *** for guess or *** quit *** for ending the game.");
-	}
-	
-	public void printGreeting() {
-		System.out.println("Welcome to the 'GuessTheNumber' game\n"
-		         + "Start the game enter *** play ***\n"
-		         + "Quit the game enter *** quit ***\n");
-	}
-
-	public void printAttempts(int attempts) {
-		System.out.println("You have "+ attempts + " attempts.\n");
+	void printNumbersRange(Model model) {
+		printToConsole(
+				buildStringMassage(
+						MessagesForPrinting.THE_SECRET_NUMBER.getMassageSnippet(),
+						String.valueOf(model.getLeftBorder()),
+						MessagesForPrinting.AND.getMassageSnippet(),
+						String.valueOf(model.getRightBorder()),
+						MessagesForPrinting.CLOSING_SQUARE_BRACKET.getMassageSnippet()));
 	}
 
-	public void printFirstPointer() {
-		System.out.println("Enter the number from *** 0 to 100 *** to guess the secret number"
-				             + " or enter *** quit *** for ending the game.");
+	void printPreviousNumbers(Model model) {
+		printToConsole(MessagesForPrinting.SELECTED_NUMBERS.getMassageSnippet() + model.getPreviousNumbers());
 	}
 
-	public void printLosing(int secretNumber) {
-		System.out.println("You had lost!!! A-ia-iaaaaa :-( !!! The secret number was "+ secretNumber+".");
-		
+	void printAttempts(Model model) {
+		printToConsole(
+				buildStringMassage(
+						MessagesForPrinting.YOU_HAVE.getMassageSnippet(),
+						String.valueOf(model.getAttempts()),
+						MessagesForPrinting.ATTEMPTS.getMassageSnippet()));
 	}
 
-	public void printPreviousNumbers(List<Integer> previousNumbers) {
-		System.out.println("Selected numbers " + previousNumbers);
+	void printHint(Model model) {
+		printToConsole(
+				buildStringMassage(
+						MessagesForPrinting.ENTER_THE_NUMBER.getMassageSnippet(),
+						String.valueOf(model.getLeftBorder()),
+						MessagesForPrinting.TO.getMassageSnippet(),
+						String.valueOf(model.getRightBorder()),
+						MessagesForPrinting.FOR_GUESS_OR_QUIT.getMassageSnippet()));
+	}
+
+	void printCongrats(Model model) {
+		printToConsole(
+				buildStringMassage(
+						MessagesForPrinting.CONGRATS.getMassageSnippet(),
+						String.valueOf(model.getAttempts()),
+						MessagesForPrinting.YOU_WON.getMassageSnippet()));
+	}
+
+	void printLosing(Model model) {
+		printToConsole(MessagesForPrinting.YOU_HAD_LOST.getMassageSnippet() + model.getSecretNumber());
+	}
+
+	void printQuit() {
+		printToConsole(MessagesForPrinting.QUIT_THE_GAME.getMassageSnippet());
+	}
+
+	private void printToConsole(String massage){
+		System.out.println(massage);
+	}
+
+	private String buildStringMassage(String... message){
+		StringBuilder buildMassage = new StringBuilder();
+		for(String s : message) {
+			buildMassage = buildMassage.append(s);
+		}
+		return new String(buildMassage);
 	}
 }
