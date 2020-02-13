@@ -75,15 +75,9 @@ public class Model {
 
 	public int getRightBorder() { return rightBorder; }
 
-	public void setRightBorder(int rightBorder) { this.rightBorder = rightBorder; }
-
 	public int getLeftBorder() { return leftBorder; }
 
-	public void setLeftBorder(int leftBorder) { this.leftBorder = leftBorder; }
-
 	public int getAttempts() { return attempts; }
-
-	public void decrementAttempts(){ attempts--; }
 
 	public List<Integer> getPreviousNumbers() { return previousNumbers; }
 
