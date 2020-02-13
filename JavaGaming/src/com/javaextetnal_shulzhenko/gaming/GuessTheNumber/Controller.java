@@ -3,11 +3,12 @@ package com.javaextetnal_shulzhenko.gaming.GuessTheNumber;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 /**
  * Controller class of GuessTheNumber game
  *
- * @version 0.1.1 13 Feb 2020
+ * @version 0.2 13 Feb 2020
  * @author Andrii Shulzhenko
  */
 public class Controller {
@@ -28,6 +29,13 @@ public class Controller {
 		String enteredData = null;
 		do {
 			enteredData = readInputData();
+			if(enteredData.equals("uk")){
+				ResourceManager.INSTANCE.changeResource(new Locale("uk","UA"));
+				displayInfo("greeting");
+			}else if(enteredData.equals("en")){
+				ResourceManager.INSTANCE.changeResource(Locale.getDefault());
+				displayInfo("greeting");
+			}
 		}while(enteredData.equalsIgnoreCase("quit") ? false :
 				enteredData.equalsIgnoreCase("play") ? play() : true);
 		displayInfo("quit");
@@ -112,6 +120,7 @@ public class Controller {
                 view.printHint(model);
                 view.printAttempts(model);
                 view.printPreviousNumbers(model);
+                break;
 		}
 	}
 }
