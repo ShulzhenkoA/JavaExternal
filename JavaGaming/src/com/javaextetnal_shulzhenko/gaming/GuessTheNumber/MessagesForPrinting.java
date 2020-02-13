@@ -1,5 +1,11 @@
 package com.javaextetnal_shulzhenko.gaming.GuessTheNumber;
 
+/**
+ * Class for massages printing ing view
+ *
+ * @version 0.1.1 13 Feb 2020
+ * @author Adnrii Shulzhenko
+ */
 public enum MessagesForPrinting {
 
 

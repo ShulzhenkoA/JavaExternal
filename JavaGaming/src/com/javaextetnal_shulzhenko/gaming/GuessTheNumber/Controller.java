@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 /**
  * Controller class of GuessTheNumber game
  *
- * @version 0.1 13 Feb 2020
+ * @version 0.1.1 13 Feb 2020
  * @author Andrii Shulzhenko
  */
 public class Controller {
