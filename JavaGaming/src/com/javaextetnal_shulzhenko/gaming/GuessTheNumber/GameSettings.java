@@ -3,7 +3,7 @@ package com.javaextetnal_shulzhenko.gaming.GuessTheNumber;
 /**
  * Class for configuring GuessTheNumber game
  *
- * @version 0.1.1 13 Feb 2020
+ * @version 0.2 13 Feb 2020
  * @author Adnrii Shulzhenko
  */
 public enum GameSettings {

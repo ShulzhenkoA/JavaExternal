@@ -3,65 +3,74 @@ package com.javaextetnal_shulzhenko.gaming.GuessTheNumber;
 /**
  * View class of the GuessTheNumber game
  *
- * @version 0.1.1 13 Feb 2020
+ * @version 0.2 13 Feb 2020
  * @author Andrii Shulzhenko
  */
 public class View {
 
+	ResourceManager manager = ResourceManager.INSTANCE;
+
+
 	void printGreeting() {
-		printToConsole(MessagesForPrinting.GREETING.getMassageSnippet());
+		printToConsole(manager.getString(MessagesForPrinting.GREETING.getMassageSnippet()));
+
 	}
 
 	void printFirstPointer() {
-		printToConsole(MessagesForPrinting.FIRST_POINTER.getMassageSnippet());
-	}
+		printToConsole(manager.getString(MessagesForPrinting.FIRST_POINTER.getMassageSnippet()));
+}
 
 	void printNumbersRange(Model model) {
 		printToConsole(
 				buildStringMassage(
-						MessagesForPrinting.THE_SECRET_NUMBER.getMassageSnippet(),
+						manager.getString(MessagesForPrinting.THE_SECRET_NUMBER.getMassageSnippet()),
 						String.valueOf(model.getLeftBorder()),
-						MessagesForPrinting.AND.getMassageSnippet(),
+						manager.getString(MessagesForPrinting.AND.getMassageSnippet()),
 						String.valueOf(model.getRightBorder()),
-						MessagesForPrinting.CLOSING_SQUARE_BRACKET.getMassageSnippet()));
+						manager.getString(MessagesForPrinting.CLOSING_SQUARE_BRACKET.getMassageSnippet())));
 	}
 
 	void printPreviousNumbers(Model model) {
-		printToConsole(MessagesForPrinting.SELECTED_NUMBERS.getMassageSnippet() + model.getPreviousNumbers());
+		printToConsole(
+				manager.getString(MessagesForPrinting.SELECTED_NUMBERS.getMassageSnippet())
+						+ model.getPreviousNumbers());
 	}
 
 	void printAttempts(Model model) {
 		printToConsole(
 				buildStringMassage(
-						MessagesForPrinting.YOU_HAVE.getMassageSnippet(),
+						manager.getString(MessagesForPrinting.YOU_HAVE.getMassageSnippet()),
 						String.valueOf(model.getAttempts()),
-						MessagesForPrinting.ATTEMPTS.getMassageSnippet()));
+						manager.getString(MessagesForPrinting.ATTEMPTS.getMassageSnippet())));
 	}
 
 	void printHint(Model model) {
 		printToConsole(
 				buildStringMassage(
-						MessagesForPrinting.ENTER_THE_NUMBER.getMassageSnippet(),
+						manager.getString(MessagesForPrinting.ENTER_THE_NUMBER.getMassageSnippet()),
 						String.valueOf(model.getLeftBorder()),
-						MessagesForPrinting.TO.getMassageSnippet(),
+						manager.getString(MessagesForPrinting.TO.getMassageSnippet()),
 						String.valueOf(model.getRightBorder()),
-						MessagesForPrinting.FOR_GUESS_OR_QUIT.getMassageSnippet()));
+						manager.getString(MessagesForPrinting.FOR_GUESS_OR_QUIT.getMassageSnippet())));
 	}
 
 	void printCongrats(Model model) {
 		printToConsole(
 				buildStringMassage(
-						MessagesForPrinting.CONGRATS.getMassageSnippet(),
-						String.valueOf(model.getAttempts()),
-						MessagesForPrinting.YOU_WON.getMassageSnippet()));
+						manager.getString(MessagesForPrinting.CONGRATS.getMassageSnippet()),
+						String.valueOf(model.getSecretNumber()),
+						manager.getString(MessagesForPrinting.YOU_WON.getMassageSnippet())));
 	}
 
 	void printLosing(Model model) {
-		printToConsole(MessagesForPrinting.YOU_HAD_LOST.getMassageSnippet() + model.getSecretNumber());
+		printToConsole(
+				manager.getString(MessagesForPrinting.YOU_HAD_LOST.getMassageSnippet()) +
+						model.getSecretNumber());
 	}
 
 	void printQuit() {
-		printToConsole(MessagesForPrinting.QUIT_THE_GAME.getMassageSnippet());
+		printToConsole(
+				manager.getString(MessagesForPrinting.QUIT_THE_GAME.getMassageSnippet()));
 	}
 
 	private void printToConsole(String massage){

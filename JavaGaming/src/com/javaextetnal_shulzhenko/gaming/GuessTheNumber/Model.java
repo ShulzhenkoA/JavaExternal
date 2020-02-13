@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * Model class of GuessTheNumber game
  *
- * @version 0.1.1 13 Feb 2020
+ * @version 0.2 13 Feb 2020
  * @author Andrii Shulzhenko
  */
 public class Model {
@@ -25,6 +25,7 @@ public class Model {
 		leftBorder = GameSettings.MIN_NUMBER.getValue();
 		attempts = GameSettings.AMOUNT_OF_ATTEMPTS.getValue();
 		previousNumbers = new ArrayList<>();
+		System.out.println(secretNumber);
 	}
 
     /**
