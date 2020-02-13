@@ -5,20 +5,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Controller class of the game
+ * Controller class of GuessTheNumber game
+ *
+ * @version 0.1 13 Feb 2020
+ * @author Andrii Shulzhenko
  */
 public class Controller {
 
 	private Model model;
 	private View view;
 	
-	public Controller() {
-		model = new Model();
-		view = new View();
+	public Controller(Model model, View view) {
+		this.model = model;
+        this.view = view;
 	}
 
 	/**
-	 * Launch the game
+	 * Launch the game and prompts user for playing, quiting or change language
 	 */
 	public void launchGame() {
 		displayInfo("greeting");
@@ -31,7 +34,7 @@ public class Controller {
 	}
 
 	/**
-	 * Begin playing process of the game
+	 * Begin playing process of the game and prompts user to enter an action;
 	 *
 	 * @return false when for ending the game
 	 */
@@ -41,18 +44,16 @@ public class Controller {
 
 		String enteredData = null;
 		do {
-			if(model.getAttempts() == 0) {
-				displayInfo("lost");
-				break;
-			}
-			enteredData = readInputData();
+
+		    enteredData = readInputData();
 
 			if(!enteredData.equalsIgnoreCase("quit")) {
-				enteredData = processTypedNumber(determineEnteredNumber(enteredData));
+				enteredData = model.processUserAction(enteredData);
 				displayInfo(enteredData);
 			}
 		}while(enteredData.equalsIgnoreCase("quit") ? false :
-			   enteredData.equalsIgnoreCase("won") ? false : true);
+                  enteredData.equalsIgnoreCase("won") ? false :
+                     enteredData.equalsIgnoreCase("lost" ) ? false : true);
 		return false;
 	}
 
@@ -72,50 +73,6 @@ public class Controller {
 		return data;
 	}
 
-	/**
-	 * Process the main logic of the game
-	 *
-	 * @param number integer variant of entered data
-	 * @return the command to be display
-	 */
-	private String processTypedNumber(int number) {
-
-		int secretNumber = model.getSecretNumber();
-
-		if(number == secretNumber) {
-			model.addPreviousNumbers(number);
-			return "won";
-		}else if(number > secretNumber && number <= model.getRightBorder()) {
-			model.setRightBorder(number);
-			model.decrementAttempts();
-			model.addPreviousNumbers(number);
-			return "forth";
-		}else if(number < secretNumber && number >= model.getLeftBorder()){
-			model.setLeftBorder(number);
-			model.decrementAttempts();
-			model.addPreviousNumbers(number);
-			return "forth";
-		}else{
-			model.decrementAttempts();
-			return "again";
-		}
-	}
-
-	/**
-	 *Determine int value of entered data
-	 *
-	 * @param data input data
-	 * @return an integer value of entered data or -1 in case of {@link NumberFormatException}
-	 */
-	private int determineEnteredNumber(String data) {
-		int num;
-		try{
-			num = Integer.parseInt(data);
-			return num;
-		}catch (NumberFormatException exc){
-			return -1;
-		}
-	}
 
 	/**
 	 * Display game info throw view object.
@@ -148,7 +105,13 @@ public class Controller {
 				break;
 			case "again":
 				view.printHint(model.getLeftBorder(), model.getRightBorder());
+				view.printPreviousNumbers(model.getPreviousNumbers());
 				view.printAttempts(model.getAttempts());
+				break;
+            default:
+                view.printHint(model.getLeftBorder(), model.getRightBorder());
+                view.printAttempts(model.getAttempts());
+                view.printPreviousNumbers(model.getPreviousNumbers());
 		}
 	}
 }

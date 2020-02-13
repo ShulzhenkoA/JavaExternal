@@ -3,7 +3,10 @@ package com.javaextetnal_shulzhenko.gaming.GuessTheNumber;
 import java.util.List;
 
 /**
- * View class of the game
+ * View class of the GuessTheNumber game
+ *
+ * @version 0.1 13 Feb 2020
+ * @author Andrii Shulzhenko
  */
 public class View {
 
