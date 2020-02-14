@@ -35,12 +35,16 @@ public class Droid implements BattleAbility {
         this.model = model;
     }
 
-    public int attack(){
-       return attackWithHands();
+    public void attack(Droid droid){
+        droid.receiveDamage(attackWithHands());
     }
 
     public void receiveDamage(int damage){
-        health -= damage;
+        int amountNotProtectedDamage = damage - performDefence(); //without protection from ProtectiveBody
+
+        if(amountNotProtectedDamage>0){
+            health -= damage;
+        }
         if(health <=0){
             alive = false;
         }

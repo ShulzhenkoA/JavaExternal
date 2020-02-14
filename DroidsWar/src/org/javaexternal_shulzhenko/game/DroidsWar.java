@@ -1,18 +1,11 @@
 package org.javaexternal_shulzhenko.game;
 
 
-import org.javaexternal_shulzhenko.game.battle.BattleField;
+import org.javaexternal_shulzhenko.game.battle.BattleFieldController;
 
 import org.javaexternal_shulzhenko.game.console.ConsoleView;
 import org.javaexternal_shulzhenko.game.droids.*;
-import org.javaexternal_shulzhenko.game.droids.abilities.attack.RightHandBattleProperties;
-import org.javaexternal_shulzhenko.game.droids.abilities.attack.TwoHandBattleProperties;
-import org.javaexternal_shulzhenko.game.droids.abilities.defence.BasicDroidBody;
-import org.javaexternal_shulzhenko.game.droids.abilities.defence.SteelBattleDroidBody;
-import org.javaexternal_shulzhenko.game.droids.abilities.defence.TitaniumDestroyerDroidBody;
 import org.javaexternal_shulzhenko.game.factories.DroidFactory;
-import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE10;
-import org.javaexternal_shulzhenko.game.weapons.BlasterRifleE5;
 
 
 // Class with main method
@@ -68,7 +61,7 @@ public class DroidsWar {
         //Repair(if not alive - set to alive and add 50hp) firstBattleDroidV01 with Repair Droid[R1] for the next fight.
         //Reload firstBattleDroidV01 weapon for the next fight.
 
-        BattleField.fightToTheEnd(firstBattleDroidV01, secondBattleDroidV01);
+        BattleFieldController.fightToTheEnd(firstBattleDroidV01, secondBattleDroidV01);
 
         repairDroid.doRepair(firstBattleDroidV01);
         repairDroid.doRepair(firstBattleDroidV01);
@@ -85,14 +78,15 @@ public class DroidsWar {
         //Print the result of the battle to console
         //Repair them for the next fight
 
-        BattleField.fightToTheEnd(firstBattleDroidV01,battleDroidV02);
+        BattleFieldController.fightToTheEnd(firstBattleDroidV01,battleDroidV02);
         repairDroid.doRepair(firstBattleDroidV01);
         repairDroid.doRepair(firstBattleDroidV01);
 
         repairDroid.doRepair(battleDroidV02);
         repairDroid.doRepair(battleDroidV02);
         
-
+        firstBattleDroidV01.reloadWeapon();
+        battleDroidV02.reloadWeapon();
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
@@ -111,7 +105,7 @@ public class DroidsWar {
         ConsoleView.printDroidInfo(battleDroidV02);
         ConsoleView.printDroidInfo(destroyer);
 
-        BattleField.fightToTheEnd(destroyer, firstBattleDroidV01);
-        BattleField.fightToTheEnd(destroyer, battleDroidV02);
+        BattleFieldController.fightToTheEnd(destroyer, firstBattleDroidV01);
+        BattleFieldController.fightToTheEnd(destroyer, battleDroidV02);
     }
 }

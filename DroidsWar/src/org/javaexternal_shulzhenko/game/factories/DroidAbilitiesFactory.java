@@ -1,24 +1,21 @@
 package org.javaexternal_shulzhenko.game.factories;
 
 
-import org.javaexternal_shulzhenko.game.droids.abilities.attack.RightHandBattleAbilities;
-import org.javaexternal_shulzhenko.game.droids.abilities.attack.RightHandBattleProperties;
-import org.javaexternal_shulzhenko.game.droids.abilities.attack.TwoHandBattleProperties;
-import org.javaexternal_shulzhenko.game.droids.abilities.attack.TwoHandsBattleAbilities;
-import org.javaexternal_shulzhenko.game.droids.abilities.repearing.RepairAbility;
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.LeftHandBattleAbility;
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.RightHandBattleAbility;
 import org.javaexternal_shulzhenko.game.droids.abilities.repearing.SmallRepairing;
 
 public class DroidAbilitiesFactory {
 
-    RightHandBattleAbilities makeRightHandBattleAbilities() {
-        return new RightHandBattleProperties();
+    RightHandBattleAbility makeRightHandBattleAbility() {
+        return new RightHandBattleAbility();
     }
 
-    TwoHandsBattleAbilities makeTwoHandsBattleAbilities(){
-        return new TwoHandBattleProperties();
+    LeftHandBattleAbility makeLeftHandBattleAbility(){
+        return new LeftHandBattleAbility();
     }
 
-    RepairAbility makeRepairAbility(){
+    SmallRepairing makeSmallRepairAbility(){
         return new SmallRepairing();
     }
 }

@@ -1,42 +1,43 @@
 package org.javaexternal_shulzhenko.game.droids;
 
-import org.javaexternal_shulzhenko.game.droids.abilities.attack.RightHandBattleAbilities;
+import org.javaexternal_shulzhenko.game.droids.abilities.attack.UseRightHandInBattle;
 import org.javaexternal_shulzhenko.game.droids.abilities.defence.SteelBattleDroidBody;
 import org.javaexternal_shulzhenko.game.weapons.Weapon;
 
 public class DroidBD01 extends Droid{
 
 
-    private RightHandBattleAbilities rightHandBattleProperties;
+    protected UseRightHandInBattle rightHandBattleAbility;
 
 
-    public DroidBD01(RightHandBattleAbilities rightHandBattleProperties, SteelBattleDroidBody protectiveBody) {
-        this("Battle Droid", "[BD01]", 100, protectiveBody);
-        this.rightHandBattleProperties = rightHandBattleProperties;
-
+    public DroidBD01(UseRightHandInBattle rightHandBattleProperties, SteelBattleDroidBody protectiveBody) {
+        this("Battle Droid", "[BD01]", 100, rightHandBattleProperties, protectiveBody);
     }
 
-    protected DroidBD01(String name, String model, int maxHealth, SteelBattleDroidBody protectiveBody) {
+    protected DroidBD01(String name, String model, int maxHealth,
+                        UseRightHandInBattle rightHandBattleAbility,
+                        SteelBattleDroidBody protectiveBody) {
         super(name, model, maxHealth, protectiveBody);
+        this.rightHandBattleAbility = rightHandBattleAbility;
     }
 
     @Override
-    public int attack() {
-        return rightHandBattleProperties.attackWithRightHandWeapon();
+    public void attack(Droid droid) {
+        droid.receiveDamage(rightHandBattleAbility.attackWithRightHandWeapon());
     }
 
     public void setWeaponInRightHand(Weapon weapon){
-        rightHandBattleProperties.setRightHandWeapon(weapon);
+        rightHandBattleAbility.setRightHandWeapon(weapon);
     }
 
     public void reloadWeapon(){
-        rightHandBattleProperties.reloadRightHandWeapon();
+        rightHandBattleAbility.reloadRightHandWeapon();
     }
 
     @Override
     public String toString() {
 
         return super.toString() +
-                "\n{weapon \n\t-- right hand -- "  + rightHandBattleProperties.getRightHandWeapon().toString();
+                "\n{weapon \n\t-- right hand -- "  + rightHandBattleAbility.getRightHandWeapon().toString();
     }
 }

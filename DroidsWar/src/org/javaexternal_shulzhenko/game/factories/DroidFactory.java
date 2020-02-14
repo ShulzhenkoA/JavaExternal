@@ -1,8 +1,6 @@
 package org.javaexternal_shulzhenko.game.factories;
 
 import org.javaexternal_shulzhenko.game.droids.*;
-import org.javaexternal_shulzhenko.game.droids.abilities.defence.BasicDroidBody;
-import org.javaexternal_shulzhenko.game.weapons.Weapon;
 
 public class DroidFactory {
 
@@ -22,7 +20,7 @@ public class DroidFactory {
 
     public DroidBD01 getBattleDroidBD01(){
         DroidBD01 factoryDroid;
-        factoryDroid = new DroidBD01(droidAbilitiesFactory.makeRightHandBattleAbilities(),
+        factoryDroid = new DroidBD01(droidAbilitiesFactory.makeRightHandBattleAbility(),
                 armorFactory.makeSteelBDB());
         factoryDroid.setWeaponInRightHand(weaponFactory.makeWeapon("E5"));
         return factoryDroid;
@@ -30,7 +28,8 @@ public class DroidFactory {
 
     public DroidBD02 getBattleDroidBD02(){
         DroidBD02 factoryDroid;
-        factoryDroid = new DroidBD02(droidAbilitiesFactory.makeTwoHandsBattleAbilities(),
+        factoryDroid = new DroidBD02(droidAbilitiesFactory.makeRightHandBattleAbility(),
+                droidAbilitiesFactory.makeLeftHandBattleAbility(),
                 armorFactory.makeSteelBDB());
         factoryDroid.setWeaponInLeftHand((weaponFactory.makeWeapon("E5")));
         factoryDroid.setWeaponInRightHand(weaponFactory.makeWeapon("E5"));
@@ -40,7 +39,8 @@ public class DroidFactory {
 
     public DroidDD01 getDroidDestroyerDD01(){
         DroidDD01 factoryDroid;
-        factoryDroid = new DroidDD01(droidAbilitiesFactory.makeTwoHandsBattleAbilities(),
+        factoryDroid = new DroidDD01(droidAbilitiesFactory.makeRightHandBattleAbility(),
+                droidAbilitiesFactory.makeLeftHandBattleAbility(),
                 armorFactory.makeTitaniumDDB());
         factoryDroid.setWeaponInRightHand(weaponFactory.makeWeapon("E10"));
         factoryDroid.setWeaponInLeftHand(weaponFactory.makeWeapon("E10"));
@@ -49,7 +49,8 @@ public class DroidFactory {
 
     public DroidR1 getRepairDroidR1(){
         DroidR1 factoryDroid;
-        factoryDroid = new DroidR1( droidAbilitiesFactory.makeRepairAbility(),armorFactory.makeBasicProtectiveBody());
+        factoryDroid = new DroidR1( droidAbilitiesFactory.makeSmallRepairAbility(),
+                armorFactory.makeBasicProtectiveBody());
         return factoryDroid;
     }
 }

@@ -2,7 +2,7 @@ package org.javaexternal_shulzhenko.game.droids.abilities.attack;
 
 import org.javaexternal_shulzhenko.game.weapons.Weapon;
 
-public class RightHandBattleProperties implements RightHandBattleAbilities {
+public class RightHandBattleAbility implements UseRightHandInBattle {
 
     protected Weapon rightHandWeapon;
 
