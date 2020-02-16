@@ -1,84 +1,182 @@
 package org.javaexternal_shulzhenko.game.console;
 
+import org.javaexternal_shulzhenko.game.account.Account;
 import org.javaexternal_shulzhenko.game.droids.Droid;
+import org.javaexternal_shulzhenko.game.utils.ResourceBundleUtil;
 
 public class ConsoleView {
 
-    public static void showResultsOfTheFight(Droid firstDroid, Droid secondDroid, String typeOfTheFight) {
+    private static final String STARS_LINE = "\n****************************************************************\n";
 
-        String firstDroidInfo;
-        String secondDroidInfo;
+    public static void showResultsOfTheFight(Droid firstDroid, Droid secondDroid) {
 
-        if (firstDroid.isAlive()) {
-            firstDroidInfo = firstDroid.toString();
-        } else {
-            firstDroidInfo = firstDroid.getName() + firstDroid.getModel() + " was defeated";
+        String firstDroidInfo = firstDroid.toString();
+        String secondDroidInfo = secondDroid.toString();
+
+        if (!firstDroid.isAlive()) {
+            firstDroidInfo = firstDroid.getName() + firstDroid.getModel() +
+                    ResourceBundleUtil.INSTANCE.getString("droidswar.language.was.defeated");
         }
 
-        if (secondDroid.isAlive()) {
-            secondDroidInfo = secondDroid.toString();
-        } else {
-            secondDroidInfo = secondDroid.getName() + secondDroid.getModel() + " was defeated.";
+        if (!secondDroid.isAlive()) {
+            secondDroidInfo = secondDroid.getName() + secondDroid.getModel() +
+                    ResourceBundleUtil.INSTANCE.getString("droidswar.language.was.defeated");
         }
 
-        String betweenInfo = "= between " + firstDroid.getName() + firstDroid.getModel() +
-                " and " + secondDroid.getName() + secondDroid.getModel();
+        String betweenInfo = buildStringMassage(
+                ResourceBundleUtil.INSTANCE.getString("droidswar.language.between"), firstDroid.getName() ,
+                firstDroid.getModel(),
+                ResourceBundleUtil.INSTANCE.getString("droidswar.language.and"),
+                secondDroid.getName(), secondDroid.getModel());
 
         String equalSignsLine = "";
 
         for (int i = 0; i < betweenInfo.length(); i++) {
-            equalSignsLine = equalSignsLine.concat("=");
+            equalSignsLine = buildStringMassage(equalSignsLine, "=");
         }
-        System.out.println(equalSignsLine +
-                "\n= Result of " + typeOfTheFight +
-                betweenInfo + "\n= Surviving droid info\n" + equalSignsLine +
-                "\n****************************************************************\n" + firstDroidInfo +
-                "\n****************************************************************\n" + secondDroidInfo +
-                "\n****************************************************************\n\n");
+
+        String allBattleInfo = buildStringMassage("\n\n" , equalSignsLine,
+                ResourceBundleUtil.INSTANCE.getString("droidswar.language.result.of.battle"),
+                betweenInfo, ResourceBundleUtil.INSTANCE.getString("droidswar.language.surviving.droid.info"),
+                equalSignsLine, STARS_LINE, firstDroidInfo,
+                STARS_LINE, secondDroidInfo, STARS_LINE);
+
+        System.out.println(allBattleInfo);
     }
 
     public static void printDroidInfo(Droid droid) {
-        System.out.println("........................Droid Information........................\n" + droid +
-                "\n........................Droid Information........................\n\n");
+        String droidInfo = buildStringMassage(
+                ResourceBundleUtil.INSTANCE.getString("droidswar.language.droidinfo.header"),
+                droid.toString(),
+                ResourceBundleUtil.INSTANCE.getString("droidswar.language.droidinfo.header"));
+        System.out.println(droidInfo);
+    }
+
+    public static void printBattleBetweenHeader() {
+        System.out.println(ResourceBundleUtil.INSTANCE.getString("droidswar.language.battle.between.header"));
     }
 
     public void printGreeting() {
-        System.out.println("____________________THIS IS DROIDS WARS___________________\n" +
-                "1. To log in to your account enter *** login ***\n" +
-                "2. Create new account enter *** create ***\n");
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.this.is.droids.menu"));
     }
 
-    public void printCreatingAccInfo() {
-        System.out.println("____________________ACCOUNT CREATING____________________\n");
+    public void printCreatingAccHeader() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.account.creating.header"));
     }
 
     public void printEnterNickName() {
-        System.out.println("Enter your game NickName (only letters are allowed, at least one " +
-                "uppercase latter is required)");
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.enter.your.nickname.creating"));
     }
 
     public void printEnterPassword() {
-        System.out.println("Enter the Password from your account (its length must be from 4 to 8, at least one " +
-                "uppercase letter, lowercase letter and number)");
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.enter.your.password.creating"));
     }
 
     public void printCreateAdmOrUserAcc() {
-        System.out.println("Do you want to create admin or user account? Enter *** admin *** or *** user *** ");
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.do.you.want.admin.creating"));
     }
 
     public void printAccountCreated() {
-        System.out.println("Your account was succesfully created.");
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.your.account.was.created"));
     }
 
-    public void printLoginAccountInfo() {
-        System.out.println("____________________LOGIN ACCOUNT____________________\n");
+    public void printLoginAccountHeader() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.login.account.header"));
     }
 
     public void printEnterForLogin() {
-        System.out.println("Enter your account NickName");
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.enter.your.account.nickname.login"));
     }
 
     public void printEnterPasswordForLogin() {
-        System.out.println("Enter your account Password");
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.enter.your.account.password.login"));
+    }
+
+    public void printInvalidNickname() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.this.nickname.exist.creating"));
+    }
+
+    public void printInvalidPassword() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.your.password.invalid.creating"));
+    }
+
+    public void printWrongNicknameOrPassword() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.this.account.dont.exist"));
+    }
+
+    public void printUserAccHeader(Account account) {
+
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.logged.in.user.header") +
+                        account.getNickname() +
+                        ResourceBundleUtil.INSTANCE.getString("droidswar.language.logged.in.user.menu"));
+    }
+
+    public void printAdminAccHeader(Account account) {
+
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.logged.in.admin.header") +
+                account.getNickname() +
+                ResourceBundleUtil.INSTANCE.getString("droidswar.language.logged.in.admin.menu"));
+    }
+
+    public void printWhichDroidCreate(Account account) {
+
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.logged.in.admin.header") +
+                account.getNickname() +
+                ResourceBundleUtil.INSTANCE.getString("droidswar.language.logged.in.admin.create.droid.menu"));
+    }
+
+    public void printDroidWasCreated(Droid droid) {
+        printDroidInfo(droid);
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.was.successfully.created"));
+    }
+
+    public void printDroidWasDeleted() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.was.successfully.deleted"));
+    }
+
+    public void printEmptyDroidsList() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.droidlist.is.empty"));
+    }
+
+    public void printDroid(Droid droid){
+        printDroidInfo(droid);
+    }
+
+    public void printDroidNumberInDroidList(int number) {
+        printToConsole(
+                ResourceBundleUtil.INSTANCE.getString("droidswar.language.droid.number.in.droidslist") +
+                        number + " ...");
+    }
+
+    public void printChooseTwoDroids() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.choose.two.droids"));
+    }
+
+    public void printChooseSecondDroid() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.enter.number.second.droid"));
+    }
+
+    public void printChooseDroidForDeleting() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.enter.number.droid.delete"));
+    }
+
+    public void printCorrectDroidNumbers() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.choose.enter.correct.numbers"));
+    }
+
+    public void printDroidsListHeader(){
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.droidlist.header"));
+    }
+
+    private void printToConsole(String massage){
+        System.out.println(massage);
+    }
+
+    private static String buildStringMassage(String... message){
+        StringBuilder buildMassage = new StringBuilder();
+        for(String s : message) {
+            buildMassage = buildMassage.append(s);
+        }
+        return new String(buildMassage);
     }
 }

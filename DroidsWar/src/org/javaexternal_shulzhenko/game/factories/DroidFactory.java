@@ -53,4 +53,21 @@ public class DroidFactory {
                 armorFactory.makeBasicProtectiveBody());
         return factoryDroid;
     }
+
+    public Droid createDroid(String typeOfDroid){
+        switch (typeOfDroid){
+            case "[D01]":
+                return getBasicDroidD01();
+            case "[BD01]":
+                return getBattleDroidBD01();
+            case "[BD02]":
+                return getBattleDroidBD02();
+            case "[DD01]":
+                return getDroidDestroyerDD01();
+            case "[R1]":
+                return getRepairDroidR1();
+            default:
+                return null;
+        }
+    }
 }

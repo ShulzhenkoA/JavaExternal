@@ -52,6 +52,6 @@ public class DroidBD02 extends DroidBD01 {
                 "\n{health = " + getHealth() + '}' +
                 "\n{defence = " + protectiveBody.toString() + '}' +
                  "\n\t-- left hand -- " + rightHandBattleAbility.getRightHandWeapon().toString() +
-                 "\n\t-- left hand -- " + leftHandBattleAbility.getLeftHandWeapon().toString();
+                 "\n\t-- left hand -- " + leftHandBattleAbility.getLeftHandWeapon().toString() + "}\n";
     }
 }

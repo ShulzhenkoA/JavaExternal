@@ -9,23 +9,24 @@ public class BattleFieldController {
         if(firstDroid.isAlive() && secondDroid.isAlive()){
             fight(firstDroid,secondDroid);
         }
-        ConsoleView.showResultsOfTheFight(firstDroid,secondDroid, " 'The single round fight'\n");
+        ConsoleView.showResultsOfTheFight(firstDroid,secondDroid);
     }
 
     public static void fightToTheEnd(Droid firstDroid, Droid secondDroid) {
         if(firstDroid.isAlive() && secondDroid.isAlive()){
             do{
                 fight(firstDroid, secondDroid);
-                /*ConsoleView.printDroidInfo(firstDroid);
+                ConsoleView.printBattleBetweenHeader();
+                ConsoleView.printDroidInfo(firstDroid);
                 ConsoleView.printDroidInfo(secondDroid);
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }*/
+                }
             }while(firstDroid.isAlive() && secondDroid.isAlive());
         }
-        ConsoleView.showResultsOfTheFight(firstDroid,secondDroid, " 'To the end fight'\n");
+        ConsoleView.showResultsOfTheFight(firstDroid,secondDroid);
     }
 
     private static void fight(Droid firstDroid, Droid secondDroid){

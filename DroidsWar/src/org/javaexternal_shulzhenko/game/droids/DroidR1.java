@@ -8,7 +8,7 @@ public class DroidR1 extends Droid{
     RepairAbility repairAbility;
 
     public DroidR1(RepairAbility repairAbility, ProtectiveBody protectiveBody) {
-        this("Repair Droid", "R1", 100, protectiveBody);
+        this("Repair Droid", "[R1]", 100, protectiveBody);
         this.repairAbility = repairAbility;
     }
 

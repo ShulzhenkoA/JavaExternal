@@ -52,6 +52,6 @@ public class DroidDD01 extends Droid{
     public String toString() {
         return super.toString() +
                 "\n{weapon \n\t-- right hand -- "  + rightHandBattleAbility.getRightHandWeapon().toString() +
-                "\n\t-- left hand -- " + leftHandBattleAbility.getLeftHandWeapon().toString();
+                "\n\t-- left hand -- " + leftHandBattleAbility.getLeftHandWeapon().toString() + "}\n";
     }
 }
