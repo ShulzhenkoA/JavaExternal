@@ -4,6 +4,7 @@ import org.javaexternal_shulzhenko.droidswar.account.Account;
 import org.javaexternal_shulzhenko.droidswar.battle.BattleFieldController;
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
 import org.javaexternal_shulzhenko.droidswar.droids.Droid;
+import org.javaexternal_shulzhenko.droidswar.exceptions.InappropriateDroidsException;
 import org.javaexternal_shulzhenko.droidswar.factories.DroidFactory;
 import org.javaexternal_shulzhenko.droidswar.utils.DataBaseConnectingUtil;
 import org.javaexternal_shulzhenko.droidswar.utils.InputDataReaderUtil;
@@ -46,11 +47,12 @@ public class LoggedUser {
             int secondChosenDroid = Integer.parseInt(InputDataReaderUtil.readInputData());
 
             if(firstChosenDroid <= 0 || firstChosenDroid > droids.size() ||
-                    secondChosenDroid <= 0 || secondChosenDroid > droids.size() ||
-                    firstChosenDroid==secondChosenDroid){
+                    secondChosenDroid <= 0 || secondChosenDroid > droids.size()){
                 throw new NumberFormatException();
             }
-            BattleFieldController.fightToTheEnd(droids.get(firstChosenDroid-1),droids.get(secondChosenDroid-1));
+            BattleFieldController.fightToEnd(droids.get(firstChosenDroid-1),droids.get(secondChosenDroid-1));
+        }catch (InappropriateDroidsException exc){
+            consoleView.printBattleBetweenSameDroids();
         }catch (NumberFormatException exc){
             consoleView.printCorrectDroidNumbers();
         }

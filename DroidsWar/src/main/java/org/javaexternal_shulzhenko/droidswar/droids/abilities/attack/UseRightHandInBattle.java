@@ -4,7 +4,7 @@ import org.javaexternal_shulzhenko.droidswar.weapons.Weapon;
 
 public interface UseRightHandInBattle extends BattleAbility {
 
-    int attackWithRightHandWeapon();
+    int attackWithRightHand();
     Weapon getRightHandWeapon();
     void setRightHandWeapon(Weapon weapon);
     void reloadRightHandWeapon();

@@ -8,8 +8,12 @@ public class RightHandBattleAbility implements UseRightHandInBattle {
 
 
     @Override
-    public int attackWithRightHandWeapon() {
-        return rightHandWeapon.shoot();
+    public int attackWithRightHand() {
+        if(rightHandWeapon != null){
+            return rightHandWeapon.shoot();
+        }else{
+            return attackWithHands();
+        }
     }
 
     @Override
@@ -24,6 +28,8 @@ public class RightHandBattleAbility implements UseRightHandInBattle {
 
     @Override
     public void reloadRightHandWeapon() {
-        rightHandWeapon.reloadAmmunition();
+        if(rightHandWeapon != null){
+            rightHandWeapon.reloadAmmunition();
+        }
     }
 }

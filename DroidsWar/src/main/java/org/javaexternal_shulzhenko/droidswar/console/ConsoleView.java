@@ -168,6 +168,10 @@ public class ConsoleView {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.droidlist.header"));
     }
 
+    public void printBattleBetweenSameDroids() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.battle.between.same"));
+    }
+
     private void printToConsole(String massage){
         System.out.println(massage);
     }
@@ -179,4 +183,5 @@ public class ConsoleView {
         }
         return new String(buildMassage);
     }
+
 }

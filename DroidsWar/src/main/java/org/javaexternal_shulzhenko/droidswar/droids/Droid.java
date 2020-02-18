@@ -18,13 +18,12 @@ public class Droid implements BattleAbility {
         this.protectiveBody = protectiveBody;
     }
 
-    protected Droid(){
+    public Droid(){
         name = "Basic Droid";
         model = "[D01]";
         maxHealth = 100;
         health = maxHealth;
         alive = true;
-        protectiveBody = new BasicDroidBody();
     }
 
     protected Droid(String name, String model, int maxHealth, ProtectiveBody protectiveBody) {
@@ -40,18 +39,15 @@ public class Droid implements BattleAbility {
     }
 
     public void receiveDamage(int damage){
-        int amountNotProtectedDamage = damage - performDefence(); //without protection from ProtectiveBody
 
-        if(amountNotProtectedDamage>0){
+        if(protectiveBody != null){
+            damage = damage - protectiveBody.defendFromAttack();
+        }
+
+        if(damage>0){
             health -= damage;
         }
-        if(health <=0){
-            alive = false;
-        }
-    }
-
-    public int performDefence(){
-        return protectiveBody.defendFromAttack();
+        checkAlive();
     }
 
     public int getHealth() {
@@ -82,11 +78,24 @@ public class Droid implements BattleAbility {
         this.alive = alive;
     }
 
+    public void checkAlive(){
+        if(health <=0){
+            alive = false;
+        }
+    }
+
     @Override
     public String toString() {
-        return "Name  - " + name +
-                "\nModel - "+ model +
-                "\n{health = " + health + '}' +
-                "\n{defence = " + protectiveBody.toString() + '}';
+        if(protectiveBody == null){
+            return "Name  - " + name +
+                    "\nModel - "+ model +
+                    "\n{health = " + health + '}' +
+                    "\n{defence = hasn't protective body}";
+        }else{
+            return "Name  - " + name +
+                    "\nModel - "+ model +
+                    "\n{health = " + health + '}' +
+                    "\n{defence = " + protectiveBody.toString() + '}';
+        }
     }
 }

@@ -23,20 +23,19 @@ public class DroidBD01 extends Droid{
 
     @Override
     public void attack(Droid droid) {
-        droid.receiveDamage(rightHandBattleAbility.attackWithRightHandWeapon());
+        droid.receiveDamage(rightHandBattleAbility.attackWithRightHand());
     }
 
     public void setWeaponInRightHand(Weapon weapon){
         rightHandBattleAbility.setRightHandWeapon(weapon);
     }
 
-    public void reloadWeapon(){
+    public void reloadRightWeapon(){
         rightHandBattleAbility.reloadRightHandWeapon();
     }
 
     @Override
     public String toString() {
-
         return super.toString() +
                 "\n{weapon \n\t-- right hand -- "  + rightHandBattleAbility.getRightHandWeapon().toString() + "}\n";
     }
