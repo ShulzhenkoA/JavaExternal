@@ -20,7 +20,7 @@ public class DroidDD01 extends Droid{
 
     }
 
-    public DroidDD01(String name, String model, int maxHealth,
+    protected DroidDD01(String name, String model, int maxHealth,
                      UseRightHandInBattle rightHandBattleAbility,
                      UseLeftHandInBattle leftHandBattleAbility,
                      TitaniumDestroyerDroidBody protectiveBody) {
