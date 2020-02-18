@@ -1,0 +1,29 @@
+package org.javaexternal_shulzhenko.droidswar.droids.abilities.attack;
+
+import org.javaexternal_shulzhenko.droidswar.weapons.Weapon;
+
+public class RightHandBattleAbility implements UseRightHandInBattle {
+
+    protected Weapon rightHandWeapon;
+
+
+    @Override
+    public int attackWithRightHandWeapon() {
+        return rightHandWeapon.shoot();
+    }
+
+    @Override
+    public Weapon getRightHandWeapon() {
+        return rightHandWeapon;
+    }
+
+    @Override
+    public void setRightHandWeapon(Weapon weapon) {
+        rightHandWeapon = weapon;
+    }
+
+    @Override
+    public void reloadRightHandWeapon() {
+        rightHandWeapon.reloadAmmunition();
+    }
+}
