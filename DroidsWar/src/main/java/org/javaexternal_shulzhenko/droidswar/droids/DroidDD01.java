@@ -31,8 +31,16 @@ public class DroidDD01 extends Droid{
 
     @Override
     public void attack(Droid droid) {
-        droid.receiveDamage(rightHandBattleAbility.attackWithRightHandWeapon() +
-                leftHandBattleAbility.attackWithLeftHandWeapon());
+        if((rightHandBattleAbility.attackWithRightHand() > 2 && leftHandBattleAbility.attackWithLeftHand() >2) ||
+                (rightHandBattleAbility.attackWithRightHand() == 2 && leftHandBattleAbility.attackWithLeftHand() == 2)){
+            droid.receiveDamage(rightHandBattleAbility.attackWithRightHand() +
+                    leftHandBattleAbility.attackWithLeftHand());
+        }else if(rightHandBattleAbility.attackWithRightHand() > 2 &&
+                leftHandBattleAbility.attackWithLeftHand() == 2){
+            droid.receiveDamage(rightHandBattleAbility.attackWithRightHand());
+        }else{
+            droid.receiveDamage(leftHandBattleAbility.attackWithLeftHand());
+        }
     }
 
     public void setWeaponInRightHand(Weapon weapon){
@@ -43,9 +51,9 @@ public class DroidDD01 extends Droid{
         leftHandBattleAbility.setLeftHandWeapon(weapon);
     }
 
-    public void reloadWeapons(){
+    public void reloadTwoWeapons(){
         rightHandBattleAbility.reloadRightHandWeapon();
-        leftHandBattleAbility.getLeftHandWeapon();
+        leftHandBattleAbility.reloadLeftHandWeapon();
     }
 
     @Override

@@ -19,7 +19,7 @@ public class BlasterRifleE5 implements Weapon {
     @Override
     public int shoot() {
         if(ammunition == 0){
-            return -1;
+            return 0;
         }else{
             ammunition--;
             return damage;
@@ -31,6 +31,9 @@ public class BlasterRifleE5 implements Weapon {
         ammunition = ammunitionCapacity;
     }
 
+    public int getAmmunition() {
+        return ammunition;
+    }
 
     @Override
     public String toString() {

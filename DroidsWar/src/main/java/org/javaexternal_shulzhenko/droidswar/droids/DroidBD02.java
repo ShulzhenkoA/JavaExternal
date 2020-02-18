@@ -7,7 +7,7 @@ import org.javaexternal_shulzhenko.droidswar.weapons.*;
 
 public class DroidBD02 extends DroidBD01 {
 
-    UseLeftHandInBattle leftHandBattleAbility;
+    protected UseLeftHandInBattle leftHandBattleAbility;
 
     public DroidBD02(UseRightHandInBattle rightHandBattleAbility,
                      UseLeftHandInBattle leftHandBattleAbility,
@@ -27,8 +27,16 @@ public class DroidBD02 extends DroidBD01 {
 
     @Override
     public void attack(Droid droid) {
-        droid.receiveDamage(rightHandBattleAbility.attackWithRightHandWeapon() +
-                leftHandBattleAbility.attackWithLeftHandWeapon());
+        if((rightHandBattleAbility.attackWithRightHand() > 2 && leftHandBattleAbility.attackWithLeftHand() >2) ||
+                (rightHandBattleAbility.attackWithRightHand() == 2 && leftHandBattleAbility.attackWithLeftHand() == 2)){
+            droid.receiveDamage(rightHandBattleAbility.attackWithRightHand() +
+                leftHandBattleAbility.attackWithLeftHand());
+        }else if(rightHandBattleAbility.attackWithRightHand() > 2 &&
+                leftHandBattleAbility.attackWithLeftHand() == 2){
+            droid.receiveDamage(rightHandBattleAbility.attackWithRightHand());
+        }else{
+            droid.receiveDamage(leftHandBattleAbility.attackWithLeftHand());
+        }
     }
 
     @Override
@@ -40,7 +48,7 @@ public class DroidBD02 extends DroidBD01 {
         leftHandBattleAbility.setLeftHandWeapon(weapon);
     }
 
-    public void reloadWeapons() {
+    public void reloadTwoWeapons() {
         rightHandBattleAbility.reloadRightHandWeapon();
         leftHandBattleAbility.reloadLeftHandWeapon();
     }
@@ -53,5 +61,6 @@ public class DroidBD02 extends DroidBD01 {
                 "\n{defence = " + protectiveBody.toString() + '}' +
                  "\n\t-- left hand -- " + rightHandBattleAbility.getRightHandWeapon().toString() +
                  "\n\t-- left hand -- " + leftHandBattleAbility.getLeftHandWeapon().toString() + "}\n";
+
     }
 }
