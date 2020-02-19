@@ -1,30 +1,23 @@
 package org.javaexternal_shulzhenko.droidswar.battle;
 
 
-import org.javaexternal_shulzhenko.droidswar.droids.Droid;
+import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.javaexternal_shulzhenko.droidswar.exceptions.InappropriateDroidsException;
 import org.javaexternal_shulzhenko.droidswar.factories.DroidFactory;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 public class BattleFieldControllerTest {
 
-    Droid firstDroid;
-    Droid secondDroid;
-    static DroidFactory factory;
-
-    @BeforeAll
-    static void setUp(){
-        factory = new DroidFactory();
-    }
+    DroidB01 firstDroid;
+    DroidB01 secondDroid;
 
     @BeforeEach
     void setThis() {
-        firstDroid = factory.getBattleDroidBD02();
-        secondDroid = factory.getBattleDroidBD02();
+        firstDroid = DroidFactory.getDroidFactory().getBattleDroidBD02();
+        secondDroid = DroidFactory.getDroidFactory().getBattleDroidBD02();
     }
     @Test
     void fightSingleRound_WithSameDroid_ThrowInappropriateDroidsException(){

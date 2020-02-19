@@ -12,18 +12,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class DroidBD02Test {
 
     DroidBD02 droidBD02;
-    Droid droid;
+    DroidB01 droid;
 
     @BeforeEach
     void setThis() {
         droidBD02 = new DroidBD02(new RightHandBattleAbility(), new LeftHandBattleAbility(),new SteelBattleDroidBody());
-        droid = new Droid();
+        droid = new DroidB01();
     }
 
     @Test
     void attackingNotProtectedDroidWithBasicAttack() {
 
-        int damage = 4;
+        int damage = 6;
 
         droidBD02.attack(droid);
         assertEquals(droid.getMaxHealth() - damage, droid.getHealth());

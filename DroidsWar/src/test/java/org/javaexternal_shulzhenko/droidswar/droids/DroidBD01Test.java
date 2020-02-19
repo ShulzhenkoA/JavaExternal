@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class DroidBD01Test {
 
     DroidBD01 droidBD01;
-    Droid droid;
+    DroidB01 droid;
 
     @BeforeEach
     void setThis() {
         droidBD01 = new DroidBD01(new RightHandBattleAbility(), new SteelBattleDroidBody());
-        droid = new Droid();
+        droid = new DroidB01();
     }
 
     @Test

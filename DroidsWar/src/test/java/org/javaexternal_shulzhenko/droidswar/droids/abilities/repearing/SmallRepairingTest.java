@@ -1,20 +1,18 @@
 package org.javaexternal_shulzhenko.droidswar.droids.abilities.repearing;
 
-import org.javaexternal_shulzhenko.droidswar.droids.Droid;
+import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SmallRepairingTest {
 
-    Droid droid;
+    DroidB01 droid;
     SmallRepairing smallRepairing;
     @BeforeEach
 
     void setUp() {
-        droid = new Droid();
+        droid = new DroidB01();
         smallRepairing = new SmallRepairing();
     }
 

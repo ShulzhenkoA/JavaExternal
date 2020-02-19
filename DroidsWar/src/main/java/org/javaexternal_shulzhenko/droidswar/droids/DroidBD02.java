@@ -1,5 +1,8 @@
 package org.javaexternal_shulzhenko.droidswar.droids;
 
+import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
+import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.LeftHandBattleAbility;
+import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.RightHandBattleAbility;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.UseLeftHandInBattle;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.UseRightHandInBattle;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.defence.SteelBattleDroidBody;
@@ -12,7 +15,7 @@ public class DroidBD02 extends DroidBD01 {
     public DroidBD02(UseRightHandInBattle rightHandBattleAbility,
                      UseLeftHandInBattle leftHandBattleAbility,
                      SteelBattleDroidBody protectiveBody) {
-        this("Battle Droid", "[BD02]", 100,
+        this("Battle DroidBD02", "[BD02]", 120,
                 rightHandBattleAbility, leftHandBattleAbility, protectiveBody);
 
     }
@@ -26,41 +29,46 @@ public class DroidBD02 extends DroidBD01 {
     }
 
     @Override
-    public void attack(Droid droid) {
-        if((rightHandBattleAbility.attackWithRightHand() > 2 && leftHandBattleAbility.attackWithLeftHand() >2) ||
-                (rightHandBattleAbility.attackWithRightHand() == 2 && leftHandBattleAbility.attackWithLeftHand() == 2)){
-            droid.receiveDamage(rightHandBattleAbility.attackWithRightHand() +
-                leftHandBattleAbility.attackWithLeftHand());
-        }else if(rightHandBattleAbility.attackWithRightHand() > 2 &&
-                leftHandBattleAbility.attackWithLeftHand() == 2){
-            droid.receiveDamage(rightHandBattleAbility.attackWithRightHand());
-        }else{
-            droid.receiveDamage(leftHandBattleAbility.attackWithLeftHand());
+    public void attack(DroidB01 droid) {
+        if(engine.droidWorkingFromEnergyConsumption()){
+            if((rightHandBattleAbility.attackWithRightHand() > 3 && leftHandBattleAbility.attackWithLeftHand() >3) ||
+                    (rightHandBattleAbility.attackWithRightHand() == 3 && leftHandBattleAbility.attackWithLeftHand() == 3)){
+                droid.receiveDamage(rightHandBattleAbility.attackWithRightHand() +
+                        leftHandBattleAbility.attackWithLeftHand());
+            }else if(rightHandBattleAbility.attackWithRightHand() > 3 &&
+                    leftHandBattleAbility.attackWithLeftHand() == 3){
+                droid.receiveDamage(rightHandBattleAbility.attackWithRightHand());
+            }else{
+                droid.receiveDamage(leftHandBattleAbility.attackWithLeftHand());
+            }
         }
     }
 
     @Override
     public void setWeaponInRightHand(Weapon weapon) {
-        rightHandBattleAbility.setRightHandWeapon(weapon);
+        if(engine.droidWorkingFromEnergyConsumption()){
+            rightHandBattleAbility.setRightHandWeapon(weapon);
+        }
     }
 
     public void setWeaponInLeftHand(Weapon weapon){
-        leftHandBattleAbility.setLeftHandWeapon(weapon);
+        if(engine.droidWorkingFromEnergyConsumption()){
+            leftHandBattleAbility.setLeftHandWeapon(weapon);
+        }
     }
 
     public void reloadTwoWeapons() {
-        rightHandBattleAbility.reloadRightHandWeapon();
-        leftHandBattleAbility.reloadLeftHandWeapon();
+        if(engine.droidWorkingFromEnergyConsumption()){
+            rightHandBattleAbility.reloadRightHandWeapon();
+            leftHandBattleAbility.reloadLeftHandWeapon();
+        }
     }
 
     @Override
     public String toString() {
-        return   "Name  - " + getName() +
-                "\nModel - "+ getModel() +
-                "\n{health = " + getHealth() + '}' +
-                "\n{defence = " + protectiveBody.toString() + '}' +
-                 "\n\t-- left hand -- " + rightHandBattleAbility.getRightHandWeapon().toString() +
-                 "\n\t-- left hand -- " + leftHandBattleAbility.getLeftHandWeapon().toString() + "}\n";
+        String toReturn = super.toString();
+        return  toReturn.substring(0,toReturn.length() - 2) +
+                 "\n\t-- left hand -- " + leftHandBattleAbility.toString() + "}\n";
 
     }
 }

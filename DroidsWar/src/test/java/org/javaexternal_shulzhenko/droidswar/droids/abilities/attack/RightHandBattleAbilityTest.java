@@ -16,7 +16,7 @@ class RightHandBattleAbilityTest {
 
     @Test
     void attackingWithLeftHandNoWeapon() {
-        int damage = 2;
+        int damage = 3;
         assertEquals(damage, rightHandBattleAbility.attackWithRightHand());
     }
 

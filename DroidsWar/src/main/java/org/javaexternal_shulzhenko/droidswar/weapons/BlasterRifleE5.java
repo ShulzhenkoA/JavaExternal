@@ -37,9 +37,6 @@ public class BlasterRifleE5 implements Weapon {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " (" +
-                "damage=" + damage +
-                ", ammunition=" + ammunition +
-                ')';
+        return getClass().getSimpleName() + " (" + "damage=" + damage + ", ammunition=" + ammunition + ')';
     }
 }

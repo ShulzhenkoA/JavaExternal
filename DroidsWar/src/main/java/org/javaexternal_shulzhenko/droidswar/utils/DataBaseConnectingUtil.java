@@ -14,7 +14,6 @@ public class DataBaseConnectingUtil {
     private static final String PASSWORD_SAVE_SNIPPET = ".password=";
     private static final String ADMIN_STATUS_SAVE_SNIPPET =".admin=";
 
-
     public static void saveUserNickname(String nickname){
         saveDataToDB(nickname + NICKNAME_SAVE_SNIPPET + nickname,
                 "src/main/resources/UsersDataBase.properties");
@@ -38,7 +37,7 @@ public class DataBaseConnectingUtil {
         rewriteDataToDB(droids,"src/main/resources/DroidsList.properties");
     }
 
-    public static List<String> receiveDroidsFromDB(){
+    public static List<String> receiveDroidsListFromDB(){
 
         List<String> droidsList;
         try(BufferedReader reader = new BufferedReader( new FileReader("src/main/resources/DroidsList.properties")) ) {

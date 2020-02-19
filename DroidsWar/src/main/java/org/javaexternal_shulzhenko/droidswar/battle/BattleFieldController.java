@@ -1,12 +1,12 @@
 package org.javaexternal_shulzhenko.droidswar.battle;
 
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
-import org.javaexternal_shulzhenko.droidswar.droids.Droid;
+import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.javaexternal_shulzhenko.droidswar.exceptions.InappropriateDroidsException;
 
 public class BattleFieldController {
 
-    public static void fightSingleRound(Droid firstDroid, Droid secondDroid) throws InappropriateDroidsException {
+    public static void fightSingleRound(DroidB01 firstDroid, DroidB01 secondDroid) throws InappropriateDroidsException {
         if(firstDroid.isAlive() && secondDroid.isAlive() && !firstDroid.equals(secondDroid)){
             fight(firstDroid,secondDroid);
         }else {
@@ -15,7 +15,7 @@ public class BattleFieldController {
         ConsoleView.showResultsOfTheFight(firstDroid,secondDroid);
     }
 
-    public static void fightToEnd(Droid firstDroid, Droid secondDroid) throws InappropriateDroidsException {
+    public static void fightToEnd(DroidB01 firstDroid, DroidB01 secondDroid) throws InappropriateDroidsException {
         if(firstDroid.isAlive() && secondDroid.isAlive() && !firstDroid.equals(secondDroid)){
             do{
                 fight(firstDroid, secondDroid);
@@ -34,7 +34,7 @@ public class BattleFieldController {
         ConsoleView.showResultsOfTheFight(firstDroid,secondDroid);
     }
 
-    private static void fight(Droid firstDroid, Droid secondDroid){
+    private static void fight(DroidB01 firstDroid, DroidB01 secondDroid){
         firstDroid.attack(secondDroid);
         secondDroid.attack(firstDroid);
     }
