@@ -1,14 +1,14 @@
 package org.javaexternal_shulzhenko.droidswar.console;
 
 import org.javaexternal_shulzhenko.droidswar.account.Account;
-import org.javaexternal_shulzhenko.droidswar.droids.Droid;
+import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.javaexternal_shulzhenko.droidswar.utils.ResourceBundleUtil;
 
 public class ConsoleView {
 
     private static final String STARS_LINE = "\n****************************************************************\n";
 
-    public static void showResultsOfTheFight(Droid firstDroid, Droid secondDroid) {
+    public static void showResultsOfTheFight(DroidB01 firstDroid, DroidB01 secondDroid) {
 
         String firstDroidInfo = firstDroid.toString();
         String secondDroidInfo = secondDroid.toString();
@@ -44,7 +44,7 @@ public class ConsoleView {
         System.out.println(allBattleInfo);
     }
 
-    public static void printDroidInfo(Droid droid) {
+    public static void printDroidInfo(DroidB01 droid) {
         String droidInfo = buildStringMassage(
                 ResourceBundleUtil.INSTANCE.getString("droidswar.language.droidinfo.header"),
                 droid.toString(),
@@ -125,7 +125,7 @@ public class ConsoleView {
                 ResourceBundleUtil.INSTANCE.getString("droidswar.language.logged.in.admin.create.droid.menu"));
     }
 
-    public void printDroidWasCreated(Droid droid) {
+    public void printDroidWasCreated(DroidB01 droid) {
         printDroidInfo(droid);
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.was.successfully.created"));
     }
@@ -138,7 +138,7 @@ public class ConsoleView {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.droidlist.is.empty"));
     }
 
-    public void printDroid(Droid droid){
+    public void printDroid(DroidB01 droid){
         printDroidInfo(droid);
     }
 

@@ -32,4 +32,9 @@ public class RightHandBattleAbility implements UseRightHandInBattle {
             rightHandWeapon.reloadAmmunition();
         }
     }
+
+    @Override
+    public String toString() {
+        return rightHandWeapon + "";
+    }
 }

@@ -6,17 +6,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class DroidR1Test {
 
-    DroidR1 droidR1;
-    Droid droid;
+    DroidRD01 droidR1;
+    DroidB01 droid;
 
     @BeforeEach
     void setThis() {
-        droidR1 = new DroidR1(new SmallRepairing(), new BasicDroidBody());
-        droid = new Droid();
+        droidR1 = new DroidRD01(new SmallRepairing(), new BasicDroidBody());
+        droid = new DroidB01();
     }
 
     @Test

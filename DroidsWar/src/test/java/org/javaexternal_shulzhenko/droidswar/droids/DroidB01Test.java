@@ -4,22 +4,17 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DroidTest {
+class DroidB01Test {
 
-    Droid firstDroid;
-    Droid secondDroid;
+    DroidB01 firstDroid;
+    DroidB01 secondDroid;
 
     @BeforeEach
     void setThis() {
-        firstDroid = new Droid();
-        secondDroid = new Droid();
+        firstDroid = new DroidB01();
+        secondDroid = new DroidB01();
     }
 
-    @Test
-    void BasicAttackOfDroid() {
-        int damage = firstDroid.attackWithHands();
-        Assertions.assertEquals(2, damage);
-    }
 
     @Test
     void AttackAnotherDroid() {

@@ -1,15 +1,14 @@
 package org.javaexternal_shulzhenko.droidswar.droids.abilities.repearing;
 
-import org.javaexternal_shulzhenko.droidswar.droids.Droid;
+import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 
 public class SmallRepairing implements RepairAbility {
 
     private final int REPAIR_UNIT = 50;
 
     @Override
-    public void repair(Droid droid) {
+    public void repair(DroidB01 droid) {
 
-        int points = droid.getHealth() + REPAIR_UNIT;
         if(!droid.isAlive()){
             droid.setAlive(true);
             droid.setHealth(REPAIR_UNIT);

@@ -1,9 +1,9 @@
 package org.javaexternal_shulzhenko.droidswar.droids.abilities.repearing;
 
 
-import org.javaexternal_shulzhenko.droidswar.droids.Droid;
+import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 
 public interface RepairAbility {
-    void repair(Droid droid);
+    void repair(DroidB01 droid);
     int getRepairUnit();
 }

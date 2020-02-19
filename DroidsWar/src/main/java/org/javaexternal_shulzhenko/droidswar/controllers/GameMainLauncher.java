@@ -1,7 +1,6 @@
 package org.javaexternal_shulzhenko.droidswar.controllers;
 
 import org.javaexternal_shulzhenko.droidswar.account.Account;
-import org.javaexternal_shulzhenko.droidswar.factories.DroidFactory;
 import org.javaexternal_shulzhenko.droidswar.utils.InputDataReaderUtil;
 import org.javaexternal_shulzhenko.droidswar.utils.DataBaseConnectingUtil;
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
@@ -13,12 +12,10 @@ public class GameMainLauncher {
 
     private AccountCreator accountCreator;
     private ConsoleView consoleView;
-    private DroidFactory droidFactory;
 
-    public GameMainLauncher(AccountCreator accountCreator, ConsoleView consoleView, DroidFactory droidFactory) {
+    public GameMainLauncher(AccountCreator accountCreator, ConsoleView consoleView) {
         this.accountCreator = accountCreator;
         this.consoleView = consoleView;
-        this.droidFactory = droidFactory;
     }
 
     public void launchGame() {
@@ -83,11 +80,11 @@ public class GameMainLauncher {
             if("true".equals(DataBaseConnectingUtil.receiveUsersDataFromDB(nickname,
                     DataBaseConnectingUtil.ADMIN_STATUS_RECEIVE_SNIPPET))){
                 LoggedAdmin admin = new LoggedAdmin(new Account(nickname, password, true),
-                           consoleView, droidFactory);
+                           consoleView);
                 admin.startGameAsAdmin();
             }else{
                 LoggedUser user = new LoggedUser(new Account(nickname, password, false),
-                        consoleView, droidFactory);
+                        consoleView);
                 user.startGameAsUser();
             }
         }

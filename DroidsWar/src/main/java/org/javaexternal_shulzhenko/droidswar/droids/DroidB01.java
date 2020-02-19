@@ -1,32 +1,35 @@
 package org.javaexternal_shulzhenko.droidswar.droids;
 
-import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.BattleAbility;
-import org.javaexternal_shulzhenko.droidswar.droids.abilities.defence.BasicDroidBody;
+import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.DamageAble;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.defence.ProtectiveBody;
 
-public class Droid implements BattleAbility {
+public class DroidB01 implements DamageAble {
 
     private String name;
     private String model;
     private int maxHealth;
     private int health;
+    private int energy;
     private boolean alive;
+    protected Engine engine;
     ProtectiveBody protectiveBody;
 
-    public Droid(ProtectiveBody protectiveBody) {
+    public DroidB01(ProtectiveBody protectiveBody) {
         this();
         this.protectiveBody = protectiveBody;
     }
 
-    public Droid(){
-        name = "Basic Droid";
-        model = "[D01]";
+    public DroidB01(){
+        name = "Basic DroidB01";
+        model = "[B01]";
         maxHealth = 100;
         health = maxHealth;
+        energy = 30;
+        engine = new Engine();
         alive = true;
     }
 
-    protected Droid(String name, String model, int maxHealth, ProtectiveBody protectiveBody) {
+    protected DroidB01(String name, String model, int maxHealth, ProtectiveBody protectiveBody) {
         this(protectiveBody);
         this.maxHealth = maxHealth;
         health = maxHealth;
@@ -34,10 +37,23 @@ public class Droid implements BattleAbility {
         this.model = model;
     }
 
-    public void attack(Droid droid){
-        droid.receiveDamage(attackWithHands());
+    public class Engine{
+         protected boolean droidWorkingFromEnergyConsumption(){
+            if(energy!=0){
+                energy--;
+                return true;
+            }else {
+                return false;
+            }
+        }
     }
 
+    @Override
+    public void attack(DroidB01 droid) {
+        if(engine.droidWorkingFromEnergyConsumption()){
+            droid.receiveDamage(2);
+        }
+    }
     public void receiveDamage(int damage){
 
         if(protectiveBody != null){
@@ -89,13 +105,15 @@ public class Droid implements BattleAbility {
         if(protectiveBody == null){
             return "Name  - " + name +
                     "\nModel - "+ model +
-                    "\n{health = " + health + '}' +
-                    "\n{defence = hasn't protective body}";
+                    "\n{HP = " + health + '}' +
+                    "\n{Energy = " + energy + '}' +
+                    "\n{Defence = hasn't protective body}";
         }else{
             return "Name  - " + name +
                     "\nModel - "+ model +
-                    "\n{health = " + health + '}' +
-                    "\n{defence = " + protectiveBody.toString() + '}';
+                    "\n{HP = " + health + '}' +
+                    "\n{Energy = " + energy + '}' +
+                    "\n{Defence = " + protectiveBody.toString() + '}';
         }
     }
 }
