@@ -2,12 +2,10 @@ package org.javaexternal_shulzhenko.droidswar.utils;
 
 import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.BattleAble;
-import org.javaexternal_shulzhenko.droidswar.factories.DroidFactory;
 
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 public class DroidsListUtil {
 
@@ -62,11 +60,7 @@ public class DroidsListUtil {
     }
 
     public static void loadList(){
-        droidsList = new ArrayList<>();
-        List<String> listOfDroidsInDB = DataBaseConnectingUtil.receiveDroidsListFromDB();
-        for(String droidModel: listOfDroidsInDB){
-            droidsList.add(DroidFactory.getDroidFactory().createDroid(droidModel));
-        }
+        droidsList = DroidsListDataBaseUtil.receiveDroidsListFromDB();
     }
 
     private static void isNullDroidList(){

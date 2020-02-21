@@ -1,12 +1,9 @@
 package org.javaexternal_shulzhenko.droidswar.droids;
 
-import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
-import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.LeftHandBattleAbility;
-import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.RightHandBattleAbility;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.UseLeftHandInBattle;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.UseRightHandInBattle;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.defence.SteelBattleDroidBody;
-import org.javaexternal_shulzhenko.droidswar.weapons.*;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.*;
 
 public class DroidBD02 extends DroidBD01 {
 

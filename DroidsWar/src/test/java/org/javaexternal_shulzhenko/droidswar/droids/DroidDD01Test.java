@@ -3,7 +3,7 @@ package org.javaexternal_shulzhenko.droidswar.droids;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.LeftHandBattleAbility;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.RightHandBattleAbility;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.defence.TitaniumDestroyerDroidBody;
-import org.javaexternal_shulzhenko.droidswar.weapons.BlasterRifleE10;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.BlasterRifleE10;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

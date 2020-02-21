@@ -3,7 +3,7 @@ package org.javaexternal_shulzhenko.droidswar.droids;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.BattleAble;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.UseRightHandInBattle;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.defence.SteelBattleDroidBody;
-import org.javaexternal_shulzhenko.droidswar.weapons.Weapon;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.Weapon;
 
 public class DroidBD01 extends DroidB01 implements BattleAble {
 

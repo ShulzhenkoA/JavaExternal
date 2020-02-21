@@ -12,7 +12,7 @@ public class ValidateInputDataUtil {
 
     public static boolean validateEnteredNickname(String nickname) throws NicknameIsUsedException {
 
-        if(DataBaseConnectingUtil.receiveUsersDataFromDB(nickname, DataBaseConnectingUtil.NICKNAME_RECEIVE_SNIPPET) != null){
+        if(UsersDataBaseUtil.receiveUsersDataFromDB(nickname, UsersDataBaseUtil.NICKNAME_RECEIVE_SNIPPET) != null){
             throw new NicknameIsUsedException();
         }
         return validateInputData(nickname, NICKNAME_REGEX);

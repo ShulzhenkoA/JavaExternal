@@ -1,4 +1,4 @@
-package org.javaexternal_shulzhenko.droidswar.weapons;
+package org.javaexternal_shulzhenko.droidswar.droids.weapons;
 
 public class BlasterRifleE5 implements Weapon {
 

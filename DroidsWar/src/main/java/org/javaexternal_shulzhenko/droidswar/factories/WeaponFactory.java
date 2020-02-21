@@ -1,8 +1,8 @@
 package org.javaexternal_shulzhenko.droidswar.factories;
 
-import org.javaexternal_shulzhenko.droidswar.weapons.BlasterRifleE10;
-import org.javaexternal_shulzhenko.droidswar.weapons.BlasterRifleE5;
-import org.javaexternal_shulzhenko.droidswar.weapons.Weapon;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.BlasterRifleE10;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.BlasterRifleE5;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.Weapon;
 
 public class WeaponFactory {
 

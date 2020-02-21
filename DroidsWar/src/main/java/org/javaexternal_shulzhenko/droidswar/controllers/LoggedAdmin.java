@@ -4,12 +4,12 @@ import org.javaexternal_shulzhenko.droidswar.account.Account;
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
 import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.javaexternal_shulzhenko.droidswar.factories.DroidFactory;
-import org.javaexternal_shulzhenko.droidswar.utils.DataBaseConnectingUtil;
+import org.javaexternal_shulzhenko.droidswar.utils.DroidsListDataBaseUtil;
 import org.javaexternal_shulzhenko.droidswar.utils.DroidsListUtil;
 import org.javaexternal_shulzhenko.droidswar.utils.InputDataReaderUtil;
+import org.javaexternal_shulzhenko.droidswar.utils.SerializedDroidsListUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LoggedAdmin {
 
@@ -28,26 +28,19 @@ public class LoggedAdmin {
             consoleView.printAdminAccHeader(account);
             enteredData = InputDataReaderUtil.readInputData();
         }while (enteredData.equalsIgnoreCase("quit") ? false :
-                enteredData.equals("show dl") ? showAllExistingDroidFromList(DroidsListUtil.retrieveDroidsList()) :
-                enteredData.equals("show sdl") ? showAllExistingDroidFromList(DroidsListUtil.retrieveSortedDroidList()) :
-                enteredData.equals("show cd") ? showAllExistingDroidFromList(DroidsListUtil.retrieveCombatDroidsFromList()) :
-                enteredData.equals("show ncd") ? showAllExistingDroidFromList(DroidsListUtil.retrieveNonCombatDroidsFromList()):
-                enteredData.equals("create") ? createNewDroidForList() :
-                enteredData.equals("delete") ? deleteDroidFromList() : true);
+                enteredData.equals("show dl") ? consoleView.showDroidsList(DroidsListUtil.retrieveDroidsList()) :
+                enteredData.equals("show sdl") ? consoleView.showDroidsList(DroidsListUtil.retrieveSortedDroidList()) :
+                enteredData.equals("show cd") ? consoleView.showDroidsList(DroidsListUtil.retrieveCombatDroidsFromList()) :
+                enteredData.equals("show ncd") ? consoleView.showDroidsList(DroidsListUtil.retrieveNonCombatDroidsFromList()):
+                enteredData.equals("create") ? createNewDroidForList("public") :
+                enteredData.equals("delete") ? deleteDroidFromList(DroidsListUtil.retrieveDroidsList(), "public") :
+                enteredData.equals("show pdl") ? consoleView.showDroidsList(SerializedDroidsListUtil.retrieveDroidsList()):
+                enteredData.equals("show psdl") ? consoleView.showDroidsList(SerializedDroidsListUtil.retrieveSortedDroidList()):
+                enteredData.equals("create pdl") ? createNewDroidForList("private"):
+                enteredData.equals("delete pdl") ? deleteDroidFromList(SerializedDroidsListUtil.retrieveDroidsList(), "private") : true);
     }
 
-    private boolean showAllExistingDroidFromList(ArrayList<DroidB01> droids){
-        int droidNumber = 1;
-        consoleView.printDroidsListHeader();
-        for (DroidB01 droid : droids){
-            consoleView.printDroidNumberInDroidList(droidNumber);
-            consoleView.printDroid(droid);
-            droidNumber++;
-        }
-        return true;
-    }
-
-    private boolean createNewDroidForList(){
+    private boolean createNewDroidForList(String typeOfList){
 
         String enteredData = null;
         do {
@@ -74,21 +67,24 @@ public class LoggedAdmin {
                     droid = null;
             }
 
-            if(droid != null){
-                DataBaseConnectingUtil.saveDroidToDB(droid.getModel());
-                consoleView.printDroidWasCreated(droid);
+            if(droid != null && typeOfList.equals("public")){
+                DroidsListDataBaseUtil.saveDroidToDB(droid.getModel());
                 DroidsListUtil.loadList();
+                consoleView.printDroidWasCreated(droid);
+                break;
+            }else if(droid != null && typeOfList.equals("private")){
+                SerializedDroidsListUtil.addDroidToList(droid);
+                consoleView.printDroidWasCreated(droid);
                 break;
             }
         }while (enteredData.equalsIgnoreCase("quit") ? false : true);
         return true;
     }
 
-    private boolean deleteDroidFromList(){
-        showAllExistingDroidFromList(DroidsListUtil.retrieveDroidsList());
-        List<String> listOfDroidsInDB = DataBaseConnectingUtil.receiveDroidsListFromDB();
-
-        if(listOfDroidsInDB.isEmpty()){
+    private boolean deleteDroidFromList(ArrayList<DroidB01> droids, String typeOfList){
+        consoleView.printDroidsListHeader();
+        consoleView.showDroidsList(droids);
+        if(droids.isEmpty()){
             return true;
         }
 
@@ -96,12 +92,17 @@ public class LoggedAdmin {
             consoleView.printChooseDroidForDeleting();
             int chosenDroid = Integer.parseInt(InputDataReaderUtil.readInputData());
 
-            if(chosenDroid <= 0 || chosenDroid > listOfDroidsInDB.size()){
+            if(chosenDroid <= 0 || chosenDroid > droids.size()){
                 throw new NumberFormatException();
             }
-            listOfDroidsInDB.remove(chosenDroid - 1);
-            DataBaseConnectingUtil.rewriteDroidsToDB(listOfDroidsInDB);
-            DroidsListUtil.loadList();
+            ;
+            if(typeOfList.equals("public")){
+                droids.remove(chosenDroid - 1);
+                DroidsListDataBaseUtil.rewriteDroidsListToDB(droids);
+                DroidsListUtil.loadList();
+            }else {
+                SerializedDroidsListUtil.deleteDroidFromList(chosenDroid);
+            }
             consoleView.printDroidWasDeleted();
         }catch (NumberFormatException exc){
             consoleView.printCorrectDroidNumbers();
