@@ -4,6 +4,8 @@ import org.javaexternal_shulzhenko.droidswar.account.Account;
 import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.javaexternal_shulzhenko.droidswar.utils.ResourceBundleUtil;
 
+import java.util.ArrayList;
+
 public class ConsoleView {
 
     private static final String STARS_LINE = "\n****************************************************************\n";
@@ -170,6 +172,21 @@ public class ConsoleView {
 
     public void printBattleBetweenSameDroids() {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.battle.between.same"));
+    }
+
+    public boolean showDroidsList(ArrayList<DroidB01> droids) {
+        printDroidsListHeader();
+        if(droids.isEmpty()){
+            printEmptyDroidsList();
+            return true;
+        }
+        int droidNumber = 1;
+        for (DroidB01 droid : droids){
+            printDroidNumberInDroidList(droidNumber);
+            printDroid(droid);
+            droidNumber++;
+        }
+        return true;
     }
 
     private void printToConsole(String massage){

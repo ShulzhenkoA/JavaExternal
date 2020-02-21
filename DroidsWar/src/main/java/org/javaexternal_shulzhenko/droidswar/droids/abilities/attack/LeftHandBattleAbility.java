@@ -1,6 +1,6 @@
 package org.javaexternal_shulzhenko.droidswar.droids.abilities.attack;
 
-import org.javaexternal_shulzhenko.droidswar.weapons.Weapon;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.Weapon;
 
 public class LeftHandBattleAbility implements UseLeftHandInBattle {
 
@@ -11,7 +11,7 @@ public class LeftHandBattleAbility implements UseLeftHandInBattle {
         if(leftHandWeapon != null){
             return leftHandWeapon.shoot();
         }else{
-            return attackWithHands();
+            return INCR_BASIC_DAMAGE;
         }
     }
 

@@ -1,6 +1,8 @@
 package org.javaexternal_shulzhenko.droidswar.droids.abilities.defence;
 
-public interface ProtectiveBody {
+import java.io.Serializable;
+
+public interface ProtectiveBody extends Serializable {
     int defendFromAttack();
     String toString();
 }

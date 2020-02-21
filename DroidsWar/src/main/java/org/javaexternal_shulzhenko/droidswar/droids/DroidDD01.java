@@ -4,7 +4,7 @@ import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.BattleAble;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.UseLeftHandInBattle;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.UseRightHandInBattle;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.defence.TitaniumDestroyerDroidBody;
-import org.javaexternal_shulzhenko.droidswar.weapons.Weapon;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.Weapon;
 
 
 public class DroidDD01 extends DroidB01 implements BattleAble {

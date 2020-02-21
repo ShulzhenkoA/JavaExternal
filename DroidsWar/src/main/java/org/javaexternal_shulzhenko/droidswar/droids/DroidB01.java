@@ -3,6 +3,8 @@ package org.javaexternal_shulzhenko.droidswar.droids;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.attack.DamageAble;
 import org.javaexternal_shulzhenko.droidswar.droids.abilities.defence.ProtectiveBody;
 
+import java.io.Serializable;
+
 public class DroidB01 implements DamageAble {
 
     private String name;
@@ -12,7 +14,7 @@ public class DroidB01 implements DamageAble {
     private int energy;
     private boolean alive;
     protected Engine engine;
-    ProtectiveBody protectiveBody;
+    protected ProtectiveBody protectiveBody;
 
     public DroidB01(ProtectiveBody protectiveBody) {
         this();
@@ -37,7 +39,7 @@ public class DroidB01 implements DamageAble {
         this.model = model;
     }
 
-    public class Engine{
+    public class Engine implements Serializable {
          protected boolean droidWorkingFromEnergyConsumption(){
             if(energy!=0){
                 energy--;

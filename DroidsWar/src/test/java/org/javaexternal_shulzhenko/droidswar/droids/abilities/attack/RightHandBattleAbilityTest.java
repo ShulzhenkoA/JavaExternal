@@ -1,6 +1,6 @@
 package org.javaexternal_shulzhenko.droidswar.droids.abilities.attack;
 
-import org.javaexternal_shulzhenko.droidswar.weapons.BlasterRifleE5;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.BlasterRifleE5;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

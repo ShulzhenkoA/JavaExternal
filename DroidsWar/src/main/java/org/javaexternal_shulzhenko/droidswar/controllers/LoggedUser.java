@@ -32,6 +32,7 @@ public class LoggedUser {
                 enteredData.equals("show ncd") ? showDroidList(DroidsListUtil.retrieveNonCombatDroidsFromList()):
                 enteredData.equals("show dl") ? showDroidList(DroidsListUtil.retrieveDroidsList()) :
                 enteredData.equals("show fhpd") ? showDroidList(DroidsListUtil.retrieveDroidsWithFullHP()) :
+                enteredData.equals("") ? showDroidList(DroidsListUtil.retrieveDroidsWithFullHP()) :
                 enteredData.equalsIgnoreCase("quit") ? false : true);
     }
 

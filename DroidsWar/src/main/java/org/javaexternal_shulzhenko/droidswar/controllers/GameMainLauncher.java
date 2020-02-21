@@ -2,7 +2,7 @@ package org.javaexternal_shulzhenko.droidswar.controllers;
 
 import org.javaexternal_shulzhenko.droidswar.account.Account;
 import org.javaexternal_shulzhenko.droidswar.utils.InputDataReaderUtil;
-import org.javaexternal_shulzhenko.droidswar.utils.DataBaseConnectingUtil;
+import org.javaexternal_shulzhenko.droidswar.utils.UsersDataBaseUtil;
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
 import org.javaexternal_shulzhenko.droidswar.utils.ResourceBundleUtil;
 
@@ -71,14 +71,14 @@ public class GameMainLauncher {
         consoleView.printEnterPasswordForLogin();
         String password = InputDataReaderUtil.readInputData();
 
-        String nicknameFromDB = DataBaseConnectingUtil.receiveUsersDataFromDB(nickname,
-                DataBaseConnectingUtil.NICKNAME_RECEIVE_SNIPPET);
-        String passwordFromDB = DataBaseConnectingUtil.receiveUsersDataFromDB(nickname,
-                DataBaseConnectingUtil.PASSWORD_RECEIVE_SNIPPET);
+        String nicknameFromDB = UsersDataBaseUtil.receiveUsersDataFromDB(nickname,
+                UsersDataBaseUtil.NICKNAME_RECEIVE_SNIPPET);
+        String passwordFromDB = UsersDataBaseUtil.receiveUsersDataFromDB(nickname,
+                UsersDataBaseUtil.PASSWORD_RECEIVE_SNIPPET);
         if(nickname.equals(nicknameFromDB) && password.equals(passwordFromDB)&& nickname!=null&&password!=null) {
 
-            if("true".equals(DataBaseConnectingUtil.receiveUsersDataFromDB(nickname,
-                    DataBaseConnectingUtil.ADMIN_STATUS_RECEIVE_SNIPPET))){
+            if("true".equals(UsersDataBaseUtil.receiveUsersDataFromDB(nickname,
+                    UsersDataBaseUtil.ADMIN_STATUS_RECEIVE_SNIPPET))){
                 LoggedAdmin admin = new LoggedAdmin(new Account(nickname, password, true),
                            consoleView);
                 admin.startGameAsAdmin();

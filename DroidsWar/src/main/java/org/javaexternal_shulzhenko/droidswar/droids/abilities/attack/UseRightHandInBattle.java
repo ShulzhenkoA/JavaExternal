@@ -1,6 +1,6 @@
 package org.javaexternal_shulzhenko.droidswar.droids.abilities.attack;
 
-import org.javaexternal_shulzhenko.droidswar.weapons.Weapon;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.Weapon;
 
 public interface UseRightHandInBattle extends BattleAble {
 

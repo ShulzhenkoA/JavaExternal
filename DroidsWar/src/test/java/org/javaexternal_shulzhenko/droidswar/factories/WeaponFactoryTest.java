@@ -1,12 +1,10 @@
 package org.javaexternal_shulzhenko.droidswar.factories;
 
-import org.javaexternal_shulzhenko.droidswar.weapons.BlasterRifleE10;
-import org.javaexternal_shulzhenko.droidswar.weapons.BlasterRifleE5;
-import org.javaexternal_shulzhenko.droidswar.weapons.Weapon;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.BlasterRifleE10;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.BlasterRifleE5;
+import org.javaexternal_shulzhenko.droidswar.droids.weapons.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.sql.SQLOutput;
 
 import static org.junit.jupiter.api.Assertions.*;
 

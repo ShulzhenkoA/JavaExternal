@@ -1,5 +1,7 @@
 package org.javaexternal_shulzhenko.droidswar.droids.abilities.repearing;
 
-public interface SelfRepairAble {
+import java.io.Serializable;
+
+public interface SelfRepairAble extends Serializable {
     void repairIfSelf();
 }

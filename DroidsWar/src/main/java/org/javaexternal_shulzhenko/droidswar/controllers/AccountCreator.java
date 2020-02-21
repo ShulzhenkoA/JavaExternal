@@ -2,7 +2,7 @@ package org.javaexternal_shulzhenko.droidswar.controllers;
 
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
 import org.javaexternal_shulzhenko.droidswar.exceptions.NicknameIsUsedException;
-import org.javaexternal_shulzhenko.droidswar.utils.DataBaseConnectingUtil;
+import org.javaexternal_shulzhenko.droidswar.utils.UsersDataBaseUtil;
 import org.javaexternal_shulzhenko.droidswar.utils.ValidateInputDataUtil;
 
 public class AccountCreator {
@@ -20,7 +20,7 @@ public class AccountCreator {
         try {
             if((ValidateInputDataUtil.validateEnteredNickname(nickname))){
                 this.nickname = nickname;
-                DataBaseConnectingUtil.saveUserNickname(nickname);
+                UsersDataBaseUtil.saveUserNickname(nickname);
                 return false;
             }
         } catch (NicknameIsUsedException e) {
@@ -33,7 +33,7 @@ public class AccountCreator {
     public boolean createPassword(String password) {
 
         if(ValidateInputDataUtil.validateEnteredPassword(password)){
-            DataBaseConnectingUtil.saveUserPassword(nickname, password);
+            UsersDataBaseUtil.saveUserPassword(nickname, password);
                         return false;
         }
         consoleView.printInvalidPassword();
@@ -41,6 +41,6 @@ public class AccountCreator {
     }
 
     public void createAsAdmin(boolean asAdmin) {
-        DataBaseConnectingUtil.saveUserAdminStatus(nickname, asAdmin);
+        UsersDataBaseUtil.saveUserAdminStatus(nickname, asAdmin);
     }
 }
