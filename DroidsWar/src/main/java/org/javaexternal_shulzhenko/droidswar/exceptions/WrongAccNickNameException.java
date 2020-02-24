@@ -1,8 +1,8 @@
 package org.javaexternal_shulzhenko.droidswar.exceptions;
 
-public class InappropriateDroidsException extends Throwable {
+public class WrongAccNickNameException extends Exception {
     @Override
     public String getLocalizedMessage() {
-        return "Inappropriate droids have been selected";
+        return "Wrong account nickname has been entered";
     }
 }

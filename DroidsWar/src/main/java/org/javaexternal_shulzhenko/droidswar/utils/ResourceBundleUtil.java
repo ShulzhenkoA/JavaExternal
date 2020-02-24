@@ -3,12 +3,6 @@ package org.javaexternal_shulzhenko.droidswar.utils;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-/**
- * Class for providing i18n in game
- *
- * @version 0.4 13 Feb 2020
- * @author Adnrii Shulzhenko
- */
 public enum ResourceBundleUtil {
     INSTANCE;
     private ResourceBundle resourceBundle;

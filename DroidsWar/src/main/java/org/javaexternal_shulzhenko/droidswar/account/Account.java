@@ -5,10 +5,7 @@ public class Account {
     private String password;
     private boolean isAdmin;
 
-    public Account(String nickname, String password, boolean isAdmin) {
-        this.nickname = nickname;
-        this.password = password;
-        this.isAdmin = isAdmin;
+    public Account() {
     }
 
     public String getNickname() {

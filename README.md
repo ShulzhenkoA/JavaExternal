@@ -17,6 +17,8 @@ The program generates a random number from 0 (inclusive) to 100 (inclusive), whi
 
 * **DWv0.7** Admin accounts recived oportunities to create additional 'Private Droids List', create/delete droids from it, sort driods in it. 'Private Droids List' works using droids serialization. 
 
+* **DWv0.8** The logging has been added in the program.  
+
 
 
 
