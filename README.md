@@ -15,7 +15,9 @@ The program generates a random number from 0 (inclusive) to 100 (inclusive), whi
 
 * **DWv0.6** An engine has been added to the structure of the droids that allows them to act depending on energy. User and admin accounts recived oportunities to sort droid or search them depending different criteria. 
 
-* **DWv0.7** Admin accounts recived oportunities to create additional 'Private Droids List', create/delete droids from it, sort driods in it. 'Private Droids List' works using droids serialization. 
+* **DWv0.7** Admin accounts recived oportunities to create additional 'Private Droids List', create/delete droids from it, sort driods in it. 'Private Droids List' works using droids serialization.
+
+* **DWv0.8** The logging has been added in the program.  
 
 
 
