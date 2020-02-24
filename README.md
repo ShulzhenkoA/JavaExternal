@@ -19,6 +19,8 @@ The program generates a random number from 0 (inclusive) to 100 (inclusive), whi
 
 * **DWv0.8** The logging has been added in the program.  
 
+* **DWv0.8** The logging has been added in the program.  
+
 
 
 

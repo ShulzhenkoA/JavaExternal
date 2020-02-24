@@ -1,0 +1,7 @@
+[WARN ] 2020-02-24 04:36:24.603 VerifiedUser:45 - org.javaexternal_shulzhenko.droidswar.exceptions.WrongAccNickNameException: Wrong account nickname has been entered
+[WARN ] 2020-02-24 12:45:03.555 AccVerifier:41 - org.javaexternal_shulzhenko.droidswar.exceptions.WrongAccPasswordException: Wrong password has been entered
+[INFO ] 2020-02-24 12:45:20.859 GameMainLauncher:53 - Bolik started the game.
+[ERROR] 2020-02-24 12:45:27.272 VerifiedUser:68 - java.lang.NumberFormatException: For input string: "g9"
+[ERROR] 2020-02-24 12:45:48.679 VerifiedUser:68 - java.lang.NullPointerException
+[ERROR] 2020-02-24 12:45:57.825 VerifiedUser:48 - org.javaexternal_shulzhenko.droidswar.exceptions.InappropriateDroidsException: Inappropriate droids have been selected
+[INFO ] 2020-02-24 12:46:08.519 VerifiedUser:38 - Bolik quit the game.

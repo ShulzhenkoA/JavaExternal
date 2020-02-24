@@ -1,5 +1,7 @@
 package org.javaexternal_shulzhenko.droidswar.utils;
 
+import org.apache.log4j.Logger;
+import org.javaexternal_shulzhenko.droidswar.controllers.VerifiedUser;
 import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 
 import java.io.*;
@@ -8,9 +10,8 @@ import java.util.Comparator;
 
 public class SerializedDroidsListUtil {
 
-
+    private static final Logger LOGGER = Logger.getLogger(SerializedDroidsListUtil.class);
     private static ArrayList<DroidB01> droidsList;
-
     private static final String DROIDS_LIST_DB_PATH = "src/main/resources/DroidsList.bin";
 
     public static ArrayList<DroidB01> retrieveDroidsList(){
@@ -43,20 +44,20 @@ public class SerializedDroidsListUtil {
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(DROIDS_LIST_DB_PATH)))){
             oos.writeObject(droidsList);
             oos.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            LOGGER.warn(exc);
         }
     }
 
     private static ArrayList<DroidB01>deserializeDroidsList() {
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(DROIDS_LIST_DB_PATH)))){
             return (ArrayList<DroidB01>) ois.readObject();
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }catch (EOFException e){
-
-        } catch (IOException e){
-            e.printStackTrace();
+        }catch (ClassNotFoundException exc) {
+            LOGGER.warn(exc);
+        }catch (EOFException exc){
+            LOGGER.warn(exc);
+        } catch (IOException exc){
+            LOGGER.warn(exc);
         }
         return null;
     }

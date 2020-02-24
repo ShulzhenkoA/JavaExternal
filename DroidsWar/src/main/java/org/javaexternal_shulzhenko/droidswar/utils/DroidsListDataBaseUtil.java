@@ -1,5 +1,7 @@
 package org.javaexternal_shulzhenko.droidswar.utils;
 
+import org.apache.log4j.Logger;
+import org.javaexternal_shulzhenko.droidswar.controllers.VerifiedUser;
 import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.javaexternal_shulzhenko.droidswar.factories.DroidFactory;
 
@@ -11,13 +13,14 @@ import java.util.ArrayList;
 
 public class DroidsListDataBaseUtil {
 
+    private static final Logger LOGGER = Logger.getLogger(DroidsListDataBaseUtil.class);
     private static final String DROIDS_DB_PATH = "src/main/resources/DroidsList.csv";
 
     public static void saveDroidToDB(String droidModel){
         try(FileWriter saver = new FileWriter(DROIDS_DB_PATH, true)){
             saver.write(droidModel+ "\n");
-        }catch (IOException e){
-            System.out.println("Writing file error!");
+        }catch (IOException exc){
+            LOGGER.warn(exc);
         }
     }
 
@@ -30,8 +33,8 @@ public class DroidsListDataBaseUtil {
                 droidsList.add(DroidFactory.getDroidFactory().createDroid(droidModel));
             }
             return droidsList;
-        } catch (IOException e) {
-            System.err.println("Reading file error!");
+        } catch (IOException exc) {
+            LOGGER.warn(exc);
         }
         return null;
     }
@@ -41,8 +44,8 @@ public class DroidsListDataBaseUtil {
             for(DroidB01 droidB01 : droids){
                 saver.write(droidB01.getModel() + "\n");
             }
-        }catch (IOException e){
-            System.out.println("Writing file error!");
+        }catch (IOException exc){
+            LOGGER.warn(exc);
         }
     }
 }

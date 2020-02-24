@@ -1,8 +1,8 @@
 package org.javaexternal_shulzhenko.droidswar.exceptions;
 
-public class InappropriateDroidsException extends Throwable {
+public class WrongAccPasswordException extends Throwable {
     @Override
     public String getLocalizedMessage() {
-        return "Inappropriate droids have been selected";
+        return "Wrong password has been entered";
     }
 }
