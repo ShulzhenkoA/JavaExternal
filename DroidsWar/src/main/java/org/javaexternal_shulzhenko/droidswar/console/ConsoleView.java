@@ -84,6 +84,7 @@ public class ConsoleView {
 
     public void printLoginAccountHeader() {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.login.account.header"));
+        printEnterForLogin();
     }
 
     public void printEnterForLogin() {
@@ -94,7 +95,7 @@ public class ConsoleView {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.enter.your.account.password.login"));
     }
 
-    public void printInvalidNickname() {
+    public  void printInvalidNickname() {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.this.nickname.exist.creating"));
     }
 
@@ -102,8 +103,12 @@ public class ConsoleView {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.your.password.invalid.creating"));
     }
 
-    public void printWrongNicknameOrPassword() {
+    public void printWrongNickname() {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.this.account.dont.exist"));
+    }
+
+    public void printWrongPassword() {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.this.password.wrong"));
     }
 
     public void printUserAccHeader(Account account) {
@@ -144,10 +149,11 @@ public class ConsoleView {
         printDroidInfo(droid);
     }
 
-    public void printDroidNumberInDroidList(int number) {
+    public void printDroidWithNumbersFromDL(int number, DroidB01 droid) {
         printToConsole(
                 ResourceBundleUtil.INSTANCE.getString("droidswar.language.droid.number.in.droidslist") +
                         number + " ...");
+        printDroid(droid);
     }
 
     public void printChooseTwoDroids() {
@@ -166,24 +172,19 @@ public class ConsoleView {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.choose.enter.correct.numbers"));
     }
 
-    public void printDroidsListHeader(){
-        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.droidlist.header"));
-    }
-
     public void printBattleBetweenSameDroids() {
         printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.battle.between.same"));
     }
 
-    public boolean showDroidsList(ArrayList<DroidB01> droids) {
-        printDroidsListHeader();
+    public boolean printDroidsList(ArrayList<DroidB01> droids) {
+        printToConsole(ResourceBundleUtil.INSTANCE.getString("droidswar.language.droidlist.header"));
         if(droids.isEmpty()){
             printEmptyDroidsList();
             return true;
         }
         int droidNumber = 1;
         for (DroidB01 droid : droids){
-            printDroidNumberInDroidList(droidNumber);
-            printDroid(droid);
+            printDroidWithNumbersFromDL(droidNumber, droid);
             droidNumber++;
         }
         return true;

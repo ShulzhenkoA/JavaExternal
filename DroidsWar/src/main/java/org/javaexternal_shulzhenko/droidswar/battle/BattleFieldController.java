@@ -1,10 +1,13 @@
 package org.javaexternal_shulzhenko.droidswar.battle;
 
+import org.apache.log4j.Logger;
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
 import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.javaexternal_shulzhenko.droidswar.exceptions.InappropriateDroidsException;
 
 public class BattleFieldController {
+
+    static final Logger LOGGER = Logger.getLogger(BattleFieldController.class.getSimpleName());
 
     public static void fightSingleRound(DroidB01 firstDroid, DroidB01 secondDroid) throws InappropriateDroidsException {
         if(firstDroid.isAlive() && secondDroid.isAlive() && !firstDroid.equals(secondDroid)){
@@ -24,8 +27,8 @@ public class BattleFieldController {
                 ConsoleView.printDroidInfo(secondDroid);
                 try {
                     Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException exc) {
+                    LOGGER.error(exc);
                 }
             }while(firstDroid.isAlive() && secondDroid.isAlive());
         }else {

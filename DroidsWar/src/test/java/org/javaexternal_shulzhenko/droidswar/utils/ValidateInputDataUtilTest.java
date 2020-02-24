@@ -1,6 +1,5 @@
 package org.javaexternal_shulzhenko.droidswar.utils;
 
-import org.javaexternal_shulzhenko.droidswar.exceptions.NicknameIsUsedException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,27 +8,28 @@ class ValidateInputDataUtilTest {
 
 
     @Test
-    void validatingEnteredAppropriateNickname() throws NicknameIsUsedException {
+    void validatingEnteredAppropriateNickname() {
         String nickName = "Nick";
         assertTrue(ValidateInputDataUtil.validateEnteredNickname(nickName));
     }
 
     @Test
-    void validatingEnteredNicknameWithNotLetters() throws NicknameIsUsedException {
+    void validatingEnteredNicknameWithNotLetters(){
         String nickName = "Nif2";
         assertFalse(ValidateInputDataUtil.validateEnteredNickname(nickName));
     }
 
     @Test
-    void validatingEnteredNicknameWithNoCapitalLetter() throws NicknameIsUsedException {
+    void validatingEnteredNicknameWithNoCapitalLetter() {
         String nickName = "nif";
         assertFalse(ValidateInputDataUtil.validateEnteredNickname(nickName));
     }
 
-    @Test
+   @Test
     void validatingEnteredExistingNickname() {
         String nickName = "Lolik";
-        assertThrows(NicknameIsUsedException.class, () -> ValidateInputDataUtil.validateEnteredNickname(nickName));
+        assertFalse(ValidateInputDataUtil.validateEnteredNickname(nickName));
+        //assertThrows(NicknameIsUsedException.class, () -> ValidateInputDataUtil.validateEnteredNickname(nickName));
     }
 
     @Test

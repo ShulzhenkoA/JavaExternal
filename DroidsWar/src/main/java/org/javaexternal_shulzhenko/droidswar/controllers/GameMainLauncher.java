@@ -1,8 +1,8 @@
 package org.javaexternal_shulzhenko.droidswar.controllers;
 
+import org.apache.log4j.Logger;
 import org.javaexternal_shulzhenko.droidswar.account.Account;
 import org.javaexternal_shulzhenko.droidswar.utils.InputDataReaderUtil;
-import org.javaexternal_shulzhenko.droidswar.utils.UsersDataBaseUtil;
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
 import org.javaexternal_shulzhenko.droidswar.utils.ResourceBundleUtil;
 
@@ -10,11 +10,12 @@ import java.util.Locale;
 
 public class GameMainLauncher {
 
-    private AccountCreator accountCreator;
+    private static final Logger LOGGER = Logger.getLogger(GameMainLauncher.class);
+    private Account account;
     private ConsoleView consoleView;
 
-    public GameMainLauncher(AccountCreator accountCreator, ConsoleView consoleView) {
-        this.accountCreator = accountCreator;
+    public GameMainLauncher(Account account, ConsoleView consoleView) {
+        this.account = account;
         this.consoleView = consoleView;
     }
 
@@ -31,66 +32,27 @@ public class GameMainLauncher {
                 enteredData.equalsIgnoreCase("en") ? changeEn() : true);
     }
 
-
-
     private boolean createAccount() {
-        consoleView.printCreatingAccHeader();
-        String inputData;
-        do {
-            consoleView.printEnterNickName();
-            inputData = InputDataReaderUtil.readInputData();
-        } while (accountCreator.createNickName(inputData));
-
-        do {
-            consoleView.printEnterPassword();
-            inputData = InputDataReaderUtil.readInputData();
-        } while (accountCreator.createPassword(inputData));
-
-        do {
-            consoleView.printCreateAdmOrUserAcc();
-            inputData = InputDataReaderUtil.readInputData();
-            if (inputData.equalsIgnoreCase("admin")) {
-                accountCreator.createAsAdmin(true);
-                break;
-            } else if (inputData.equalsIgnoreCase("user")) {
-                accountCreator.createAsAdmin(false);
-                break;
-            }
-        } while (true);
-        consoleView.printAccountCreated();
-        return true;
+        return new AccCreator(new Account(), consoleView).launchAccountCreator();
     }
 
     private boolean loginAccount() {
-
-        consoleView.printLoginAccountHeader();
-
-        consoleView.printEnterForLogin();
-        String nickname = InputDataReaderUtil.readInputData();
-
-        consoleView.printEnterPasswordForLogin();
-        String password = InputDataReaderUtil.readInputData();
-
-        String nicknameFromDB = UsersDataBaseUtil.receiveUsersDataFromDB(nickname,
-                UsersDataBaseUtil.NICKNAME_RECEIVE_SNIPPET);
-        String passwordFromDB = UsersDataBaseUtil.receiveUsersDataFromDB(nickname,
-                UsersDataBaseUtil.PASSWORD_RECEIVE_SNIPPET);
-        if(nickname.equals(nicknameFromDB) && password.equals(passwordFromDB)&& nickname!=null&&password!=null) {
-
-            if("true".equals(UsersDataBaseUtil.receiveUsersDataFromDB(nickname,
-                    UsersDataBaseUtil.ADMIN_STATUS_RECEIVE_SNIPPET))){
-                LoggedAdmin admin = new LoggedAdmin(new Account(nickname, password, true),
-                           consoleView);
-                admin.startGameAsAdmin();
-            }else{
-                LoggedUser user = new LoggedUser(new Account(nickname, password, false),
-                        consoleView);
-                user.startGameAsUser();
-            }
+        if(new AccVerifier(account, consoleView).launchAccVerifier()){
+            startGameAs();
         }
-        consoleView.printWrongNicknameOrPassword();
-
         return true;
+    }
+
+    private void startGameAs() {
+        if(account.isAdmin()){
+            VerifiedAdmin verifiedAdmin = new VerifiedAdmin(account, consoleView);
+            LOGGER.info(account.getNickname() + " entered the game.");
+            verifiedAdmin.startGameAsAdmin();
+        }else{
+            VerifiedUser verifiedUser = new VerifiedUser(account, consoleView);
+            LOGGER.info(account.getNickname() + " started the game.");
+            verifiedUser.startGameAsUser();
+        }
     }
 
     private boolean changeUkr(){
