@@ -5,3 +5,4 @@
 [ERROR] 2020-02-24 12:45:48.679 VerifiedUser:68 - java.lang.NullPointerException
 [ERROR] 2020-02-24 12:45:57.825 VerifiedUser:48 - org.javaexternal_shulzhenko.droidswar.exceptions.InappropriateDroidsException: Inappropriate droids have been selected
 [INFO ] 2020-02-24 12:46:08.519 VerifiedUser:38 - Bolik quit the game.
+[INFO ] 2020-02-26 16:40:53.734 GameMainLauncher:49 - Lolik entered the game.
