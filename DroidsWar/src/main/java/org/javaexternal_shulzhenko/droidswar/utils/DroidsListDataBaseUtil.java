@@ -1,7 +1,7 @@
 package org.javaexternal_shulzhenko.droidswar.utils;
 
-import org.apache.log4j.Logger;
-import org.javaexternal_shulzhenko.droidswar.controllers.VerifiedUser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 import org.javaexternal_shulzhenko.droidswar.factories.DroidFactory;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class DroidsListDataBaseUtil {
 
-    private static final Logger LOGGER = Logger.getLogger(DroidsListDataBaseUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(DroidsListDataBaseUtil.class);
     private static final String DROIDS_DB_PATH = "src/main/resources/DroidsList.csv";
 
     public static void saveDroidToDB(String droidModel){

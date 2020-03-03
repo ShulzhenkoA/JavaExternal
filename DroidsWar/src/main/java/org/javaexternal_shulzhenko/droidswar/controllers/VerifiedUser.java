@@ -1,6 +1,7 @@
 package org.javaexternal_shulzhenko.droidswar.controllers;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaexternal_shulzhenko.droidswar.account.Account;
 import org.javaexternal_shulzhenko.droidswar.battle.BattleFieldController;
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
@@ -12,7 +13,7 @@ import org.javaexternal_shulzhenko.droidswar.utils.InputDataReaderUtil;
 import java.util.ArrayList;
 
 public class VerifiedUser {
-    private static final Logger LOGGER = Logger.getLogger(VerifiedUser.class);
+    private static final Logger LOGGER = LogManager.getLogger(VerifiedUser.class);
     private Account account;
     private ConsoleView consoleView;
 

@@ -1,15 +1,15 @@
 package org.javaexternal_shulzhenko.droidswar.utils;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaexternal_shulzhenko.droidswar.account.Account;
-import org.javaexternal_shulzhenko.droidswar.controllers.VerifiedUser;
 
 import java.io.*;
 import java.util.Properties;
 
 public class UsersDataBaseUtil {
 
-    private static final Logger LOGGER = Logger.getLogger(UsersDataBaseUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(UsersDataBaseUtil.class);
     private static final String USERS_DB_PATH = "src/main/resources/UsersDataBase.properties";
 
     public static Account receiveAccFromProperties(String userName){

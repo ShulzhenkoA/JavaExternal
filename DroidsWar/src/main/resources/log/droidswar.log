@@ -6,3 +6,5 @@
 [ERROR] 2020-02-24 12:45:57.825 VerifiedUser:48 - org.javaexternal_shulzhenko.droidswar.exceptions.InappropriateDroidsException: Inappropriate droids have been selected
 [INFO ] 2020-02-24 12:46:08.519 VerifiedUser:38 - Bolik quit the game.
 [INFO ] 2020-02-26 16:40:53.734 GameMainLauncher:49 - Lolik entered the game.
+[INFO ] 2020-03-03 19:39:45.657 GameMainLauncher:50 - Lolik entered the game.
+[INFO ] 2020-03-03 19:40:02.245 VerifiedAdmin:45 - Lolik quit the game.

@@ -1,7 +1,7 @@
 package org.javaexternal_shulzhenko.droidswar.utils;
 
-import org.apache.log4j.Logger;
-import org.javaexternal_shulzhenko.droidswar.controllers.VerifiedUser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class InputDataReaderUtil {
 
-    private static final Logger LOGGER = Logger.getLogger(InputDataReaderUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(InputDataReaderUtil.class);
 
     public static String readInputData() {
         String data = null;

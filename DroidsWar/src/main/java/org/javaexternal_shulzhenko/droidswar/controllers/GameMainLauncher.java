@@ -1,6 +1,7 @@
 package org.javaexternal_shulzhenko.droidswar.controllers;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaexternal_shulzhenko.droidswar.account.Account;
 import org.javaexternal_shulzhenko.droidswar.utils.InputDataReaderUtil;
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
@@ -10,7 +11,7 @@ import java.util.Locale;
 
 public class GameMainLauncher {
 
-    private static final Logger LOGGER = Logger.getLogger(GameMainLauncher.class);
+    private static final Logger LOGGER = LogManager.getLogger(GameMainLauncher.class);
     private Account account;
     private ConsoleView consoleView;
 

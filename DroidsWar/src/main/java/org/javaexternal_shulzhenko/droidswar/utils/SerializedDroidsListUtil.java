@@ -1,7 +1,7 @@
 package org.javaexternal_shulzhenko.droidswar.utils;
 
-import org.apache.log4j.Logger;
-import org.javaexternal_shulzhenko.droidswar.controllers.VerifiedUser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
 
 import java.io.*;
@@ -10,7 +10,7 @@ import java.util.Comparator;
 
 public class SerializedDroidsListUtil {
 
-    private static final Logger LOGGER = Logger.getLogger(SerializedDroidsListUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(SerializedDroidsListUtil.class);
     private static ArrayList<DroidB01> droidsList;
     private static final String DROIDS_LIST_DB_PATH = "src/main/resources/DroidsList.bin";
 

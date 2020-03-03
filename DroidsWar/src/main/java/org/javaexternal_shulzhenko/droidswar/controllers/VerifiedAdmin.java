@@ -1,6 +1,7 @@
 package org.javaexternal_shulzhenko.droidswar.controllers;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaexternal_shulzhenko.droidswar.account.Account;
 import org.javaexternal_shulzhenko.droidswar.console.ConsoleView;
 import org.javaexternal_shulzhenko.droidswar.droids.DroidB01;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 public class VerifiedAdmin {
 
-    private static final Logger LOGGER = Logger.getLogger(VerifiedAdmin.class);
+    private static final Logger LOGGER = LogManager.getLogger(VerifiedAdmin.class);
     private Account account;
     private ConsoleView consoleView;
 
