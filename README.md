@@ -22,7 +22,7 @@ The program generates a random number from 0 (inclusive) to 100 (inclusive), whi
 * **DWv0.8** The logging with log4j2 has been added in the program.  
 
 
-## Task4 - [SearchigTool(https://github.com/ShulzhenkoA/JavaExternal/tree/master/SearchingTool)
+## Task4 - [SearchigTool](https://github.com/ShulzhenkoA/JavaExternal/tree/master/SearchingTool)
 The program allows you to process the search, parsing and sorting of words from all URLs added to the program URLs_DB file.
 
 
