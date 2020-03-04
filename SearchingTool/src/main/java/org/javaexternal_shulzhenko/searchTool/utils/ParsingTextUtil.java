@@ -1,4 +1,4 @@
-package org.javaexternal_shulzhenko.searchTool;
+package org.javaexternal_shulzhenko.searchTool.utils;
 
 import java.util.HashMap;
 import java.util.Map;
