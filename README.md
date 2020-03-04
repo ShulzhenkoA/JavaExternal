@@ -2,8 +2,10 @@
 
 ## Task1 - [Shevchenko's poem(team task).](https://github.com/ShulzhenkoA/JavaExternal_team_tasks/tree/master/tasks/poem) [Draw a figure(team task).](https://github.com/ShulzhenkoA/JavaExternal_team_tasks/tree/master/tasks/geometrical.figures/src/com/java/external)
 
+
 ## Task2 - [GuessTheNumber (Gaming Java with MVC pattern)](https://github.com/ShulzhenkoA/JavaExternal/tree/master/JavaGaming/src/com/javaextetnal_shulzhenko/gaming/GuessTheNumber)
 The program generates a random number from 0 (inclusive) to 100 (inclusive), which is proposed to guess the player with 6 attempts. Entering non-numbers and numbers outside the range is considered as an attempt. To exit the game, enter the 'quit' command.
+
 
 ## Task3 - [DroidsWar](https://github.com/ShulzhenkoA/JavaExternal/tree/master/DroidsWar)
 * The **DroidsWar** program allows you to create droids of different models and strengths, giving them different weapons or equipping them with different armor, as well as create non-combat droids (for example, droids for repair) and simulate the battle between them. 
@@ -20,6 +22,9 @@ The program generates a random number from 0 (inclusive) to 100 (inclusive), whi
 * **DWv0.8** The logging with log4j2 has been added in the program.  
 
 
+## Task4 - [SearchigTool(https://github.com/ShulzhenkoA/JavaExternal/tree/master/SearchingTool)
+The program allows you to process the search, parsing and sorting of words from all URLs added to the program URLs_DB file.
 
 
-
+## Task5 - [WeatherApp](https://github.com/ShulzhenkoA/JavaExternal/tree/master/WeatherApp/)
+The program allows you to display the current weather in the requested city and weather statistics from the requested cities using your OWM API key. To request the weather, enter your OWM API key and the desired city as command line arguments.
