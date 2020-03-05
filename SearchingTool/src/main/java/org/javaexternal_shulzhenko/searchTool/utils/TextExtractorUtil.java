@@ -1,16 +1,25 @@
 package org.javaexternal_shulzhenko.searchTool.utils;
 
-import java.io.BufferedReader;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 public class TextExtractorUtil {
 
-    public String getText(String url){
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(UrlConnectorUtil.openURLConnection(url).
-                getInputStream(), "UTF-8"))) {
-            return reader.lines().collect(Collectors.joining("\n"));
+    private static TextExtractorUtil textExtractorUtil = new TextExtractorUtil();
+
+    private TextExtractorUtil() {
+    }
+
+    public static TextExtractorUtil getTextExtractorUtil() {
+        return textExtractorUtil;
+    }
+
+    public static String getText(String url){
+        try {
+            Document doc = Jsoup.connect(url).get();
+            return doc.text();
         } catch (IOException e) {
             e.printStackTrace();
         }
