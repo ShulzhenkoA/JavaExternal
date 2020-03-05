@@ -14,7 +14,7 @@ public class ConsoleView {
         }
     }
 
-    public void displaySetToConsole(String[] statisticSet){
+    private void displaySetToConsole(String[] statisticSet){
         System.out.printf("%s at %s the weather in %s was : Temperature - %sC; humidity - %s%%; pressure - %smbar\n",
                statisticSet[4], statisticSet[5], statisticSet[0], statisticSet[1], statisticSet[2], statisticSet[3]);
     }

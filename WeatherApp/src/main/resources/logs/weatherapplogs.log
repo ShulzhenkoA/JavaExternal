@@ -1,2 +1,1 @@
-[ERROR] 2020-03-04 05:14:34.963 WeatherDataService:67 - net.aksingh.owmjapis.api.APIException: API call gave error: 404 - Not Found
-[ERROR] 2020-03-04 05:15:12.407 WeatherDataService:67 - net.aksingh.owmjapis.api.APIException: API call gave error: 404 - Not Found
+[ERROR] 2020-03-06 01:12:46.163 WeatherDataService:67 - net.aksingh.owmjapis.api.APIException: API call gave error: 404 - Not Found

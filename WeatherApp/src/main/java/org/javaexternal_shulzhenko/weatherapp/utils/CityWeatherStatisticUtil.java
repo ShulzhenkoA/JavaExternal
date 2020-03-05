@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import org.javaexternal_shulzhenko.weatherapp.cityweather.CityWeather;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class CityWeatherStatisticUtil {
     private static final Logger LOGGER = LogManager.getLogger(CityWeatherStatisticUtil.class);
     private static final String STATISTICS_DB_PATH = "src/main/resources/Statistics.csv";
 
-    public void saveToStatisticDB(CityWeather cityWeather){
+    public static void saveToStatisticDB(CityWeather cityWeather){
         try(Writer writer = new FileWriter(new File(STATISTICS_DB_PATH), true)){
             writer.write(cityWeather.toString());
         } catch (IOException exc) {
@@ -23,7 +22,7 @@ public class CityWeatherStatisticUtil {
         }
     }
 
-    public List<String[]> loadFromStatisticDB() {
+    public static List<String[]> loadFromStatisticDB() {
         try(BufferedReader reader = new BufferedReader(new FileReader(new File(STATISTICS_DB_PATH)))) {
             String indicatorsSet;
             List<String[]> statistic = new LinkedList<>();
