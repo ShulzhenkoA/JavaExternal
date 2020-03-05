@@ -1,34 +1,32 @@
 package org.javaexternal_shulzhenko.weatherapp.devices;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.javaexternal_shulzhenko.weatherapp.cityweather.CityWeather;
 import org.javaexternal_shulzhenko.weatherapp.console.ConsoleView;
-import org.javaexternal_shulzhenko.weatherapp.exceptions.InvalidWeatherDataException;
 import org.javaexternal_shulzhenko.weatherapp.services.WeatherDataService;
 import org.javaexternal_shulzhenko.weatherapp.utils.CityWeatherStatisticUtil;
+import org.javaexternal_shulzhenko.weatherapp.utils.WeatherDataServiceValidator;
 
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 public class WeatherStatisticsDevice implements Observer, Display {
-    
-    private final static Logger LOGGER = LogManager.getLogger(WeatherStatisticsDevice.class);
-    private Observable weatherData;
-    private CityWeatherStatisticUtil cityWeatherStatistics;
+
+    private Observable weatherDataService;
+    private CityWeather cityWeather;
     private ConsoleView consoleView;
-    
-    public WeatherStatisticsDevice(Observable weatherData, ConsoleView consoleView) {
-        this.weatherData = weatherData;
+
+    public WeatherStatisticsDevice(Observable weatherData, CityWeather cityWeather, ConsoleView consoleView) {
+        this.weatherDataService = weatherData;
+        this.cityWeather = cityWeather;
         this.consoleView = consoleView;
         loadThisDevice();
     }
     
     @Override
-    public void update(Observable newData, Object arg) {
-        weatherDataValidator(newData);
-        CityWeather cityWeather = ((WeatherDataService)weatherData).getCityWeather();
+    public void update(Observable refreshedDataService, Object arg) {
+        WeatherDataServiceValidator.validateDataService(refreshedDataService);
+        cityWeather = ((WeatherDataService) weatherDataService).getCityWeather();
         addWeatherStatistics(cityWeather);
     }
 
@@ -36,28 +34,20 @@ public class WeatherStatisticsDevice implements Observer, Display {
     public void displayWeather() {
         consoleView.displayWeatherStatisticToConsole(loadWeatherStatistic());
     }
-    
-    public void weatherDataValidator(Observable observable){
-        try {
-            if(!(observable instanceof WeatherDataService)){
-                throw new InvalidWeatherDataException();
-            }
-        }catch (InvalidWeatherDataException exc){
-            LOGGER.error(exc);
-            exc.printStackTrace();
-        }
-    }
 
     public void addWeatherStatistics(CityWeather cityWeather) {
-        cityWeatherStatistics.saveToStatisticDB(cityWeather);
+        CityWeatherStatisticUtil.saveToStatisticDB(cityWeather);
     }
 
     public List<String[]> loadWeatherStatistic() {
-        return cityWeatherStatistics.loadFromStatisticDB();
+        return CityWeatherStatisticUtil.loadFromStatisticDB();
     }
 
     private void loadThisDevice() {
-        weatherData.addObserver(this);
-        cityWeatherStatistics = new CityWeatherStatisticUtil();
+        weatherDataService.addObserver(this);
+        WeatherDataServiceValidator.validateDataService(weatherDataService);
+        cityWeather = ((WeatherDataService) weatherDataService).getCityWeather();
+        addWeatherStatistics(cityWeather);
+
     }
 }

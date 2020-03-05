@@ -13,8 +13,10 @@ public class WeatherStarter {
         WeatherDataService wd = new WeatherDataService(args[0], args[1], OWM.Country.UKRAINE);
         ConsoleView consoleView = new ConsoleView();
         CityWeather cityWeather = new CityWeather();
-        WeatherStatisticsDevice ws = new WeatherStatisticsDevice(wd, consoleView);
+
+        WeatherStatisticsDevice ws = new WeatherStatisticsDevice(wd, cityWeather,consoleView);
         CurrentWeatherDevice cw = new CurrentWeatherDevice(wd, cityWeather, consoleView);
+
         cw.displayWeather();
         ws.displayWeather();
         wd.refreshCityWeather();
