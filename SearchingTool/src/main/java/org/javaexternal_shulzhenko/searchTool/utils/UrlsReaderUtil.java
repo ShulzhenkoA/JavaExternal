@@ -1,11 +1,20 @@
-package org.javaexternal_shulzhenko.searchTool;
+package org.javaexternal_shulzhenko.searchTool.utils;
 
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
 public class UrlsReaderUtil {
+
+    private static UrlsReaderUtil urlsReaderUtil = new UrlsReaderUtil();
     private static final String URLs_DB = "src/main/resources/URLs_DB.txt";
+
+    private UrlsReaderUtil() {
+    }
+
+    public static UrlsReaderUtil getUrlsReaderUtil() {
+        return urlsReaderUtil;
+    }
 
     public static List<String> getURLs(){
         try(BufferedReader reader = new BufferedReader(new FileReader(URLs_DB))) {

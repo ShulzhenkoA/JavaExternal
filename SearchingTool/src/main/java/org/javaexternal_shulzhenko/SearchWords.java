@@ -1,15 +1,16 @@
 package org.javaexternal_shulzhenko;
 
-import org.javaexternal_shulzhenko.searchTool.*;
-
-import java.util.*;
+import org.javaexternal_shulzhenko.searchTool.controller.SearchingToolController;
+import org.javaexternal_shulzhenko.searchTool.console.ConsoleView;
+import org.javaexternal_shulzhenko.searchTool.model.WordsFromURLs;
 
 public class SearchWords {
 
     public static void main(String[] args) {
-        TextExtractorUtil textExtractorUtil = new TextExtractorUtil();
         ConsoleView consoleView = new ConsoleView();
-        SearchingToolAggregator searchingToolAggregator = new SearchingToolAggregator(textExtractorUtil, consoleView);
-        searchingToolAggregator.showWordsFromUrls();
+        WordsFromURLs wordsFromURLs = new WordsFromURLs();
+        SearchingToolController searchingToolAggregator = new SearchingToolController(consoleView, wordsFromURLs);
+        searchingToolAggregator.showSortedWordsFromUrls();
+        searchingToolAggregator.showURLsWithWordsFreq();
     }
 }
