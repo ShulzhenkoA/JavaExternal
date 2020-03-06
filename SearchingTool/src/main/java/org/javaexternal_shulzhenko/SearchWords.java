@@ -12,5 +12,6 @@ public class SearchWords {
         SearchingToolController searchingToolAggregator = new SearchingToolController(consoleView, wordsFromURLs);
         searchingToolAggregator.showSortedWordsFromUrls();
         searchingToolAggregator.showURLsWithWordsFreq();
+        searchingToolAggregator.showWordFreqInURLs("стихи");
     }
 }

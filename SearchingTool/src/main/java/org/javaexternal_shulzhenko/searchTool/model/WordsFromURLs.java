@@ -8,28 +8,27 @@ import java.util.Map;
 
 public class WordsFromURLs {
 
+    private WordsExtractorUtil wordsExtractorUtil;
     private List<String> urls;
-    private List<String[]> sortedWordWithURLsAndFreq;
-    private Map<String, Map<String, Integer>> urlsWithSortedWordsAndFreq;
-
-
 
     public WordsFromURLs() {
         loadData();
     }
 
     private void loadData() {
-        WordsExtractorUtil wordsExtractorUtil = WordsExtractorUtil.getWordsExtractorUtil();
+        wordsExtractorUtil = WordsExtractorUtil.getWordsExtractorUtil();
         urls = UrlsReaderUtil.getURLs();
-        sortedWordWithURLsAndFreq = wordsExtractorUtil.getSortedWordsWithURLsAndFreq(urls);
-        urlsWithSortedWordsAndFreq = wordsExtractorUtil.getURLsWithSortedWordsAndFreq(urls);
     }
 
-    public List<String[]> getSortedWordWithURLsAndFreq() {
-        return sortedWordWithURLsAndFreq;
+    public List<String[]> getAllSortedWordsURLsFreq() {
+        return wordsExtractorUtil.getSortedWordsURLsFreq(urls);
     }
 
-    public Map<String, Map<String, Integer>> getUrlsWithSortedWordsAndFreq() {
-        return urlsWithSortedWordsAndFreq;
+    public Map<String, Map<String, Integer>> getUrlsWordsFreq() {
+        return wordsExtractorUtil.getURLsSortedWordsFreq(urls);
+    }
+
+    public List<String[]> getSearchedWordURLsFreq(String word){
+        return wordsExtractorUtil.getSearchedWordURLsFreq(urls, word);
     }
 }

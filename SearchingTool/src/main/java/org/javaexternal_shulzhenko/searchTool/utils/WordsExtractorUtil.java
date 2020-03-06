@@ -13,14 +13,31 @@ public class WordsExtractorUtil {
         return wordsExtractorUtil;
     }
 
-    public List<String []> getSortedWordsWithURLsAndFreq(List<String> urls){
-        Map<String, Map<String, Integer>> urlsWithParsedTexts = getURLsWithSortedWordsAndFreq(urls);
+    public List<String []> getSortedWordsURLsFreq(List<String> urls){
+        Map<String, Map<String, Integer>> urlsWithParsedTexts = getURLsSortedWordsFreq(urls);
         List<String[]> listOfWords = transformToList(urlsWithParsedTexts);
-        sortListByWordsWithURLsAndFreq(listOfWords);
+        sortWordsWithURLsAndFreq(listOfWords);
         return listOfWords;
     }
 
-    public Map<String, Map<String, Integer>> getURLsWithSortedWordsAndFreq(List<String> urls){
+    public List<String[]> getSearchedWordURLsFreq(List<String> urls, String searchedWord){
+        Map<String, Map<String, Integer>> urlsWordsFreq = getURLsSortedWordsFreq(urls);
+        List<String[]> searchedWordURLsFreq = new LinkedList<>();
+        for (String singleUrl : urlsWordsFreq.keySet()) {
+            Map<String , Integer> wordsFreq = urlsWordsFreq.get(singleUrl);
+            String firstChar = String.valueOf(searchedWord.charAt(0));
+            String[] twoCaseWord = new String[]{firstChar.toUpperCase() + searchedWord.substring(1),
+                    firstChar.toLowerCase() + searchedWord.substring(1)};
+            for(String word: twoCaseWord){
+                Integer freq = wordsFreq.get(word);
+                String freqInStr = (freq == null) ? String.valueOf(0) : freq.toString();
+                searchedWordURLsFreq.add(new String[]{word, singleUrl, freqInStr});
+            }
+        }
+        return searchedWordURLsFreq;
+    }
+
+    public Map<String, Map<String, Integer>> getURLsSortedWordsFreq(List<String> urls){
         Map<String,String[]> urlsTexts = getURLsWithParsedTexts(urls);
         Map<String, Map<String, Integer>> urlsWordsFreq = new HashMap<>();
         for (String singleUrl : urlsTexts.keySet()) {
@@ -46,7 +63,6 @@ public class WordsExtractorUtil {
     private Map<String, Integer> countWordFreqAndSort(String[] wordsFromUrl) {
         Map<String, Integer> wordsWithFreq = new TreeMap<>();
         for (String word : wordsFromUrl) {
-            wordsWithFreq.get(word);
             Integer freq = wordsWithFreq.get(word);
             wordsWithFreq.put(word, (freq == null) ? 1 : freq +1);
         }
@@ -66,7 +82,7 @@ public class WordsExtractorUtil {
         return listOfWords;
     }
 
-    private void sortListByWordsWithURLsAndFreq(List<String[]> listOfWords) {
+    private void sortWordsWithURLsAndFreq(List<String[]> listOfWords) {
         Collections.sort(listOfWords, Comparator.comparing(o -> o[1]));
     }
 }
