@@ -14,10 +14,14 @@ public class SearchingToolController {
     }
 
     public void showSortedWordsFromUrls(){
-        consoleView.displaySortedWords(wordsFromURLs);
+        consoleView.displayAllSortedWords(wordsFromURLs);
     }
 
     public void showURLsWithWordsFreq(){
         consoleView.displayURLsWithWords(wordsFromURLs);
+    }
+
+    public void showWordFreqInURLs(String word){
+        consoleView.displaySingleSearchedWord(wordsFromURLs, word);
     }
 }
