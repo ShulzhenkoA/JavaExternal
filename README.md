@@ -29,5 +29,5 @@ The program allows you to process the search, parsing and sorting of words from 
 ## Task5 - [WeatherApp](https://github.com/ShulzhenkoA/JavaExternal/tree/master/WeatherApp/)
 The program allows you to display the current weather in the requested city and weather statistics from the requested cities using your OWM API key. To request the weather, enter your OWM API key and the desired city as command line arguments.
 
-## Task6 - [WeatherApp](https://github.com/ShulzhenkoA/JavaExternal/tree/master/MobileTariffs/)
+## Task6 - [MobileTariffs](https://github.com/ShulzhenkoA/JavaExternal/tree/master/MobileTariffs/)
 The program allows you to process various operations with mobile tariffs data in XML format.
