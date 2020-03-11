@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<tariffs xmlns="http://www.javaexternal.tariffs">
+    <tariff>
+        <name>Super Lite</name>
+        <operator_name>Lifecell</operator_name>
+        <payroll>70</payroll>
+        <call_prices>
+            <withing_network>0</withing_network>
+            <outside_network>1.5</outside_network>
+            <stationary_phones>3.0</stationary_phones>
+        </call_prices>
+        <sms>0.5</sms>
+        <parameters>
+            <favourite_number>1 number</favourite_number>
+            <tariffing>12/sec</tariffing>
+            <tariff_connection_fee>60 UAH</tariff_connection_fee>
+        </parameters>
+    </tariff>
+    <tariff>
+        <name>Star 3 Numbers</name>
+        <operator_name>Kyivstar</operator_name>
+        <payroll>50</payroll>
+        <call_prices>
+            <withing_network>1.0</withing_network>
+            <outside_network>1.8</outside_network>
+            <stationary_phones>2.2</stationary_phones>
+        </call_prices>
+        <sms>0.3</sms>
+        <parameters>
+            <favourite_number>3 numbers</favourite_number>
+            <tariff_connection_fee>0 UAH</tariff_connection_fee>
+        </parameters>
+    </tariff>
+    <tariff>
+        <name>Speak without limits</name>
+        <operator_name>Vodafon</operator_name>
+        <payroll>110</payroll>
+        <call_prices>
+            <withing_network>0</withing_network>
+            <outside_network>-1</outside_network>
+            <stationary_phones>0.5</stationary_phones>
+        </call_prices>
+        <sms>0.5</sms>
+        <parameters>
+            <tariffing>60/sec</tariffing>
+            <tariff_connection_fee>90 UAH</tariff_connection_fee>
+        </parameters>
+    </tariff>
+    <tariff>
+        <name>Free withing network</name>
+        <operator_name>Intertelecom</operator_name>
+        <payroll>60</payroll>
+        <call_prices>
+            <withing_network>0</withing_network>
+            <outside_network>2.5</outside_network>
+            <stationary_phones>3.0</stationary_phones>
+        </call_prices>
+        <sms>0.7</sms>
+        <parameters>
+            <favourite_number>1 number</favourite_number>
+            <tariff_connection_fee>30 UAH</tariff_connection_fee>
+            <tariffing>60/sec</tariffing>
+        </parameters>
+    </tariff>
+</tariffs>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.javaexternal.tariffs"
+        xmlns:tns="http://www.javaexternal.tariffs"
+        elementFormDefault="qualified">
+    <element name="tariffs">
+        <complexType>
+            <sequence>
+                <element name="tariff" type="tns:Tariff" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Tariff">
+        <sequence>
+            <element name="name">
+                <simpleType>
+                    <restriction base="string">
+                        <minLength value="5"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="operator_name">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="Kyivstar"/>
+                        <enumeration value="Lifecell"/>
+                        <enumeration value="Vodafon"/>
+                        <enumeration value="Intertelecom"/>
+                        <enumeration value="3Mob"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="payroll" type="double"/>
+            <element name="call_prices" type="tns:Call_prices"/>
+            <element name="sms" type="double"/>
+            <element name="parameters" type="tns:Parameter"/>
+        </sequence>
+    </complexType>
+    <complexType name="Call_prices">
+        <sequence>
+            <element name="withing_network" type="double"/>
+            <element name="outside_network" type="double"/>
+            <element name="stationary_phones" type="double"/>
+        </sequence>
+    </complexType>
+    <complexType name="Parameter">
+        <choice minOccurs="2" maxOccurs="unbounded">
+            <element name="favourite_number">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="1 number"/>
+                        <enumeration value="2 numbers"/>
+                        <enumeration value="3 numbers"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="tariffing">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="12/sec"/>
+                        <enumeration value="30/sec"/>
+                        <enumeration value="60/sec"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="tariff_connection_fee">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="0 UAH"/>
+                        <enumeration value="30 UAH"/>
+                        <enumeration value="60 UAH"/>
+                        <enumeration value="90 UAH"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </choice>
+    </complexType>
+</schema>
