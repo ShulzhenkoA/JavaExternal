@@ -10,6 +10,6 @@ public class InvalidTariffException extends Throwable {
 
     @Override
     public String getMessage() {
-        return "Invalid " + message;
+        return message;
     }
 }

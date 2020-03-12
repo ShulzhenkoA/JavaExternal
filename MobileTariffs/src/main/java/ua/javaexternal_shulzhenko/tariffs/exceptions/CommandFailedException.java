@@ -1,11 +1,11 @@
 package ua.javaexternal_shulzhenko.tariffs.exceptions;
 
-public class InvalidCommandException extends Throwable {
+public class CommandFailedException extends Throwable {
 
     private String message;
 
-    public InvalidCommandException(String message) {
-        this.message = message;
+    public CommandFailedException(String message) {
+        this.message=message;
     }
 
     @Override

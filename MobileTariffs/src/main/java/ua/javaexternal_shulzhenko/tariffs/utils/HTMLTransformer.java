@@ -21,15 +21,11 @@ public class HTMLTransformer {
         return transformer;
     }
 
-    public void transformXMLtoHTML(String fileXSL, String fileXML){
+    public void transformXMLtoHTML(String fileXSL, String fileXML) throws TransformerException {
         String newHtmlPath = "resources/" + fileXML.substring(fileXML.indexOf("/") + 1, fileXML.indexOf(".")) + ".html";
-        try {
-            TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer transformer = tf.newTransformer(new StreamSource(fileXSL));
-            transformer.transform(new StreamSource(fileXML), new StreamResult(newHtmlPath));
-        } catch(TransformerException e) {
-            LOGGER.error("Impossible transform file : " + fileXML + e);
-        }
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer transformer = tf.newTransformer(new StreamSource(fileXSL));
+        transformer.transform(new StreamSource(fileXML), new StreamResult(newHtmlPath));
     }
 }
 

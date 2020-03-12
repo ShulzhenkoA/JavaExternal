@@ -1,4 +1,4 @@
-package ua.javaexternal_shulzhenko.tariffs.models;
+package ua.javaexternal_shulzhenko.tariffs.models.tariff;
 
 import ua.javaexternal_shulzhenko.tariffs.anotations.MobileType;
 import ua.javaexternal_shulzhenko.tariffs.anotations.TariffElement;
