@@ -1,9 +1,8 @@
 package ua.javaexternal_shulzhenko.tariffs.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import ua.javaexternal_shulzhenko.tariffs.models.Tariff;
-import ua.javaexternal_shulzhenko.tariffs.models.TariffEnum;
+import ua.javaexternal_shulzhenko.tariffs.exceptions.CommandFailedException;
+import ua.javaexternal_shulzhenko.tariffs.models.tariff.Tariff;
+import ua.javaexternal_shulzhenko.tariffs.models.tariff.TariffEnum;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -11,7 +10,6 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +17,6 @@ import java.util.List;
 public class TariffsStAXBuilder {
 
     private static TariffsStAXBuilder tariffsStAXBuilder = new TariffsStAXBuilder();
-    private static Logger LOGGER = LogManager.getLogger(TariffsStAXBuilder.class);
     private List<Tariff> tariffs = new LinkedList<>();
     private XMLInputFactory inputFactory;
 
@@ -35,13 +32,12 @@ public class TariffsStAXBuilder {
         return tariffs;
     }
 
-    public void buildSetTariffs(String fileName) {
+    public void buildSetTariffs(String fileName) throws CommandFailedException, XMLStreamException, IOException {
 
         XMLStreamReader reader = null;
         String name;
 
         try(FileInputStream inputStream = new FileInputStream(new File(fileName))) {
-
             reader = inputFactory.createXMLStreamReader(inputStream);
             if(reader.hasNext()){
                 reader.next();
@@ -57,12 +53,6 @@ public class TariffsStAXBuilder {
                 }
                 reader.close();
             }
-        } catch (XMLStreamException exc) {
-            LOGGER.error("StAX parsing error! " + exc.getMessage());
-        } catch (FileNotFoundException exc) {
-            LOGGER.error("File " + fileName + " not found! " + exc);
-        } catch (IOException exc) {
-            LOGGER.error("I/O error" + exc.getMessage());
         }
     }
     private Tariff buildTariff(XMLStreamReader reader) throws XMLStreamException {

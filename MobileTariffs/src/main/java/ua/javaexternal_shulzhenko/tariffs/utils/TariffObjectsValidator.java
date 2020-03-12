@@ -1,11 +1,9 @@
 package ua.javaexternal_shulzhenko.tariffs.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.javaexternal_shulzhenko.tariffs.anotations.MobileType;
 import ua.javaexternal_shulzhenko.tariffs.anotations.TariffElement;
 import ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException;
-import ua.javaexternal_shulzhenko.tariffs.models.Tariff;
+import ua.javaexternal_shulzhenko.tariffs.models.tariff.Tariff;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -21,8 +19,9 @@ public class TariffObjectsValidator {
     private final List<String> TARIFFING = Arrays.asList("12/sec", "30/sec", "60/sec");
     private final List<String> TARIFF_CONNECTION_FEE = Arrays.asList("0 UAH", "30 UAH", "60 UAH", "90 UAH");
 
-    private static Logger LOGGER = LogManager.getLogger(TariffObjectsValidator.class);
     private Tariff tariff;
+    private String tariffName;
+    private int tariffCount;
 
     private TariffObjectsValidator() {
     }
@@ -31,16 +30,13 @@ public class TariffObjectsValidator {
         return tariffValidator;
     }
 
-    public void validateTariffs(List<Tariff> tariffs){
+    public void validateTariffs(List<Tariff> tariffs) throws InvalidTariffException, IllegalAccessException {
         for (Tariff tariff: tariffs) {
             this.tariff = tariff;
+            tariffCount++;
             Class<? extends Tariff> tariffClass = tariff.getClass();
-            try {
-                validateClass(tariffClass, TARIFF_PROP_ORDER);
-                validateTariffClassElements(tariffClass);
-            } catch (InvalidTariffException | IllegalAccessException exc) {
-                LOGGER.error(exc.getMessage());
-            }
+            validateClass(tariffClass, TARIFF_PROP_ORDER);
+            validateTariffClassElements(tariffClass);
         }
     }
 
@@ -74,7 +70,7 @@ public class TariffObjectsValidator {
                         validateTariffPayroll(tariffElementAnnotation, field);
                         break;
                     case "callPrices":
-                        validateTariffCallPrices(tariffElementAnnotation, field);
+                        validateTariffCallPrices(field);
                         break;
                     case "sms":
                         validateTariffSMS(tariffElementAnnotation, field);
@@ -93,8 +89,9 @@ public class TariffObjectsValidator {
             IllegalAccessException, InvalidTariffException {
         if(tariffElementAnnotation.required()){
             String tariffNameValue = ((String) field.get(tariff));
+            tariffName = tariffNameValue;
             if(tariffNameValue.trim().equals("")){
-                throw new InvalidTariffException("tariff name.");
+                throw new InvalidTariffException("tariff name in " + tariffCount + "is invalid.");
             }
         }
     }
@@ -104,7 +101,8 @@ public class TariffObjectsValidator {
         if(tariffElementAnnotation.required()){
             String operatorName = (String) field.get(tariff);
             if(OPERATORS.indexOf(operatorName) < 0){
-                throw new InvalidTariffException("tariff operator name.");
+                throw new InvalidTariffException("tariff operator name in " + tariffCount + " tariff \"" +
+                        tariffName + "\" is invalid.");
             }
         }
     }
@@ -113,7 +111,7 @@ public class TariffObjectsValidator {
             IllegalAccessException, InvalidTariffException {
         double payroll = field.getDouble(tariff);
         if(payroll<tariffElementAnnotation.minvalue()){
-            throw new InvalidTariffException("tariff payroll.");
+            throw new InvalidTariffException("tariff payroll in " + tariffCount + " tariff \"" + tariffName + "\" is invalid.");
         }
     }
 
@@ -121,11 +119,11 @@ public class TariffObjectsValidator {
             IllegalAccessException, InvalidTariffException {
         double smsPrice = field.getDouble(tariff);
         if(smsPrice<tariffElementAnnotation.minvalue()){
-            throw new InvalidTariffException("tariff sms.");
+            throw new InvalidTariffException("tariff sms in " + tariffCount + " tariff \"" + tariffName + "\" is invalid.");
         }
     }
 
-    private void validateTariffCallPrices(TariffElement tariffElementAnnotation, Field field) throws
+    private void validateTariffCallPrices(Field field) throws
             IllegalAccessException, InvalidTariffException {
         Tariff.CallPrices callPrices = (Tariff.CallPrices) field.get(tariff);
         Class<? extends Tariff.CallPrices> callPricesClass = callPrices.getClass();
@@ -142,7 +140,8 @@ public class TariffObjectsValidator {
                 field.setAccessible(true);
                 double price = field.getDouble(callPrices);
                 if(price < tariffElementAnnotation.minvalue()){
-                    throw new InvalidTariffException(field.getName() + " price.");
+                    throw new InvalidTariffException(field.getName() + " price in " + tariffCount + " tariff \"" +
+                            tariffName + "\" is invalid.");
                 }
             }
         }
@@ -159,6 +158,7 @@ public class TariffObjectsValidator {
     private void validateParametersClassElements(Class<? extends Tariff.Parameters> parametersClass, Tariff.Parameters parameters) throws
             InvalidTariffException, IllegalAccessException {
         Field[] classFields = parametersClass.getDeclaredFields();
+
         for (Field field : classFields) {
             if(field.isAnnotationPresent(TariffElement.class)){
                 TariffElement tariffElementAnnotation = field.getAnnotation(TariffElement.class);
@@ -186,7 +186,8 @@ public class TariffObjectsValidator {
         if(field.get(parameters) != null){
             String operatorName = (String) field.get(parameters);
             if(valuesTemplate.indexOf(operatorName) < 0){
-                throw new InvalidTariffException(field.getName() + " parameter");
+                throw new InvalidTariffException(field.getName() + " parameter in " + tariffCount + " tariff \"" +
+                        tariffName + "\" is invalid.");
             }
         }
     }
