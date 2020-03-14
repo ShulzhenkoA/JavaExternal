@@ -39,3 +39,4 @@ The program allows :
  - show all tariffs oject from databse.  
 
 This app works using patterns "Singleton", "MVC", "Command", "Facade", "Repository". "Command" is implemented using lambda expressions in CommandsModel class. There application has a DBConnetor class, that can connect to the databases you have chosen and prepare the appropriate statements. Database queries are performed in the TariffDAO, which implements abstract DAO with various abstract queries.
+
