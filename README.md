@@ -29,7 +29,7 @@ The program allows you to process the search, parsing and sorting of words from 
 ## Task5 - [WeatherApp](https://github.com/ShulzhenkoA/JavaExternal/tree/master/WeatherApp/)
 The program allows you to display the current weather in the requested city and weather statistics from the requested cities using your OWM API key. To request the weather, enter your OWM API key and the desired city as command line arguments.
 
-## Task6 - [MobileTariffs - ¹3](https://github.com/ShulzhenkoA/JavaExternal/tree/master/MobileTariffs/)
+## Task6 - [MobileTariffs - #3](https://github.com/ShulzhenkoA/JavaExternal/tree/master/MobileTariffs/)
 The program allows :
  - validate XML file with mobile tariffs(resources/tariffs.xml) with XSD schema(resources/tariffs.xsd) using SAX;
  - transform tariffs.xml and create tariffs.html using XSLT;
