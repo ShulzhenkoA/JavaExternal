@@ -37,8 +37,8 @@
         <payroll>110</payroll>
         <call_prices>
             <withing_network>0</withing_network>
-            <outside_network>-1</outside_network>
-            <stationary_phones>0.5</stationary_phones>
+            <outside_network>0.5</outside_network>
+            <stationary_phones>0.9</stationary_phones>
         </call_prices>
         <sms>0.5</sms>
         <parameters>

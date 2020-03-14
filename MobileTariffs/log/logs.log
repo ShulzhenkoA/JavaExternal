@@ -1,47 +1,22 @@
-[ERROR] 2020-03-12 01:15:50.581 AppController:58 - Invalid Invalid menu command
-[ERROR] 2020-03-12 01:15:53.069 AppController:58 - Invalid Invalid menu command
-[ERROR] 2020-03-12 01:15:55.357 AppController:58 - Invalid Invalid menu command
-[ERROR] 2020-03-12 01:21:49.385 AppController:58 - Invalid Can't validate tariff objects. They aren't built yet.
-[ERROR] 2020-03-12 01:25:18.116 AppController:58 - Invalid Invalid menu command
-[ERROR] 2020-03-12 01:25:21.430 AppController:58 - Invalid Invalid menu command
-[ERROR] 2020-03-12 01:25:23.062 AppController:58 - Invalid Invalid menu command
-[ERROR] 2020-03-12 01:25:26.382 AppController:58 - Invalid Invalid menu command
-[ERROR] 2020-03-12 01:25:30.910 AppController:58 - Invalid Invalid menu command
-[ERROR] 2020-03-12 01:25:32.437 AppController:58 - Invalid Invalid menu command
-[ERROR] 2020-03-12 01:26:27.571 AppController:58 - Invalid Can't validate tariff objects. They aren't built yet.
-[ERROR] 2020-03-12 01:26:52.501 AppController:58 - Invalid Can't open. File isn't create yet.
-[ERROR] 2020-03-12 01:27:46.242 AppController:58 - Can't open. File isn't create yet.
-[ERROR] 2020-03-12 01:27:52.116 AppController:58 - Can't open. File isn't create yet.
-[ERROR] 2020-03-12 01:28:00.805 AppController:58 - Invalid menu command
-[ERROR] 2020-03-12 01:28:04.596 AppController:58 - Invalid menu command
-[ERROR] 2020-03-12 01:30:52.434 AppController:58 - Can't validate tariff objects. They aren't built yet.
-[ERROR] 2020-03-12 02:42:00.794 AppController:62 - Can't open. File isn't create yet.
-[ERROR] 2020-03-12 02:42:51.914 AppController:62 - Can't open. File isn't create yet.
-[ERROR] 2020-03-12 02:43:03.715 AppController:62 - Can't execute command. Tariff objects aren't built yet.
-[ERROR] 2020-03-12 02:43:18.266 AppController:62 - Can't execute command. Tariff objects aren't built yet.
-[ERROR] 2020-03-12 02:44:52.577 AppController:62 - Invalid menu command
-[ERROR] 2020-03-12 02:45:06.536 CommandsModel:80 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: outsideNetwork price.
-[ERROR] 2020-03-12 02:45:06.537 AppController:62 - Command have been failed due to invalid tariff exception.
-[ERROR] 2020-03-12 03:15:47.538 AppController:62 - Can't execute command. Tariff objects aren't built yet.
-[ERROR] 2020-03-12 03:15:49.268 AppController:62 - Can't execute command. Tariff objects aren't built yet.
-[ERROR] 2020-03-12 03:15:53.082 AppController:62 - Can't execute command. Tariff objects aren't built yet.
-[ERROR] 2020-03-12 03:19:24.780 CommandsModel:80 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: outsideNetwork price in 3 tariff Speak without limits is invalid.
-[ERROR] 2020-03-12 03:19:24.780 AppController:62 - Command have been failed due to invalid tariff exception.
-[ERROR] 2020-03-12 03:21:34.816 CommandsModel:80 - class ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException
-[ERROR] 2020-03-12 03:21:34.822 AppController:62 - Command have been failed due to invalid tariff exception.
-[ERROR] 2020-03-12 03:22:22.335 CommandsModel:80 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: outsideNetwork price in 3 tariff Speak without limits is invalid.
-[ERROR] 2020-03-12 03:22:22.341 AppController:62 - Command have been failed due to invalid tariff exception.
-[ERROR] 2020-03-12 03:27:43.050 AppController:62 - Can't execute command. Tariff objects aren't built yet.
-[ERROR] 2020-03-12 03:27:50.917 AppController:62 - Can't execute command. Tariff objects aren't built yet.
-[ERROR] 2020-03-12 03:27:55.311 CommandsModel:80 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: tariff operator name in 2 tariff "Star 3 Numbers" is invalid.
-[ERROR] 2020-03-12 03:27:55.311 AppController:62 - Command have been failed due to invalid tariff exception.
-[ERROR] 2020-03-12 03:28:37.444 CommandsModel:80 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: tariff payroll in 2 tariff "Star 3 Numbers" is invalid.
-[ERROR] 2020-03-12 03:28:37.450 AppController:62 - Command have been failed due to invalid tariff exception.
-[ERROR] 2020-03-12 03:29:23.718 CommandsModel:80 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: outsideNetwork price in 2 tariff "Star 3 Numbers" is invalid.
-[ERROR] 2020-03-12 03:29:23.724 AppController:62 - Command have been failed due to invalid tariff exception.
-[ERROR] 2020-03-12 03:29:58.205 CommandsModel:80 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: stationaryPhones price in 2 tariff "Star 3 Numbers" is invalid.
-[ERROR] 2020-03-12 03:29:58.212 AppController:62 - Command have been failed due to invalid tariff exception.
-[ERROR] 2020-03-12 03:30:19.467 CommandsModel:80 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: favouriteNumbers parameter in 2 tariff "Star 3 Numbers" is invalid.
-[ERROR] 2020-03-12 03:30:19.475 AppController:62 - Command have been failed due to invalid tariff exception.
-[ERROR] 2020-03-12 03:31:11.467 CommandsModel:80 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: tariffConnectionFee parameter in 2 tariff "Star 3 Numbers" is invalid.
-[ERROR] 2020-03-12 03:31:11.473 AppController:62 - Command have been failed due to invalid tariff exception.
+[ERROR] 2020-03-14 12:38:16.322 AppController:65 - Invalid menu command
+[ERROR] 2020-03-14 12:41:20.597 AppController:65 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 12:41:50.965 AppController:65 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 12:43:26.834 AppController:65 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 12:43:55.852 AppController:65 - Can't open. File isn't create yet.
+[ERROR] 2020-03-14 12:44:05.259 AppController:65 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 12:44:11.787 AppController:65 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 12:44:40.579 CommandsModel:133 - Column 'tariffing' cannot be null
+[ERROR] 2020-03-14 12:44:40.592 AppController:65 - Command of adding tariffs to database failed due to Column 'tariffing' cannot be null
+[ERROR] 2020-03-14 16:48:07.745 AppController:66 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 16:48:12.049 CommandsModel:85 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: outsideNetwork price in 3 tariff "Speak without limits" is invalid.
+[ERROR] 2020-03-14 16:48:12.049 AppController:66 - Command have been failed due to invalid tariff exception.
+[ERROR] 2020-03-14 17:21:06.452 AppController:69 - Invalid menu command
+[ERROR] 2020-03-14 17:21:15.543 CommandsModel:89 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: outsideNetwork price in 3 tariff "Speak without limits" is invalid.
+[ERROR] 2020-03-14 17:21:15.543 AppController:69 - Command have been failed due to invalid tariff exception.
+[ERROR] 2020-03-14 17:21:54.026 CommandsModel:89 - ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException: stationaryPhones price in 3 tariff "Speak without limits" is invalid.
+[ERROR] 2020-03-14 17:21:54.033 AppController:69 - Command have been failed due to invalid tariff exception.
+[ERROR] 2020-03-14 17:23:18.780 AppController:69 - Command failed. Database is empty.
+[ERROR] 2020-03-14 18:10:20.905 AppController:70 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 18:10:30.764 AppController:70 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 18:33:16.935 AppController:70 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 18:39:06.944 AppController:70 - Command failed. Database is empty.

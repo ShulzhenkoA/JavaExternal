@@ -7,7 +7,6 @@ import ua.javaexternal_shulzhenko.tariffs.models.command.CommandsModel;
 
 import ua.javaexternal_shulzhenko.tariffs.consoleView.ConsoleView;
 import ua.javaexternal_shulzhenko.tariffs.exceptions.CommandFailedException;
-import ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidCommandException;
 import ua.javaexternal_shulzhenko.tariffs.models.command.CommandsNS;
 import ua.javaexternal_shulzhenko.tariffs.utils.PromptUserUtil;
 
@@ -22,8 +21,8 @@ public class AppController {
     }
     public void runApp() {
         String command;
+        consoleView.printMassage(ConsoleMessages.MENU);
         do{
-            consoleView.printMassage(ConsoleMessages.MENU);
             command = PromptUserUtil.promptUser();
             try {
                 switch (command){
@@ -43,24 +42,33 @@ public class AppController {
                     case "4":
                         commandsModel.executeCommand(CommandsNS.BUILD_TARIFFS);
                         consoleView.printMassage(ConsoleMessages.TARIFFS_OBJECTS_BUILT);
-
-                    break;
+                        break;
                     case "5":
                         commandsModel.executeCommand(CommandsNS.VALIDATE_TARIFF_OBJECTS);
                         consoleView.printMassage(ConsoleMessages.TARIFF_OBJECTS_VALIDATED);
                         break;
                     case "6":
                         commandsModel.executeCommand(CommandsNS.SHOW_TARIFFS_OBJECTS);
-                        consoleView.printMassage(commandsModel.getTariffList().toString());
+                        consoleView.printMassage(commandsModel.getTariffsFromXML().toString());
                         break;
                     case "7":
+                        commandsModel.executeCommand(CommandsNS.VALIDATE_TARIFF_OBJECTS);
+                        commandsModel.executeCommand(CommandsNS.ADD_TARIFFS_TO_DB);
+                        consoleView.printMassage(ConsoleMessages.TARIFFS_ADDED_TO_DB);
+                        break;
+                    case "8":
+                        commandsModel.executeCommand(CommandsNS.GET_TARIFFS_FROM_DB);
+                        consoleView.printMassage(commandsModel.getTariffsFromDB().toString());
+                        break;
+                    case "9":
+                        commandsModel.executeCommand(CommandsNS.CLOSE_DAO_CONNECTOR);
                         break;
                     default:
-                        throw new InvalidCommandException("Invalid menu command");
+                        throw new CommandFailedException("Invalid menu command");
                 }
-            }catch (InvalidCommandException | CommandFailedException exc){
+            }catch (CommandFailedException exc){
                 LOGGER.error(exc.getMessage());
             }
-        } while (!command.equals("7"));
+        } while (!command.equals("9"));
     }
 }

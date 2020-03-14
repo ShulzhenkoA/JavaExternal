@@ -29,11 +29,14 @@ The program allows you to process the search, parsing and sorting of words from 
 ## Task5 - [WeatherApp](https://github.com/ShulzhenkoA/JavaExternal/tree/master/WeatherApp/)
 The program allows you to display the current weather in the requested city and weather statistics from the requested cities using your OWM API key. To request the weather, enter your OWM API key and the desired city as command line arguments.
 
-## Task6 - [MobileTariffs](https://github.com/ShulzhenkoA/JavaExternal/tree/master/MobileTariffs/)
+## Task6 - [MobileTariffs - #3](https://github.com/ShulzhenkoA/JavaExternal/tree/master/MobileTariffs/)
 The program allows :
- - validate xml file with mobile tariffs(resources/tariffs.xml) with xsd schema(resources/tariffs.xsd) using SAX;
+ - validate XML file with mobile tariffs(resources/tariffs.xml) with XSD schema(resources/tariffs.xsd) using SAX;
  - transform tariffs.xml and create tariffs.html using XSLT;
  - create Java objects from tariffs.xml using StAX;
- - validate created Java objects using custom annotations and corresponding validator.
+ - validate created from XML Java objects using custom annotations and corresponding validator;
+ - add created from XML Java objects to database;
+ - show all tariffs oject from databse.  
 
-This app works using patterns "Singleton", "MVC", "Command", "Facade". "Command" is implemented using lambda expressions in CommandsModel class. 
+This app works using patterns "Singleton", "MVC", "Command", "Facade", "Repository". "Command" is implemented using lambda expressions in CommandsModel class. There application has a DBConnetor class, that can connect to the databases you have chosen and prepare the appropriate statements. Database queries are performed in the TariffDAO, which implements abstract DAO with various abstract queries.
+
