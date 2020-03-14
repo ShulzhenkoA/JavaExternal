@@ -30,7 +30,7 @@ public class TariffObjectsValidator {
         return tariffValidator;
     }
 
-    public void validateTariffs(List<Tariff> tariffs) throws InvalidTariffException, IllegalAccessException {
+    public void validateTariffs(List<Tariff> tariffs){
         for (Tariff tariff: tariffs) {
             this.tariff = tariff;
             tariffCount++;
@@ -40,7 +40,7 @@ public class TariffObjectsValidator {
         }
     }
 
-    private void validateClass(Class<?> someClass, String[] classPropsTemplate) throws InvalidTariffException {
+    private void validateClass(Class<?> someClass, String[] classPropsTemplate) {
         if(someClass.isAnnotationPresent(MobileType.class)){
             MobileType tariffAnnotation = someClass.getAnnotation(MobileType.class);
             String typeName = tariffAnnotation.typeName();
@@ -51,42 +51,44 @@ public class TariffObjectsValidator {
         }
     }
 
-    private void validateTariffClassElements(Class<? extends Tariff> tariffClass) throws
-            IllegalAccessException, InvalidTariffException {
+    private void validateTariffClassElements(Class<? extends Tariff> tariffClass){
         Field[] classFields = tariffClass.getDeclaredFields();
         for (Field field : classFields) {
             if(field.isAnnotationPresent(TariffElement.class)){
                 TariffElement tariffElementAnnotation = field.getAnnotation(TariffElement.class);
                 field.setAccessible(true);
                 String name = field.getName();
-                switch (name){
-                    case "name":
-                        validateTariffName(tariffElementAnnotation, field);
-                        break;
-                    case "operatorName":
-                        validateTariffOperatorName(tariffElementAnnotation, field);
-                        break;
-                    case "payroll":
-                        validateTariffPayroll(tariffElementAnnotation, field);
-                        break;
-                    case "callPrices":
-                        validateTariffCallPrices(field);
-                        break;
-                    case "sms":
-                        validateTariffSMS(tariffElementAnnotation, field);
-                        break;
-                    case "parameters":
-                        validateTariffParameters(field);
-                        break;
-                    default:
-                        break;
+                try {
+                    switch (name){
+                        case "name":
+                            validateTariffName(tariffElementAnnotation, field);
+                            break;
+                        case "operatorName":
+                            validateTariffOperatorName(tariffElementAnnotation, field);
+                            break;
+                        case "payroll":
+                            validateTariffPayroll(tariffElementAnnotation, field);
+                            break;
+                        case "callPrices":
+                            validateTariffCallPrices(field);
+                            break;
+                        case "sms":
+                            validateTariffSMS(tariffElementAnnotation, field);
+                            break;
+                        case "parameters":
+                            validateTariffParameters(field);
+                            break;
+                        default:
+                            break;
+                    }
+                }catch (IllegalAccessException exc){
+                    throw new InvalidTariffException("can't access the element" + exc.getMessage());
                 }
             }
         }
     }
 
-    private void validateTariffName(TariffElement tariffElementAnnotation, Field field) throws
-            IllegalAccessException, InvalidTariffException {
+    private void validateTariffName(TariffElement tariffElementAnnotation, Field field) throws IllegalAccessException{
         if(tariffElementAnnotation.required()){
             String tariffNameValue = ((String) field.get(tariff));
             tariffName = tariffNameValue;
@@ -96,8 +98,7 @@ public class TariffObjectsValidator {
         }
     }
 
-    private void validateTariffOperatorName(TariffElement tariffElementAnnotation, Field field) throws
-            IllegalAccessException, InvalidTariffException {
+    private void validateTariffOperatorName(TariffElement tariffElementAnnotation, Field field) throws IllegalAccessException{
         if(tariffElementAnnotation.required()){
             String operatorName = (String) field.get(tariff);
             if(OPERATORS.indexOf(operatorName) < 0){
@@ -107,32 +108,28 @@ public class TariffObjectsValidator {
         }
     }
 
-    private void validateTariffPayroll(TariffElement tariffElementAnnotation, Field field) throws
-            IllegalAccessException, InvalidTariffException {
+    private void validateTariffPayroll(TariffElement tariffElementAnnotation, Field field) throws IllegalAccessException{
         double payroll = field.getDouble(tariff);
         if(payroll<tariffElementAnnotation.minvalue()){
             throw new InvalidTariffException("tariff payroll in " + tariffCount + " tariff \"" + tariffName + "\" is invalid.");
         }
     }
 
-    private void validateTariffSMS(TariffElement tariffElementAnnotation, Field field) throws
-            IllegalAccessException, InvalidTariffException {
+    private void validateTariffSMS(TariffElement tariffElementAnnotation, Field field) throws IllegalAccessException{
         double smsPrice = field.getDouble(tariff);
         if(smsPrice<tariffElementAnnotation.minvalue()){
             throw new InvalidTariffException("tariff sms in " + tariffCount + " tariff \"" + tariffName + "\" is invalid.");
         }
     }
 
-    private void validateTariffCallPrices(Field field) throws
-            IllegalAccessException, InvalidTariffException {
+    private void validateTariffCallPrices(Field field) throws IllegalAccessException {
         Tariff.CallPrices callPrices = (Tariff.CallPrices) field.get(tariff);
         Class<? extends Tariff.CallPrices> callPricesClass = callPrices.getClass();
         validateClass(callPricesClass, CALL_PRICES_PROP_ORDER);
         validateCallPricesClassElements(callPricesClass, callPrices);
     }
 
-    private void validateCallPricesClassElements(Class<? extends Tariff.CallPrices> callPricesClass, Tariff.CallPrices callPrices) throws
-            InvalidTariffException, IllegalAccessException {
+    private void validateCallPricesClassElements(Class<? extends Tariff.CallPrices> callPricesClass, Tariff.CallPrices callPrices) throws IllegalAccessException {
         Field[] classFields = callPricesClass.getDeclaredFields();
         for (Field field : classFields) {
             if(field.isAnnotationPresent(TariffElement.class)){
@@ -147,18 +144,15 @@ public class TariffObjectsValidator {
         }
     }
 
-    private void validateTariffParameters(Field field) throws
-            IllegalAccessException, InvalidTariffException {
+    private void validateTariffParameters(Field field) throws IllegalAccessException{
         Tariff.Parameters parameters = (Tariff.Parameters) field.get(tariff);
         Class<? extends Tariff.Parameters> parametersClass = parameters.getClass();
         validateClass(parametersClass, PARAMETERS_PROP_ORDER);
         validateParametersClassElements(parametersClass, parameters);
     }
 
-    private void validateParametersClassElements(Class<? extends Tariff.Parameters> parametersClass, Tariff.Parameters parameters) throws
-            InvalidTariffException, IllegalAccessException {
+    private void validateParametersClassElements(Class<? extends Tariff.Parameters> parametersClass, Tariff.Parameters parameters) throws IllegalAccessException {
         Field[] classFields = parametersClass.getDeclaredFields();
-
         for (Field field : classFields) {
             if(field.isAnnotationPresent(TariffElement.class)){
                 TariffElement tariffElementAnnotation = field.getAnnotation(TariffElement.class);
@@ -181,8 +175,7 @@ public class TariffObjectsValidator {
         }
     }
 
-    private void validateParametersElement(Field field, Tariff.Parameters parameters, List<String> valuesTemplate) throws
-            IllegalAccessException, InvalidTariffException {
+    private void validateParametersElement(Field field, Tariff.Parameters parameters, List<String> valuesTemplate) throws IllegalAccessException {
         if(field.get(parameters) != null){
             String operatorName = (String) field.get(parameters);
             if(valuesTemplate.indexOf(operatorName) < 0){

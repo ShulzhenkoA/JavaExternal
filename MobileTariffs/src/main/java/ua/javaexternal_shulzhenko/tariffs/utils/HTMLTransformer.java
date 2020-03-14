@@ -1,8 +1,5 @@
 package ua.javaexternal_shulzhenko.tariffs.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -12,7 +9,6 @@ import javax.xml.transform.stream.StreamSource;
 public class HTMLTransformer {
 
     private static HTMLTransformer transformer = new HTMLTransformer();
-    private final Logger LOGGER = LogManager.getLogger(HTMLTransformer.class);
 
     private HTMLTransformer() {
     }

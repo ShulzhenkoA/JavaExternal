@@ -1,6 +1,5 @@
 package ua.javaexternal_shulzhenko.tariffs.utils;
 
-import ua.javaexternal_shulzhenko.tariffs.exceptions.CommandFailedException;
 import ua.javaexternal_shulzhenko.tariffs.models.tariff.Tariff;
 import ua.javaexternal_shulzhenko.tariffs.models.tariff.TariffEnum;
 
@@ -32,7 +31,7 @@ public class TariffsStAXBuilder {
         return tariffs;
     }
 
-    public void buildSetTariffs(String fileName) throws CommandFailedException, XMLStreamException, IOException {
+    public void buildSetTariffs(String fileName) throws XMLStreamException, IOException {
 
         XMLStreamReader reader = null;
         String name;

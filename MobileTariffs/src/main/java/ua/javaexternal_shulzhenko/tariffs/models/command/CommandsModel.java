@@ -1,7 +1,5 @@
 package ua.javaexternal_shulzhenko.tariffs.models.command;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
 import ua.javaexternal_shulzhenko.tariffs.connector.DBConnector;
 import ua.javaexternal_shulzhenko.tariffs.connector.DataBases;
@@ -26,7 +24,6 @@ import java.util.List;
 
 public class CommandsModel {
 
-    private static final Logger LOGGER = LogManager.getLogger(CommandsModel.class);
     private HashMap<String, Command> commands;
     private List<Tariff> tariffsFromXML;
     private List<Tariff> tariffsFromDB;
@@ -39,7 +36,7 @@ public class CommandsModel {
         setUpCommands();
     }
 
-    public void executeCommand(CommandsNS commandName) throws CommandFailedException {
+    public void executeCommand(CommandsNS commandName) {
         Command command = commands.get(commandName.getName());
         command.execute();
     }
@@ -57,12 +54,8 @@ public class CommandsModel {
         addToCommandsMap(CommandsNS.VALIDATE_XML_XSD, () -> {
             try{
                 ValidatorSAXXSD.getValidator().validateXML(RESOURCES[0], RESOURCES[1]);
-            }catch (SAXException e) {
-                LOGGER.error( RESOURCES[0] + " is not valid." + e.getMessage());
-                throw new CommandFailedException("Command have been failed due to XML don't match XSD.");
-            } catch (IOException e) {
-                LOGGER.error(e.getMessage());
-                throw new CommandFailedException("Command have been failed due I/O error.");
+            }catch (SAXException | IOException exc) {
+                throw new CommandFailedException("Command have been failed due to: " + exc.getMessage());
             }
         });
 
@@ -71,12 +64,8 @@ public class CommandsModel {
             try {
                 tariffsStAXBuilder.buildSetTariffs(RESOURCES[0]);
                 tariffsFromXML = tariffsStAXBuilder.getTariffs();
-            }catch (XMLStreamException exc) {
-                LOGGER.error("StAX parsing error! " + exc.getMessage());
-                throw new CommandFailedException("Command have been failed due to StAX parsing error.");
-            } catch (IOException exc) {
-                LOGGER.error("I/O error" + exc.getMessage());
-                throw new CommandFailedException("Command have been failed due to I/O error.");
+            }catch (XMLStreamException | IOException exc) {
+                throw new CommandFailedException("Command have been failed due to: " + exc.getMessage());
             }
         });
 
@@ -86,11 +75,7 @@ public class CommandsModel {
             try {
                 tariffValidator.validateTariffs(tariffsFromXML);
             } catch (InvalidTariffException exc) {
-                LOGGER.error(exc);
-                throw new CommandFailedException("Command have been failed due to invalid tariff exception.");
-            } catch (IllegalAccessException exc) {
-                LOGGER.error(exc);
-                throw new CommandFailedException("Command have been failed due to illegal access exception.");
+                throw new CommandFailedException("Command have been failed due to: " + exc.getMessage());
             }
         });
 
@@ -101,8 +86,7 @@ public class CommandsModel {
             try {
                 htmlTransformer.transformXMLtoHTML(RESOURCES[2], RESOURCES[0]);
             } catch (TransformerException exc) {
-                LOGGER.error(exc.getMessage());
-                throw new CommandFailedException("Command transforming from XML to HTML failed.");
+                throw new CommandFailedException("Command transforming from XML to HTML failed due to" + exc.getMessage());
             }
         });
 
@@ -113,8 +97,7 @@ public class CommandsModel {
                 try {
                     Desktop.getDesktop().browse(url);
                 } catch (IOException exc) {
-                    LOGGER.error(exc.getMessage());
-                    throw new CommandFailedException("Command to open HTML file failed.");
+                    throw new CommandFailedException("Command to open HTML file failed due to: " + exc.getMessage());
                 }
             } else {
                 throw new CommandFailedException("Can't open. File isn't create yet.");
@@ -127,7 +110,6 @@ public class CommandsModel {
             try {
                 tariffDAO.addTariffs(tariffsFromXML);
             } catch (SQLException exc) {
-                LOGGER.error(exc.getMessage());
                 throw new CommandFailedException("Command of adding tariffs to database failed due to " + exc.getMessage());
             }
         });
@@ -140,7 +122,6 @@ public class CommandsModel {
                     throw new CommandFailedException("Command failed. Database is empty.");
                 }
             }catch (SQLException exc){
-                LOGGER.error(exc.getMessage());
                 throw new CommandFailedException("Command of getting tariffs from database failed due to " + exc.getMessage());
             }
 
@@ -151,29 +132,27 @@ public class CommandsModel {
                 try {
                     tariffDAO.closeConnector();
                 } catch (SQLException exc) {
-                    LOGGER.error(exc.getMessage());
                     throw new CommandFailedException("Command of closing DAO connector failed due to " + exc.getMessage());
                 }
             }
         });
     }
 
-    private void addToCommandsMap(CommandsNS commandName, Command command){
+    private void addToCommandsMap(CommandsNS commandName, Command command) {
         commands.put(commandName.getName(), command);
     }
 
-    private void isEmptyTariffsList() throws CommandFailedException{
+    private void isEmptyTariffsList() {
         if (tariffsFromXML == null || tariffsFromXML.isEmpty()) {
             throw new CommandFailedException("Can't execute command. Tariff objects aren't built yet.");
         }
     }
 
-    private void connectToDB() throws CommandFailedException {
+    private void connectToDB() {
         if(tariffDAO == null){
             try {
                 tariffDAO = new TariffDAO(new DBConnector(DataBases.MYSQL));
             } catch (SQLException exc) {
-                LOGGER.error(exc.getMessage());
                 throw new CommandFailedException("Command of adding tariffs to database failed due to " + exc.getMessage());
             }
         }

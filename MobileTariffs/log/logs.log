@@ -20,3 +20,12 @@
 [ERROR] 2020-03-14 18:10:30.764 AppController:70 - Can't execute command. Tariff objects aren't built yet.
 [ERROR] 2020-03-14 18:33:16.935 AppController:70 - Can't execute command. Tariff objects aren't built yet.
 [ERROR] 2020-03-14 18:39:06.944 AppController:70 - Command failed. Database is empty.
+[ERROR] 2020-03-14 22:39:40.909 AppController:69 - Command failed. Database is empty.
+[ERROR] 2020-03-14 22:39:47.247 AppController:69 - Can't execute command. Tariff objects aren't built yet.
+[ERROR] 2020-03-14 22:40:00.879 AppController:69 - Can't open. File isn't create yet.
+[ERROR] 2020-03-14 22:41:33.935 AppController:69 - Command have been failed due to: stationaryPhones price in 3 tariff "Speak without limits" is invalid.
+[FATAL] 2020-03-14 22:42:13.159 tariffs:37 - 41 : 34 - Element type "stationary_phones0.3" must be followed by either attribute specifications, ">" or "/>".
+[ERROR] 2020-03-14 22:42:13.163 AppController:69 - Command have been failed due to: Element type "stationary_phones0.3" must be followed by either attribute specifications, ">" or "/>".
+[ERROR] 2020-03-14 22:43:04.958 AppController:69 - Command transforming from XML to HTML failed due tojavax.xml.transform.TransformerException: com.sun.org.apache.xml.internal.utils.WrappedRuntimeException: Element type "stationary_phones0.3" must be followed by either attribute specifications, ">" or "/>".
+[ERROR] 2020-03-14 22:46:57.732 AppController:69 - Command have been failed due to: schema_reference.4: Failed to read schema document 'file:/E:/Programming/Projects/JavaExternal/MobileTariffs/resources/tariffs.xsd', because 1) could not find the document; 2) the document could not be read; 3) the root element of the document is not <xsd:schema>.
+[ERROR] 2020-03-14 22:48:54.115 AppController:69 - Command have been failed due to: can't access the elementClass ua.javaexternal_shulzhenko.tariffs.utils.TariffObjectsValidator can not access a member of class ua.javaexternal_shulzhenko.tariffs.models.tariff.Tariff$CallPrices with modifiers "private"

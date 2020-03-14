@@ -1,6 +1,6 @@
 package ua.javaexternal_shulzhenko.tariffs.exceptions;
 
-public class InvalidTariffException extends Throwable {
+public class InvalidTariffException extends RuntimeException {
 
     private String message;
 

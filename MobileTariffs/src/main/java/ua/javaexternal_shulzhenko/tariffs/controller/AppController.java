@@ -37,7 +37,6 @@ public class AppController {
                     case "3":
                         commandsModel.executeCommand(CommandsNS.OPEN_CREATED_HTML);
                         consoleView.printMassage(ConsoleMessages.OPENED_CREATED_HTML);
-
                         break;
                     case "4":
                         commandsModel.executeCommand(CommandsNS.BUILD_TARIFFS);

@@ -1,6 +1,6 @@
 package ua.javaexternal_shulzhenko.tariffs.exceptions;
 
-public class CommandFailedException extends Throwable {
+public class CommandFailedException extends RuntimeException {
 
     private String message;
 
