@@ -46,7 +46,7 @@ public class TariffsStAXBuilder {
                     if (type == XMLStreamConstants.START_ELEMENT) {
                         name = reader.getLocalName();
                         if (TariffEnum.valueOf(name.toUpperCase()) == TariffEnum.TARIFF) {
-                            Tariff tariff = buildTariff(reader);
+                            Tariff tariff = buildTariffFromXML(reader);
                             tariffs.add(tariff);
                         }
                     }
@@ -55,7 +55,7 @@ public class TariffsStAXBuilder {
             }
         }
     }
-    private Tariff buildTariff(XMLStreamReader reader) throws XMLStreamException {
+    private Tariff buildTariffFromXML(XMLStreamReader reader) throws XMLStreamException {
 
         Tariff tariff = new Tariff();
         String name;
@@ -78,7 +78,7 @@ public class TariffsStAXBuilder {
                             tariff.setPayroll(price);
                             break;
                         case CALL_PRICES:
-                            tariff.setCallPrices(getXMLPrices(reader));
+                            tariff.setCallPrices(buildCallPricesFromXML(reader, tariff.getCallPrices()));
                             break;
                         case SMS:
                             name = getXMLText(reader);
@@ -86,7 +86,7 @@ public class TariffsStAXBuilder {
                             tariff.setSms(price);
                             break;
                         case PARAMETERS:
-                            tariff.setParameters(getXMLParameters(reader));
+                            tariff.setParameters(buildParametersFromXML(reader, tariff.getParameters()));
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
@@ -100,8 +100,7 @@ public class TariffsStAXBuilder {
         throw new XMLStreamException("Unknown element in tag tariff");
     }
 
-    private Tariff.CallPrices getXMLPrices(XMLStreamReader reader) throws XMLStreamException {
-        Tariff.CallPrices callPrices = new Tariff.CallPrices();
+    private Tariff.CallPrices buildCallPricesFromXML(XMLStreamReader reader, Tariff.CallPrices callPrices) throws XMLStreamException {
         int type;
         String name;
         while (reader.hasNext()) {
@@ -133,8 +132,7 @@ public class TariffsStAXBuilder {
         throw new XMLStreamException("Unknown element in tag call_prices");
     }
 
-    private Tariff.Parameters getXMLParameters(XMLStreamReader reader) throws XMLStreamException {
-        Tariff.Parameters parameters = new Tariff.Parameters();
+    private Tariff.Parameters buildParametersFromXML(XMLStreamReader reader, Tariff.Parameters parameters) throws XMLStreamException {
         int type;
         String name;
         while (reader.hasNext()) {

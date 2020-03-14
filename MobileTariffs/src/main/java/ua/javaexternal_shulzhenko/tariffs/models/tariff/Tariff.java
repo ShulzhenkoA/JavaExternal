@@ -24,6 +24,11 @@ public class Tariff {
     @TariffElement(elementName = "parameters", required = true)
     private Parameters parameters;
 
+    public Tariff() {
+        callPrices = new CallPrices();
+        parameters = new Parameters();
+    }
+
     public String getName() {
         return name;
     }

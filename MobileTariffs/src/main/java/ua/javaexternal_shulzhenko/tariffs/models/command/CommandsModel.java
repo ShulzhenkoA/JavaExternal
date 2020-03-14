@@ -3,8 +3,10 @@ package ua.javaexternal_shulzhenko.tariffs.models.command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
+import ua.javaexternal_shulzhenko.tariffs.connector.DBConnector;
+import ua.javaexternal_shulzhenko.tariffs.connector.DataBases;
+import ua.javaexternal_shulzhenko.tariffs.dao.TariffDAO;
 import ua.javaexternal_shulzhenko.tariffs.exceptions.CommandFailedException;
-import ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidCommandException;
 import ua.javaexternal_shulzhenko.tariffs.exceptions.InvalidTariffException;
 import ua.javaexternal_shulzhenko.tariffs.models.tariff.Tariff;
 import ua.javaexternal_shulzhenko.tariffs.utils.HTMLTransformer;
@@ -18,6 +20,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,27 +28,33 @@ public class CommandsModel {
 
     private static final Logger LOGGER = LogManager.getLogger(CommandsModel.class);
     private HashMap<String, Command> commands;
-    private List<Tariff> tariffList;
+    private List<Tariff> tariffsFromXML;
+    private List<Tariff> tariffsFromDB;
     private final String[] RESOURCES = new String[]{"resources/tariffs.xml", "resources/tariffs.xsd",
             "resources/tariffs.xsl", "resources/tariffs.html"};
+    private TariffDAO tariffDAO;
 
     public CommandsModel() {
         commands = new HashMap<>();
         setUpCommands();
     }
 
-    public List<Tariff> getTariffList() {
-        return tariffList;
-    }
-
-    public void executeCommand(CommandsNS commandName) throws InvalidCommandException, CommandFailedException {
+    public void executeCommand(CommandsNS commandName) throws CommandFailedException {
         Command command = commands.get(commandName.getName());
         command.execute();
     }
 
+    public List<Tariff> getTariffsFromXML() {
+        return tariffsFromXML;
+    }
+
+    public List<Tariff> getTariffsFromDB() {
+        return tariffsFromDB;
+    }
+
     private void setUpCommands() {
 
-        setCommand(CommandsNS.VALIDATE_XML_XSD, () -> {
+        addToCommandsMap(CommandsNS.VALIDATE_XML_XSD, () -> {
             try{
                 ValidatorSAXXSD.getValidator().validateXML(RESOURCES[0], RESOURCES[1]);
             }catch (SAXException e) {
@@ -57,11 +66,11 @@ public class CommandsModel {
             }
         });
 
-        setCommand(CommandsNS.BUILD_TARIFFS, () -> {
+        addToCommandsMap(CommandsNS.BUILD_TARIFFS, () -> {
             TariffsStAXBuilder tariffsStAXBuilder = TariffsStAXBuilder.getTariffsStAXBuilder();
             try {
                 tariffsStAXBuilder.buildSetTariffs(RESOURCES[0]);
-                tariffList = tariffsStAXBuilder.getTariffs();
+                tariffsFromXML = tariffsStAXBuilder.getTariffs();
             }catch (XMLStreamException exc) {
                 LOGGER.error("StAX parsing error! " + exc.getMessage());
                 throw new CommandFailedException("Command have been failed due to StAX parsing error.");
@@ -71,11 +80,11 @@ public class CommandsModel {
             }
         });
 
-        setCommand(CommandsNS.VALIDATE_TARIFF_OBJECTS, () -> {
+        addToCommandsMap(CommandsNS.VALIDATE_TARIFF_OBJECTS, () -> {
             isEmptyTariffsList();
             TariffObjectsValidator tariffValidator = TariffObjectsValidator.getTariffValidator();
             try {
-                tariffValidator.validateTariffs(tariffList);
+                tariffValidator.validateTariffs(tariffsFromXML);
             } catch (InvalidTariffException exc) {
                 LOGGER.error(exc);
                 throw new CommandFailedException("Command have been failed due to invalid tariff exception.");
@@ -85,9 +94,9 @@ public class CommandsModel {
             }
         });
 
-        setCommand(CommandsNS.SHOW_TARIFFS_OBJECTS, this::isEmptyTariffsList);
+        addToCommandsMap(CommandsNS.SHOW_TARIFFS_OBJECTS, this::isEmptyTariffsList);
 
-        setCommand(CommandsNS.TRANSFORM_XML_HTML, () -> {
+        addToCommandsMap(CommandsNS.TRANSFORM_XML_HTML, () -> {
             HTMLTransformer htmlTransformer = HTMLTransformer.getTransformer();
             try {
                 htmlTransformer.transformXMLtoHTML(RESOURCES[2], RESOURCES[0]);
@@ -97,7 +106,7 @@ public class CommandsModel {
             }
         });
 
-        setCommand(CommandsNS.OPEN_CREATED_HTML, () -> {
+        addToCommandsMap(CommandsNS.OPEN_CREATED_HTML, () -> {
             File file = new File(RESOURCES[3]);
             if (file.exists()) {
                 URI url = file.toURI();
@@ -108,19 +117,65 @@ public class CommandsModel {
                     throw new CommandFailedException("Command to open HTML file failed.");
                 }
             } else {
-                throw new InvalidCommandException("Can't open. File isn't create yet.");
+                throw new CommandFailedException("Can't open. File isn't create yet.");
+            }
+        });
+
+        addToCommandsMap(CommandsNS.ADD_TARIFFS_TO_DB, () -> {
+            isEmptyTariffsList();
+            connectToDB();
+            try {
+                tariffDAO.addTariffs(tariffsFromXML);
+            } catch (SQLException exc) {
+                LOGGER.error(exc.getMessage());
+                throw new CommandFailedException("Command of adding tariffs to database failed due to " + exc.getMessage());
+            }
+        });
+
+        addToCommandsMap(CommandsNS.GET_TARIFFS_FROM_DB, ()-> {
+           connectToDB();
+            try {
+                tariffsFromDB = tariffDAO.getTariffs();
+                if(tariffsFromDB.isEmpty()){
+                    throw new CommandFailedException("Command failed. Database is empty.");
+                }
+            }catch (SQLException exc){
+                LOGGER.error(exc.getMessage());
+                throw new CommandFailedException("Command of getting tariffs from database failed due to " + exc.getMessage());
+            }
+
+        });
+
+        addToCommandsMap(CommandsNS.CLOSE_DAO_CONNECTOR, ()-> {
+            if(tariffDAO != null){
+                try {
+                    tariffDAO.closeConnector();
+                } catch (SQLException exc) {
+                    LOGGER.error(exc.getMessage());
+                    throw new CommandFailedException("Command of closing DAO connector failed due to " + exc.getMessage());
+                }
             }
         });
     }
 
-    private void isEmptyTariffsList() throws InvalidCommandException {
-        if (tariffList == null || tariffList.isEmpty()) {
-            throw new InvalidCommandException("Can't execute command. Tariff objects aren't built yet.");
-        }
-    }
-
-    private void setCommand(CommandsNS commandName, Command command){
+    private void addToCommandsMap(CommandsNS commandName, Command command){
         commands.put(commandName.getName(), command);
     }
 
+    private void isEmptyTariffsList() throws CommandFailedException{
+        if (tariffsFromXML == null || tariffsFromXML.isEmpty()) {
+            throw new CommandFailedException("Can't execute command. Tariff objects aren't built yet.");
+        }
+    }
+
+    private void connectToDB() throws CommandFailedException {
+        if(tariffDAO == null){
+            try {
+                tariffDAO = new TariffDAO(new DBConnector(DataBases.MYSQL));
+            } catch (SQLException exc) {
+                LOGGER.error(exc.getMessage());
+                throw new CommandFailedException("Command of adding tariffs to database failed due to " + exc.getMessage());
+            }
+        }
+    }
 }
