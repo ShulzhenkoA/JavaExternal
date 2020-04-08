@@ -1,4 +1,4 @@
-package ua.javaexternal_shulzhenko.port.wait_notify_v_0_1;
+package ua.javaexternal_shulzhenko.port.executors_v_0_3;
 
 public class Ship implements Runnable{
 
@@ -10,11 +10,14 @@ public class Ship implements Runnable{
         this.name = name;
         this.destinedPort = destinedPort;
         containersNumber = 1000000;
-        new Thread(this, name).start();
     }
 
     public void run(){
-        destinedPort.allowShipEnterToPortPier(this);
+        try {
+            destinedPort.allowShipEnterToPortPier(this);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {

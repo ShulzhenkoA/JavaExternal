@@ -1,4 +1,4 @@
-package ua.javaexternal_shulzhenko.port.wait_notify_v_0_1;
+package ua.javaexternal_shulzhenko.port.synchronizers_v_0_2;
 
 public class Ship implements Runnable{
 
@@ -14,7 +14,11 @@ public class Ship implements Runnable{
     }
 
     public void run(){
-        destinedPort.allowShipEnterToPortPier(this);
+        try {
+            destinedPort.allowShipEnterToPortPier(this);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {

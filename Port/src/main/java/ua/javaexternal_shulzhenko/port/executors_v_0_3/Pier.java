@@ -1,4 +1,4 @@
-package ua.javaexternal_shulzhenko.port.wait_notify_v_0_1;
+package ua.javaexternal_shulzhenko.port.executors_v_0_3;
 
 public class Pier implements Runnable{
 
@@ -25,9 +25,7 @@ public class Pier implements Runnable{
                 System.out.println("++++++++++++++++++++++++++ " + shipAtPier.getName() + " unloaded  and sailed away ++++++++++++++++++++++++++");
                 System.out.println("Storage is loaded by " + portStorage.getContainers());
                 setShipAtPier(null);
-                synchronized (port){
-                    port.notifyAll();
-                }
+                Port.SEMAPHORE.release();
             }
             synchronized (this){
                 try {
