@@ -25,12 +25,6 @@ public class Port {
         freePier.setShipAtPier(ship);
     }
 
-    public void informPort(){
-        synchronized (this){
-            notifyAll();
-        }
-    }
-
     private boolean isFreePier() {
         for (Pier pier : portPiers) {
             if(pier.isEmptyPier()){

@@ -1,8 +1,9 @@
-package ua.javaexternal_shulzhenko.port.wait_notify_v_0_1;
+package ua.javaexternal_shulzhenko.port.synchronizers_v_0_2;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
+
         Port port = new Port();
         for (int i = 1; i <= 10; i++) {
             if(i==6){
